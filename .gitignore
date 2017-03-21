@@ -3,3 +3,4 @@ src/Catalyst.Web/obj/
 src/Catalyst.Core/bin/Debug/
 src/Catalyst.Web/bin/Catalyst.Core.dll
 src/Catalyst.Web/bin/Catalyst.Web.dll
+src/.vs/
