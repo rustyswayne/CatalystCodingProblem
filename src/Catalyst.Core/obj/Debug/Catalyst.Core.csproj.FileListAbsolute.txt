@@ -1,0 +1,5 @@
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Core\bin\Debug\Catalyst.Core.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Core\bin\Debug\Catalyst.Core.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Core\obj\Debug\Catalyst.Core.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Core\obj\Debug\Catalyst.Core.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Core\bin\Debug\Newtonsoft.Json.dll
