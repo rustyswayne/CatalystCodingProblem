@@ -66,3 +66,13 @@ C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Microsoft.CodeDom.P
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Microsoft.Web.Infrastructure.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\LightInject.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\LightInject.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\LightInject.Annotation.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\LightInject.Annotation.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\EntityFramework.SqlServer.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\EntityFramework.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\EntityFramework.SqlServerCompact.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\System.Data.SqlServerCe.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll.config
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\log4net.dll

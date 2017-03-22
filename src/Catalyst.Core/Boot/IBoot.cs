@@ -9,10 +9,5 @@
         /// Bootstraps application.
         /// </summary>
         void Boot();
-
-        /// <summary>
-        /// Terminates application
-        /// </summary>
-        void Terminate();
     }
 }

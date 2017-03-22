@@ -10,6 +10,8 @@
     "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": "1.0.3",
     "Microsoft.Net.Compilers": "2.0.1",
     "Microsoft.Web.Infrastructure": "1.0.0",
+    "LightInject": "5.0.2",
+    "LightInject.Annotation": "1.1.0",
     "Newtonsoft.Json": "6.0.4"
   },
   "frameworks": {
