@@ -4,3 +4,7 @@ src/Catalyst.Core/bin/Debug/
 src/Catalyst.Web/bin/Catalyst.Core.dll
 src/Catalyst.Web/bin/Catalyst.Web.dll
 src/.vs/
+tests/Catalyst.Tests/bin/
+src/Catalyst.Web/bin/
+src/Catalyst.Web/App_Data/Logs/
+tests/Catalyst.Tests/obj/
