@@ -5,7 +5,7 @@
     "LightInject": "5.0.2",
     "LightInject.Annotation": "1.1.0",
     "log4net": "2.0.8",
-    "Newtonsoft.Json": "6.0.4",
+    "Newtonsoft.Json": "10.0.1",
     "semver": "2.0.4"
   },
   "frameworks": {

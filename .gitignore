@@ -8,3 +8,5 @@ tests/Catalyst.Tests/bin/
 src/Catalyst.Web/bin/
 src/Catalyst.Web/App_Data/Logs/
 tests/Catalyst.Tests/obj/
+src/Catalyst.Web.Ui.Client/.idea/
+src/Catalyst.Web/project.lock.json
