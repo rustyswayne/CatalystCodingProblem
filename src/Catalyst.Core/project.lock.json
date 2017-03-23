@@ -76,6 +76,15 @@
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
         }
+      },
+      "Semver/2.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net452/Semver.dll": {}
+        },
+        "runtime": {
+          "lib/net452/Semver.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.5.2/win": {
@@ -152,6 +161,15 @@
         },
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Semver/2.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net452/Semver.dll": {}
+        },
+        "runtime": {
+          "lib/net452/Semver.dll": {}
         }
       }
     }
@@ -343,6 +361,19 @@
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
       ]
+    },
+    "Semver/2.0.4": {
+      "sha512": "H52a9cgrh4hkVxv5y99L9vk2NBtJB3ids/yavTHUvC0pUl3EsWEZAJmjBPFSt7jDtn3Q04+Nhtfo0J2xvsnhZQ==",
+      "type": "package",
+      "path": "semver/2.0.4",
+      "files": [
+        "lib/net452/Semver.dll",
+        "lib/net452/Semver.xml",
+        "lib/netstandard1.1/Semver.dll",
+        "lib/netstandard1.1/Semver.xml",
+        "semver.2.0.4.nupkg.sha512",
+        "semver.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -352,7 +383,8 @@
       "LightInject >= 5.0.2",
       "LightInject.Annotation >= 1.1.0",
       "Newtonsoft.Json >= 6.0.4",
-      "log4net >= 2.0.8"
+      "log4net >= 2.0.8",
+      "semver >= 2.0.4"
     ],
     ".NETFramework,Version=v4.5.2": []
   },
@@ -373,7 +405,8 @@
       "LightInject": "5.0.2",
       "LightInject.Annotation": "1.1.0",
       "log4net": "2.0.8",
-      "Newtonsoft.Json": "6.0.4"
+      "Newtonsoft.Json": "6.0.4",
+      "semver": "2.0.4"
     },
     "frameworks": {
       "net452": {}

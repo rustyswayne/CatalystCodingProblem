@@ -4,9 +4,9 @@
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
-
-    using global::Catalyst.Core.Logging;
-
+    using Catalyst.Core.Logging;
+    using Catalyst.Core.Services;
+    
     using LightInject;
 
     /// <summary>
@@ -28,6 +28,11 @@
         /// The <see cref="CacheManager"/>.
         /// </summary>
         public static ICacheManager CacheManager => Container.GetInstance<ICacheManager>();
+
+        /// <summary>
+        /// The <see cref="IServiceContext"/>.
+        /// </summary>
+        public static IServiceContext Services => Container.GetInstance<IServiceContext>();
 
         /// <summary>
         /// Gets an instance of the <see cref="ICatalystDbContext"/>.

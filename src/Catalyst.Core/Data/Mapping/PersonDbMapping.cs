@@ -3,12 +3,12 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
-    using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.Dto;
 
     /// <summary>
-    /// Represents the database mapping for the <see cref="Person"/>.
+    /// Represents the database mapping for the <see cref="PersonDto"/>.
     /// </summary>
-    internal class PersonDbMapping : EntityTypeConfiguration<Person>
+    internal class PersonDbMapping : EntityTypeConfiguration<PersonDto>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonDbMapping"/> class.
@@ -27,12 +27,12 @@
             Property(x => x.Photo).IsOptional();
 
             HasMany(x => x.Addresses)
-                .WithRequired(x => x.Person)
+                .WithRequired(x => x.PersonDto)
                 .Map(x => x.MapKey("PersonId"))
                 .WillCascadeOnDelete(true);
 
-            Property(x => x.UpdateDate).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
-            Property(x => x.CreateDate).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+            Property(x => x.UpdateDate).IsRequired();
+            Property(x => x.CreateDate).IsRequired();
         }
     }
 }

@@ -76,3 +76,4 @@ C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\EntityFramework.Sql
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\System.Data.SqlServerCe.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll.config
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\log4net.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Semver.dll

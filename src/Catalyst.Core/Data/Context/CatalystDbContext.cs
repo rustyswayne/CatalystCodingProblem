@@ -5,12 +5,12 @@
 
     using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
-    using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.Dto;
 
     /// <summary>
     /// Represents a database context for the Catalyst Coding Problem.
     /// </summary>
-    internal class CatalystDbContext : DbContext, ICatalystDbContext
+    public class CatalystDbContext : DbContext, ICatalystDbContext
     {
         /// <summary>
         /// The register for the model type configurations.
@@ -56,13 +56,14 @@
             if (register == null) throw new ArgumentNullException(nameof(register));
 
             _register = register;
+            
         }
 
         /// <inheritdoc />
-        public DbSet<Person> People { get; set; }
+        public DbSet<PersonDto> People { get; set; }
 
         /// <inheritdoc />
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<AddressDto> Addresses { get; set; }
 
         /// <inheritdoc />
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

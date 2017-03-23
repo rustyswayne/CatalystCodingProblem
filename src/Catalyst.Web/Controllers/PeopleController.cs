@@ -1,7 +1,8 @@
 ﻿namespace Catalyst.Web.Controllers
 {
-    using Catalyst.Core;
     using System.Web.Mvc;
+
+    using Catalyst.Core;
 
     /// <summary>
     /// The people controller.
@@ -22,7 +23,9 @@
         /// </returns>
         public ActionResult List()
         {
-            return View("List");
+            var model = Services.Person.GetAll();
+
+            return View("List", model);
         }
 
         /// <summary>
@@ -36,7 +39,10 @@
         /// </returns>
         public ActionResult PersonDetails(string slug)
         {
-            if (slug.IsNullOrWhiteSpace()) return RedirectToAction("List");
+            if (slug.IsNullOrWhiteSpace())
+            {
+                return RedirectToAction("List");
+            }
 
             return View("PersonDetails", (object)slug);
         }

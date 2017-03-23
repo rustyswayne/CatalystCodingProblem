@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Models.Domain
+﻿namespace Catalyst.Core.Models.Dto
 {
     /// <summary>
     /// Represents an entity with an ExtendedData (JSON) field.

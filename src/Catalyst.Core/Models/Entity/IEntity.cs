@@ -1,11 +1,11 @@
-﻿namespace Catalyst.Core.Models.Domain
+﻿namespace Catalyst.Core.Models.Entity
 {
     using System;
 
     /// <summary>
-    /// Represents an entity DTO.
+    /// Represents an entity.
     /// </summary>
-    internal interface IDto
+    public interface IEntity
     {
         /// <summary>
         /// Gets or sets the id of the Entity.
@@ -14,7 +14,7 @@
 
         /// <summary>
         /// Gets or sets the date the entity was last updated.
-        /// </summary>
+        /// </summary>                                                             s
         DateTime UpdateDate { get; set; }
 
         /// <summary>

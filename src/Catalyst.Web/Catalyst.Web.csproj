@@ -88,6 +88,7 @@
     <Content Include="Views\People\List.cshtml" />
     <Content Include="Views\People\PersonDetails.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Config\entityFramework.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

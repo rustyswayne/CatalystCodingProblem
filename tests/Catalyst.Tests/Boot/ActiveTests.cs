@@ -42,5 +42,16 @@
             //// Assert
             Assert.That(Active.DbContext, Is.Not.Null);
         }
+
+        [Test]
+        public void Services()
+        {
+            //// Arrange - handled in base
+
+            //// Act - handled in base
+
+            //// Assert
+            Assert.That(Active.Services, Is.Not.Null);
+        }
     }
 }

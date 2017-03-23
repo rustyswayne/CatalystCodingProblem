@@ -2,7 +2,7 @@
 {
     using System.Data.Entity;
 
-    using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.Dto;
 
     /// <summary>
     /// Represents the Catalyst <see cref="DbContext"/>.
@@ -12,11 +12,11 @@
         /// <summary>
         /// Gets or sets the people <see cref="DbSet"/>.
         /// </summary>
-        DbSet<Address> Addresses { get; set; }
+        DbSet<AddressDto> Addresses { get; set; }
 
         /// <summary>
         /// Gets or sets the addresses <see cref="DbSet"/>.
         /// </summary>
-        DbSet<Person> People { get; set; }
+        DbSet<PersonDto> People { get; set; }
     }
 }

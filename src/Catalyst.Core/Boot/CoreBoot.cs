@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Catalyst.Core.Configuration;
     using Catalyst.Core.DI;
     using Catalyst.Core.DI.Compositions;
     using Catalyst.Core.Logging;
@@ -59,7 +60,9 @@
         /// </summary>
         public virtual void Boot()
         {
-            _logger.Info<CoreBoot>("Catalyst People Problem Boot started");
+            var version = CatalystVersion.GetSemanticVersion();
+
+            _logger.Info<CoreBoot>($"Catalyst People Problem (Version: {version}) - Boot started");
 
             this.Compose(_container);
 
@@ -68,7 +71,7 @@
 
             if (Complete != null) Complete.Invoke(this, new EventArgs());
 
-            _logger.Info<CoreBoot>("Catalyst People Problem Boot completed");
+            _logger.Info<CoreBoot>($"Catalyst People Problem (Version: {version}) - Boot completed");
 
         }
 
@@ -85,6 +88,9 @@
 
             // Data and database
             container.RegisterFrom<DataComposition>();
+
+            // Services
+            container.RegisterFrom<ServiceComposition>();
         }
     }
 }

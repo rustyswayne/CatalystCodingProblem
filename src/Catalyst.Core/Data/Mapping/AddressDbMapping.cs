@@ -2,12 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
-    using Catalyst.Core.Models.Domain;
+
+    using Catalyst.Core.Models.Dto;
 
     /// <summary>
-    /// Represents the database mapping for the <see cref="Address"/>.
+    /// Represents the database mapping for the <see cref="AddressDto"/>.
     /// </summary>
-    internal class AddressDbMapping : EntityTypeConfiguration<Address>
+    internal class AddressDbMapping : EntityTypeConfiguration<AddressDto>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddressDbMapping"/> class.
@@ -26,8 +27,8 @@
             Property(x => x.Locality).IsOptional().HasMaxLength(255);
             Property(x => x.CountryCode).IsOptional().HasMaxLength(3);
             Property(x => x.PostalCode).IsOptional().HasMaxLength(50);
-            Property(x => x.UpdateDate).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
-            Property(x => x.CreateDate).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+            Property(x => x.UpdateDate).IsRequired();
+            Property(x => x.CreateDate).IsRequired();
         }
     }
 }
