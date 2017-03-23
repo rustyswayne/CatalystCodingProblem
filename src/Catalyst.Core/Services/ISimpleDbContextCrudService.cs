@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
 
-    using Catalyst.Core.Models.Entity;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
     /// Represents a service based off <see cref="DbContext"/>.
@@ -13,7 +13,7 @@
     /// The type of <see cref="IEntity"/>
     /// </typeparam>
     public interface ISimpleDbContextCrudService<TEntity> : IService
-        where TEntity : IEntity
+        where TEntity : class, IEntity
     {
         /// <summary>
         /// Gets the count of all entities managed by the service.

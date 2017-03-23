@@ -2,12 +2,12 @@
 {
     using System;
 
-    using Catalyst.Core.Models;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
-    /// Represents a service that manages <see cref="IPerson"/> entities.
+    /// Represents a service that manages <see cref="Person"/> entities.
     /// </summary>
-    public interface IPersonService : ISimpleDbContextCrudService<IPerson>
+    public interface IPersonService : ISimpleDbContextCrudService<Person>
     {
         /// <summary>
         /// Creates a <see cref="IPerson"/> without saving it.
@@ -24,7 +24,7 @@
         /// <returns>
         /// The <see cref="IPerson"/>.
         /// </returns>
-        IPerson Create(string firstName, string lastName, DateTime birthDay);
+        Person Create(string firstName, string lastName, DateTime birthDay);
 
         /// <summary>
         /// Gets a <see cref="IPerson"/> by it's slug.
@@ -35,6 +35,6 @@
         /// <returns>
         /// The <see cref="IPerson"/>.
         /// </returns>
-        IPerson GetBySlug(string slug);
+        Person GetBySlug(string slug);
     }
 }

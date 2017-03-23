@@ -1,9 +1,9 @@
-﻿namespace Catalyst.Core.Models.Dto
+﻿namespace Catalyst.Core.Models.Domain
 {
     /// <summary>
     /// Represents an entity with an ExtendedData (JSON) field.
     /// </summary>
-    internal interface IExtendedData
+    public interface IExtendedData
     {
         /// <summary>
         /// Gets or sets the extended data (JSON).

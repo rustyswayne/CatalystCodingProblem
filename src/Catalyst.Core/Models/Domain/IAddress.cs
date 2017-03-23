@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Models
+﻿namespace Catalyst.Core.Models.Domain
 {
     /// <summary>
     /// Represents an address.

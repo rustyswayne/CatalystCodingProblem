@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Models.Dto
+﻿namespace Catalyst.Core.Models.Domain
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +8,12 @@
     /// <summary>
     /// Represents a person DTO.
     /// </summary>
-    public class PersonDto : IDto, IExtendedData
+    public class Person : IPerson, IDto
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PersonDto"/> class.
+        /// Initializes a new instance of the <see cref="Person"/> class.
         /// </summary>
-        public PersonDto()
+        public Person()
         {
             this.Id = GuidComb.GenerateComb();
         }
@@ -52,7 +52,7 @@
         /// <summary>
         /// Gets or sets the addresses.
         /// </summary>
-        public virtual ICollection<AddressDto> Addresses { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
 
         /// <inheritdoc />
         public DateTime UpdateDate { get; set; }

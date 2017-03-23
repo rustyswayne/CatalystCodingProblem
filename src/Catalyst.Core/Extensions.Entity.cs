@@ -1,8 +1,11 @@
 ﻿namespace Catalyst.Core
 {
+    using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.Entity.Core.Objects.DataClasses;
 
     using Catalyst.Core.Models;
-    using Catalyst.Core.Models.Entity;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
     /// Extension methods related to <see cref="IEntity"/> models.

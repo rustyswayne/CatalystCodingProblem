@@ -1,21 +1,18 @@
 ﻿namespace Catalyst.Core.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
-    using Catalyst.Core.Factories;
     using Catalyst.Core.Logging;
-    using Catalyst.Core.Models;
-    using Catalyst.Core.Models.Dto;
+    using Catalyst.Core.Models.Domain;
 
     using LightInject;
 
     /// <inheritdoc />
-    internal class PersonService : CatalystDbContextServiceBase<IPerson, PersonDto>, IPersonService
+    internal class PersonService : CatalystDbContextServiceBase<Person>, IPersonService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
@@ -35,34 +32,26 @@
         }
 
         /// <summary>
-        /// The <see cref="DbSet{PersonDto}"/>.
+        /// The <see cref="DbSet{Person}"/>.
         /// </summary>
-        protected override DbSet<PersonDto> Db => DbContext.People;
+        protected override DbSet<Person> Db => DbContext.People;
+
+        /// <summary>
+        /// The entity set name.
+        /// </summary>
+        protected override string EntitySetName => "Person";
 
         /// <inheritdoc />
-        public IPerson Create(string firstName, string lastName, DateTime birthDay)
+        public Person Create(string firstName, string lastName, DateTime birthDay)
         {
             return new Person { FirstName = firstName, LastName = lastName, Birthday = birthDay };
         }
 
-        ///// <inheritdoc />
-        //public IEnumerable<IPerson> GetAll()
-        //{
-        //    // fixme - quick hack to simply query all.
-        //    // this should have a check for cached items based on cached item count and count.
-        //    var factory = new PersonFactory();
-
-        //    return Db.ToArray().Select(peep => factory.BuildEntity(peep));
-        //}
-
-
         /// <inheritdoc />
-        public IPerson GetBySlug(string slug)
+        public Person GetBySlug(string slug)
         {
-            var factory = GetFactory();
-            var dto = Db.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
-
-            return dto != null ? factory.BuildEntity(dto) : null;
+            return Db.AsNoTracking()
+                    .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
         }
 
 
@@ -101,21 +90,10 @@
         }
 
         /// <inheritdoc />
-        protected override void PerformAdd(IPerson entity)
+        protected override void PerformAdd(Person entity)
         {
             ((Person)entity).Slug = GetUniqueSlug(entity);
             base.PerformAdd(entity);
-        }
-
-        /// <summary>
-        /// Gets the person factory.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="PersonFactory"/>.
-        /// </returns>
-        protected override EntityFactoryBase<PersonDto, IPerson> GetFactory()
-        {
-            return new PersonFactory();
         }
     }
 }

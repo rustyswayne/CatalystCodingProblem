@@ -7,7 +7,7 @@
 
     using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
-    using Catalyst.Core.Models.Dto;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
     /// Represents a database context for the Catalyst Coding Problem.
@@ -52,10 +52,10 @@
         }
 
         /// <inheritdoc />
-        public DbSet<PersonDto> People { get; set; }
+        public DbSet<Person> People { get; set; }
 
         /// <inheritdoc />
-        public DbSet<AddressDto> Addresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         /// <summary>
         /// Overrides Save changes for logging.

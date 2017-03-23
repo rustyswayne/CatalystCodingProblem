@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Models.Dto
+﻿namespace Catalyst.Core.Models.Domain
 {
     using System;
 

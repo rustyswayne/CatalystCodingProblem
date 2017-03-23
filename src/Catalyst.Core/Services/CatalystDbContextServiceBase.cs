@@ -3,14 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
+    using System.Data.Entity.Core.Objects.DataClasses;
+    using System.Data.Entity.Infrastructure;
     using System.Linq;
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
-    using Catalyst.Core.Factories;
     using Catalyst.Core.Logging;
-    using Catalyst.Core.Models.Dto;
-    using Catalyst.Core.Models.Entity;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
     /// Represents a service based on the <see cref="ICatalystDbContext"/>.
@@ -18,15 +19,11 @@
     /// <typeparam name="TEntity">
     /// The type of <see cref="IEntity"/>
     /// </typeparam>
-    /// <typeparam name="TDto">
-    /// The type of the <see cref="IDto"/>
-    /// </typeparam>
-    internal abstract class CatalystDbContextServiceBase<TEntity, TDto> : ISimpleDbContextCrudService<TEntity>
-        where TEntity : IEntity
-        where TDto : class, IDto, new()
+    internal abstract class CatalystDbContextServiceBase<TEntity> : ISimpleDbContextCrudService<TEntity>
+        where TEntity : class, IEntity
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CatalystDbContextServiceBase{TEntity,TDto}"/> class. 
+        /// Initializes a new instance of the <see cref="CatalystDbContextServiceBase{TEntity}"/> class. 
         /// </summary>
         /// <param name="context">
         /// The context.
@@ -56,6 +53,7 @@
         /// </summary>
         protected CatalystDbContext DbContext { get; set; }
 
+
         /// <summary>
         /// Gets the logger.
         /// </summary>
@@ -71,10 +69,12 @@
         /// </summary>
         protected IRuntimeCacheProvider RuntimeCache => CacheManager.RuntimeCache;
 
+        protected abstract string EntitySetName { get; }
+
         /// <summary>
         /// Gets the <see cref="CatalystDbContext"/>.
         /// </summary>
-        protected abstract DbSet<TDto> Db { get; }
+        protected  abstract DbSet<TEntity> Db { get; }
 
         /// <summary>
         /// Gets an entity by it's id.
@@ -109,13 +109,23 @@
         /// <inheritdoc />
         public virtual void Save(TEntity entity)
         {
-            if (entity.HasIdentity())
+            var state = GetEntityState(entity);
+            switch (state)
             {
-                PerformUpdate(entity);
-            }
-            else
-            {
-                PerformAdd(entity);
+                case EntityState.Added:
+                    PerformAdd(entity);
+                    break;
+                case EntityState.Detached:
+                    Db.Attach(entity);
+                    PerformUpdate(entity);
+                    break;
+                case EntityState.Modified:
+                    PerformUpdate(entity);
+                    break;
+                case EntityState.Deleted:
+                case EntityState.Unchanged:
+                default:
+                    return;
             }
         }
 
@@ -133,7 +143,7 @@
         /// <inheritdoc />
         public virtual int Count()
         {
-            return Db.Count();
+            return Db.AsNoTracking().Count();
         }
 
         /// <summary>
@@ -147,11 +157,8 @@
         /// </returns>
         protected virtual TEntity PerformGet(Guid id)
         {
-            var dto = Db.Find(id);
-            if (dto == null) return default(TEntity);
+            return Db.Find(id);
 
-            var factory = GetFactory();
-            return factory.BuildEntity(dto);
         }
 
         /// <summary>
@@ -168,13 +175,6 @@
             return $"{typeof(TEntity).Name}.{id}";
         }
 
-        /// <summary>
-        /// Gets the factory to convert the models.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="EntityFactoryBase{TDto, TEntity}"/>.
-        /// </returns>
-        protected abstract EntityFactoryBase<TDto, TEntity> GetFactory();
 
         /// <summary>
         /// Performs the work of adding an entity.
@@ -184,10 +184,7 @@
         /// </param>
         protected virtual void PerformAdd(TEntity entity)
         {
-            var factory = GetFactory();
-            entity.UpdatingEntity();
-            var dto = factory.BuildDto(entity);
-            Db.Add(dto);
+            Db.Add(entity);
             DbContext.SaveChanges();
         }
 
@@ -199,11 +196,63 @@
         /// </param>
         protected virtual void PerformUpdate(TEntity entity)
         {
-            var factory = GetFactory();
-            entity.AddingEntity();
-            var dto = factory.BuildDto(entity);
-            Db.Attach(dto);
+            throw new NotImplementedException();
+            // Db.Attach(dto);
             DbContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Attaches or gets an entity.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// A value indicating if the entity is currently attached.
+        /// </returns>
+        protected bool CheckIfAttached(TEntity entity)
+        {
+            var context = ((IObjectContextAdapter)DbContext).ObjectContext;
+
+            ObjectStateEntry entry;
+
+            var detached = false;
+            if (context.ObjectStateManager.TryGetObjectStateEntry(context.CreateEntityKey(EntitySetName, entity), out entry))
+            {
+                // Re-attach if necessary
+                detached = entry.State == EntityState.Detached;
+            }
+            else
+            {
+                // Attach for the first time
+                detached = true;
+            }
+
+            return detached;
+        }
+
+        /// <summary>
+        /// Attaches or gets an entity.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// A value indicating if the entity is currently attached.
+        /// </returns>
+        protected EntityState GetEntityState(TEntity entity)
+        {
+            var context = ((IObjectContextAdapter)DbContext).ObjectContext;
+
+            ObjectStateEntry entry;
+            if (context.ObjectStateManager.TryGetObjectStateEntry(context.CreateEntityKey(EntitySetName, entity), out entry))
+            {
+                // Return the entry state
+                return entry.State;
+            }
+            
+            // New entry
+            return EntityState.Added;
         }
     }
 }

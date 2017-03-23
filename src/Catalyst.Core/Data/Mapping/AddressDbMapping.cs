@@ -3,12 +3,12 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
-    using Catalyst.Core.Models.Dto;
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
-    /// Represents the database mapping for the <see cref="AddressDto"/>.
+    /// Represents the database mapping for the <see cref="Address"/>.
     /// </summary>
-    internal class AddressDbMapping : EntityTypeConfiguration<AddressDto>
+    internal class AddressDbMapping : EntityTypeConfiguration<Address>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddressDbMapping"/> class.

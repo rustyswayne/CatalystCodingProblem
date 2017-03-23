@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     using Catalyst.Core.Models;
-    using Catalyst.Core.Models.Dto;
+    using Catalyst.Core.Models.Domain;
 
     using Newtonsoft.Json;
 
@@ -19,15 +19,15 @@
         /// <returns>
         /// Collection of persons for install data.
         /// </returns>
-        public static IEnumerable<PersonDto> GetDefaultPeople()
+        public static IEnumerable<Person> GetDefaultPeople()
         {
             var ed = new ExtendedDataCollection();
             var interests = new[] { "Family", "Travel", "Movies", "Skiing", "SCUBA Diving", "Food" };
             ed.SetValue("interests", JsonConvert.SerializeObject(interests));
 
-            return new List<PersonDto>
+            return new List<Person>
             {
-                new PersonDto
+                new Person
                 {
                     FirstName = "Russell",
                     LastName = "Swayne",
@@ -37,9 +37,9 @@
                     CreateDate = DateTime.UtcNow,
                     UpdateDate = DateTime.UtcNow,
 
-                    Addresses = new List<AddressDto>
+                    Addresses = new List<Address>
                     {
-                        new AddressDto
+                        new Address
                             {
                                 Name = "Disney World",
                                 Address1 = "Walt Disney World Resort",
@@ -50,7 +50,7 @@
                                 CreateDate = DateTime.UtcNow,
                                 UpdateDate = DateTime.UtcNow
                             },
-                        new AddressDto
+                        new Address
                             {
                                 Name = "Colosseum",
                                 Address1 = "Piazza del Colosseo",
