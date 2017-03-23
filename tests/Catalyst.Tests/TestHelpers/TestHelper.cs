@@ -12,7 +12,7 @@
         /// Gets the current assembly directory.
         /// </summary>
         /// <value>The assembly directory.</value>
-        static public string CurrentAssemblyDirectory
+        public static string CurrentAssemblyDirectory
         {
             get
             {
@@ -20,6 +20,17 @@
                 var uri = new Uri(codeBase);
                 var path = uri.LocalPath;
                 return Path.GetDirectoryName(path);
+            }
+        }
+
+        public static string TestAppDataDirectory
+        {
+            get
+            {
+                var assembly = CurrentAssemblyDirectory;
+                var baseDir = assembly.Substring(0, assembly.LastIndexOf("\\bin", StringComparison.Ordinal));
+
+                return $"{baseDir}\\AppData\\";
             }
         }
 

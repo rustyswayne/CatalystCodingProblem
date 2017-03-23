@@ -1,5 +1,7 @@
 ﻿namespace Catalyst.Tests.TestHelpers
 {
+    using System;
+
     using Catalyst.Core.Boot;
     using Catalyst.Core.DI;
 
@@ -13,6 +15,8 @@
         [OneTimeSetUp]
         public virtual void Initialize()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", TestHelper.TestAppDataDirectory);
+
             var container = new ServiceContainer();
             container.EnableAnnotatedConstructorInjection();
             container.EnableAnnotatedPropertyInjection();
