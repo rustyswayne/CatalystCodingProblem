@@ -8,10 +8,11 @@
     /// <summary>
     /// Responsible for address models
     /// </summary>
-    internal class AddressFactory : IEntityFactory<AddressDto, Address>
+    internal class AddressFactory : EntityFactoryBase<AddressDto, Address>
     {
+
         /// <inheritdoc />
-        public AddressDto BuildDto(Address entity)
+        protected override AddressDto PerformBuildDTo(Address entity)
         {
             var dto = new AddressDto
                        {
@@ -32,7 +33,7 @@
         }
 
         /// <inheritdoc />
-        public Address BuildEntity(AddressDto dto)
+        protected override Address PerformBuildEntity(AddressDto dto)
         {
             return new Address
                        {

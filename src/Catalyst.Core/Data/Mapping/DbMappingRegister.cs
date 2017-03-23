@@ -60,13 +60,6 @@
         {
             _logger.Info<DbMappingRegister>("Initializing");
 
-            var alltypes =
-                Assembly.GetExecutingAssembly()
-                    .GetTypes()
-                    .Where(type => !type.Namespace.IsNullOrWhiteSpace() && 
-                                type.BaseType != null && 
-                                type.BaseType.IsGenericType);
-
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
                         .Where(type => !string.IsNullOrEmpty(type.Namespace))
                         .Where(type => type.BaseType != null && type.BaseType.IsGenericType

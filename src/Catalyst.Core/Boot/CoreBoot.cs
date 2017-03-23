@@ -15,7 +15,7 @@
     /// <remarks>
     /// Setup for singletons and DI.
     /// </remarks>
-    internal class CoreBoot : IBoot
+    public class CoreBoot : IBoot
     {
         /// <summary>
         /// The <see cref="IServiceContainer"/>.
@@ -81,7 +81,7 @@
         /// <param name="container">
         /// The container.
         /// </param>
-        internal virtual void Compose(IServiceContainer container)
+        protected virtual void Compose(IServiceContainer container)
         {
             // Caching
             container.RegisterFrom<CacheComposition>();

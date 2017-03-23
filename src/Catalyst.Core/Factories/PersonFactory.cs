@@ -13,16 +13,15 @@
     /// <summary>
     /// Responsible for person models.
     /// </summary>
-    internal class PersonFactory : IEntityFactory<PersonDto, Person>
+    internal class PersonFactory : EntityFactoryBase<PersonDto, IPerson>
     {
         /// <summary>
         /// The <see cref="AddressFactory"/>.
         /// </summary>
         private readonly AddressFactory addressFactory = new AddressFactory();
 
-
         /// <inheritdoc />
-        public PersonDto BuildDto(Person entity)
+        protected override PersonDto PerformBuildDTo(IPerson entity)
         {
            
             var dto = new PersonDto
@@ -52,7 +51,7 @@
         }
 
         /// <inheritdoc />
-        public Person BuildEntity(PersonDto dto)
+        protected override IPerson PerformBuildEntity(PersonDto dto)
         {
 
             var ed = dto.ExtendedData.IsNullOrWhiteSpace() ?

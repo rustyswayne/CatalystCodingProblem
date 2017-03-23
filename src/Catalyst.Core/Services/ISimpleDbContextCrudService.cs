@@ -26,10 +26,13 @@
         /// <summary>
         /// Gets all entities.
         /// </summary>
+        /// <param name="ids">
+        /// Optional collection of Ids.
+        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{TEntity}"/>.
         /// </returns>
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(params Guid[] ids);
 
         /// <summary>
         /// Gets an entity by it's Id.

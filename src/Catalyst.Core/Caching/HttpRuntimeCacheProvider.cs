@@ -11,7 +11,7 @@
     /// <summary>
     /// Represents a cache provider for HttpRuntime caching.
     /// </summary>
-    internal class HttpRuntimeCacheProvider : CacheProviderBase, IRuntimeCacheProvider
+    public class HttpRuntimeCacheProvider : CacheProviderBase, IRuntimeCacheProvider
     {
         /// <summary>
         /// The <see cref="Cache"/>.

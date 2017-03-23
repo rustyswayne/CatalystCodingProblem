@@ -21,6 +21,11 @@
         string LastName { get; set; }
 
         /// <summary>
+        /// Gets the slug.
+        /// </summary>
+        string Slug { get; }
+
+        /// <summary>
         /// Gets or sets the birthday.
         /// </summary>
         DateTime Birthday { get; set; }
@@ -34,11 +39,6 @@
         /// Gets or sets the photo.
         /// </summary>
         string Photo { get; set; }
-
-        /// <summary>
-        /// Gets the interests.
-        /// </summary>
-        IList<string> Interests { get; }
 
         /// <summary>
         /// Gets the addresses.

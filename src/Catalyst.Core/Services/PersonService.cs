@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
 
     using Catalyst.Core.Caching;
@@ -9,9 +10,12 @@
     using Catalyst.Core.Factories;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Models;
+    using Catalyst.Core.Models.Dto;
+
+    using LightInject;
 
     /// <inheritdoc />
-    internal class PersonService : CatalystDbContextServiceBase<IPerson>, IPersonService
+    internal class PersonService : CatalystDbContextServiceBase<IPerson, PersonDto>, IPersonService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
@@ -25,65 +29,93 @@
         /// <param name="logger">
         /// The <see cref="ILogger"/>.
         /// </param>
-        public PersonService(ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        public PersonService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
         }
 
+        /// <summary>
+        /// The <see cref="DbSet{PersonDto}"/>.
+        /// </summary>
+        protected override DbSet<PersonDto> Db => DbContext.People;
+
         /// <inheritdoc />
-        public IEnumerable<IPerson> GetAll()
+        public IPerson Create(string firstName, string lastName, DateTime birthDay)
         {
-            // fixme - quick hack to simply query all.
-            // this should have a check for cached items based on cached item count and count.
-            var factory = new PersonFactory();
-
-            // TODO - fix this Lazy hack
-            var dtos = Db.People.ToArray();
-
-            return dtos.Select(peep => factory.BuildEntity(peep));
+            return new Person { FirstName = firstName, LastName = lastName, Birthday = birthDay };
         }
+
+        ///// <inheritdoc />
+        //public IEnumerable<IPerson> GetAll()
+        //{
+        //    // fixme - quick hack to simply query all.
+        //    // this should have a check for cached items based on cached item count and count.
+        //    var factory = new PersonFactory();
+
+        //    return Db.ToArray().Select(peep => factory.BuildEntity(peep));
+        //}
 
 
         /// <inheritdoc />
         public IPerson GetBySlug(string slug)
         {
-            throw new NotImplementedException();
+            var factory = GetFactory();
+            var dto = Db.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
+
+            return dto != null ? factory.BuildEntity(dto) : null;
         }
 
-        /// <inheritdoc />
-        public int Count()
-        {
-            throw new NotImplementedException();
-        }
 
-        /// <inheritdoc />
-        public void Save(IPerson entity)
+        /// <summary>
+        /// Get's a unique slug for the <see cref="IPerson"/>.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        internal string GetUniqueSlug(IPerson person)
         {
-            throw new NotImplementedException();
-        }
+            var attempt = 0;
+            while (!EnsureUniqueSlug(person.GenerateSlug(attempt)))
+            {
+                attempt++;
+            }
 
-        /// <inheritdoc />
-        public void Delete(IPerson entity)
-        {
-            throw new NotImplementedException();
+            return person.GenerateSlug(attempt);
         }
 
         /// <summary>
-        /// Gets the entity from the context.
+        /// Ensures the slug is unique.
         /// </summary>
-        /// <param name="id">
-        /// The id.
+        /// <param name="slug">
+        /// The slug.
         /// </param>
         /// <returns>
-        /// The <see cref="IPerson"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        protected override IPerson PerformGet(Guid id)
+        internal bool EnsureUniqueSlug(string slug)
         {
-            var dto = Db.People.Find(id);
-            if (dto == null) return null;
+            return Db.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)) == null;
+        }
 
-            var factory = new PersonFactory();
-            return factory.BuildEntity(dto);
+        /// <inheritdoc />
+        protected override void PerformAdd(IPerson entity)
+        {
+            ((Person)entity).Slug = GetUniqueSlug(entity);
+            base.PerformAdd(entity);
+        }
+
+        /// <summary>
+        /// Gets the person factory.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="PersonFactory"/>.
+        /// </returns>
+        protected override EntityFactoryBase<PersonDto, IPerson> GetFactory()
+        {
+            return new PersonFactory();
         }
     }
 }

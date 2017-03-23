@@ -2,6 +2,8 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Validation;
+    using System.Linq;
 
     using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
@@ -18,14 +20,9 @@
         private readonly IMappingConfigurationRegister _register;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
+        /// The <see cref="ILogger"/>.
         /// </summary>
-        public CatalystDbContext()
-            : this(Constants.Database.ConnectionStringName)
-        {
-            // Enables Lazy Loading of relationships
-            Configuration.LazyLoadingEnabled = true;
-        }
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
@@ -33,16 +30,8 @@
         /// <param name="nameOrConnectionString">
         /// The name or connection string.
         /// </param>
-        public CatalystDbContext(string nameOrConnectionString)
-            : this(nameOrConnectionString, new DbMappingRegister(Logger.CreateWithDefaultLog4NetConfiguration()))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
-        /// </summary>
-        /// <param name="nameOrConnectionString">
-        /// The name or connection string.
+        /// <param name="logger">
+        /// The logger.
         /// </param>
         /// <param name="register">
         /// The register.
@@ -50,13 +39,16 @@
         /// <exception cref="ArgumentNullException">
         /// Throws if the register is null
         /// </exception>
-        internal CatalystDbContext(string nameOrConnectionString, IMappingConfigurationRegister register)
+        public CatalystDbContext(string nameOrConnectionString, ILogger logger, IMappingConfigurationRegister register)
             : base(nameOrConnectionString)
         {                   
             if (register == null) throw new ArgumentNullException(nameof(register));
+            if (logger == null) throw new ArgumentException(nameof(logger));
 
             _register = register;
-            
+            _logger = logger;
+
+            Configuration.LazyLoadingEnabled = true;
         }
 
         /// <inheritdoc />
@@ -64,6 +56,43 @@
 
         /// <inheritdoc />
         public DbSet<AddressDto> Addresses { get; set; }
+
+        /// <summary>
+        /// Overrides Save changes for logging.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="DbEntityValidationException">
+        /// Throws the context exception after the exception is logged.
+        /// </exception>
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                // Throw a new DbEntityValidationException with the improved exception message.
+                var improved = new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+
+                _logger.Error<CatalystDbContext>("Context FAILED to SaveChanges", improved);
+
+                throw improved;
+            }
+        }
 
         /// <inheritdoc />
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

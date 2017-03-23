@@ -16,8 +16,7 @@
         /// <param name="peopleService">
         /// The people service.
         /// </param>
-        public ServiceContext(
-            Lazy<IPersonService> peopleService)
+        public ServiceContext(Lazy<IPersonService> peopleService)
         {
             _peopleService = peopleService;
         }

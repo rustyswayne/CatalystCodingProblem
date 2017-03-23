@@ -7,17 +7,32 @@
     /// Represents a factory for converting domain (data) models to business models.
     /// </summary>
     /// <typeparam name="TDto">
-    /// The type of the <see cref="IDto"/>
+    /// The type of the DTO
     /// </typeparam>
     /// <typeparam name="TEntity">
-    /// The type of the <see cref="EntityBase"/>
+    /// The type of the entity
     /// </typeparam>
-    internal interface IEntityFactory<TDto, TEntity>
+    internal abstract class EntityFactoryBase<TDto, TEntity> : IEntityFactory<TDto, TEntity>
         where TDto : IDto, new()
         where TEntity : IEntity
     {
+        /// <inheritdoc />
+        public TDto BuildDto(TEntity entity)
+        {
+            var dto = PerformBuildDTo(entity);
+            return dto;
+        }
+
+        /// <inheritdoc />
+        public TEntity BuildEntity(TDto dto)
+        {
+            var entity = PerformBuildEntity(dto);
+
+            return entity;
+        }
+
         /// <summary>
-        /// Builds the <see cref="IDto"/>.
+        /// Performs the work of building the DTO object.
         /// </summary>
         /// <param name="entity">
         /// The entity.
@@ -25,17 +40,17 @@
         /// <returns>
         /// The <see cref="TDto"/>.
         /// </returns>
-        TDto BuildDto(TEntity entity);
+        protected abstract TDto PerformBuildDTo(TEntity entity);
 
         /// <summary>
-        /// Builds the <see cref="EntityBase"/>.
+        /// Performs the work of building the entity object.
         /// </summary>
         /// <param name="dto">
-        /// The DTO.
+        /// The dto.
         /// </param>
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        TEntity BuildEntity(TDto dto);
+        protected abstract TEntity PerformBuildEntity(TDto dto);
     }
 }

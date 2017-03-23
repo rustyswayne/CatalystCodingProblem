@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Data.Initializers
+﻿namespace Catalyst.Core.Data.Migrations.Install
 {
     using System;
     using System.Collections.Generic;
@@ -34,8 +34,8 @@
                     ExtendedData = JsonConvert.SerializeObject(ed.AsEnumerable()),
                     Birthday = DateTime.Parse("1971-08-06"),
                     Slug = "russell-swayne",
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
 
                     Addresses = new List<AddressDto>
                     {
@@ -47,8 +47,8 @@
                                 Region = "Florida",
                                 PostalCode = "32830",
                                 CountryCode = "US",
-                                CreateDate = DateTime.Now,
-                                UpdateDate = DateTime.Now
+                                CreateDate = DateTime.UtcNow,
+                                UpdateDate = DateTime.UtcNow
                             },
                         new AddressDto
                             {
@@ -58,8 +58,8 @@
                                 Locality = "Roma",
                                 PostalCode = "00184",
                                 CountryCode = "IT",
-                                CreateDate = DateTime.Now,
-                                UpdateDate = DateTime.Now
+                                CreateDate = DateTime.UtcNow,
+                                UpdateDate = DateTime.UtcNow
                             }
                     }
                 }

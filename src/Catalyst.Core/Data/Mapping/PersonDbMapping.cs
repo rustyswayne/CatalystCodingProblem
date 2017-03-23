@@ -1,6 +1,7 @@
 ﻿namespace Catalyst.Core.Data.Mapping
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using Catalyst.Core.Models.Dto;
@@ -20,8 +21,23 @@
             HasKey(x => x.Id);
             Property(x => x.Id).IsRequired();
 
-            Property(x => x.FirstName).IsRequired().HasMaxLength(50);
-            Property(x => x.LastName).IsRequired().HasMaxLength(50);
+            Property(x => x.FirstName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("IX_catalystPerson_FirstName")));
+
+            Property(x => x.LastName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute("IX_catalystPerson_LastName")));
+
+            Property(x => x.Slug)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName, 
+                    new IndexAnnotation(new IndexAttribute("IX_catalystPerson_Slug") { IsUnique = true }));
+
             Property(x => x.Birthday).IsRequired();
             Property(x => x.ExtendedData).IsOptional();
             Property(x => x.Photo).IsOptional();
