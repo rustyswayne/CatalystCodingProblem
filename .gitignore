@@ -10,3 +10,4 @@ src/Catalyst.Web/App_Data/Logs/
 tests/Catalyst.Tests/obj/
 src/Catalyst.Web.Ui.Client/.idea/
 src/Catalyst.Web/project.lock.json
+src/Catalyst.Web.Ui.Client/node_modules/
