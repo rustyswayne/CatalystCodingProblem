@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyst.Core", "Catalyst.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyst.Web", "Catalyst.Web\Catalyst.Web.csproj", "{AA879679-0311-476A-8679-9DEA20AEC016}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{97607B58-64F9-40BD-9F8F-3D6998569F2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyst.Tests", "..\tests\Catalyst.Tests\Catalyst.Tests.csproj", "{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{AA879679-0311-476A-8679-9DEA20AEC016}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA879679-0311-476A-8679-9DEA20AEC016}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA879679-0311-476A-8679-9DEA20AEC016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6D3C4DA-E198-48B0-A56E-892A6E5BAB42} = {97607B58-64F9-40BD-9F8F-3D6998569F2E}
 	EndGlobalSection
 EndGlobal
