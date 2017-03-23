@@ -1,11 +1,11 @@
-﻿namespace Catalyst.Core.Models.Entity
+﻿namespace Catalyst.Core.Models.Domain
 {
     using System;
 
     /// <summary>
-    /// Represents an entity.
+    /// Represents an entity DTO.
     /// </summary>
-    public interface IEntity
+    internal interface IDto
     {
         /// <summary>
         /// Gets or sets the id of the Entity.

@@ -1,12 +1,31 @@
 ﻿namespace Catalyst.Core.Services
 {
-    using Catalyst.Core.Models;
+    using System;
+
+    using Catalyst.Core.Models.Domain;
 
     /// <summary>
-    /// Represents a service that manages <see cref="IPerson"/> entities.
+    /// Represents a service that manages <see cref="Person"/> entities.
     /// </summary>
-    public interface IPersonService : ISimpleDbContextCrudService<IPerson>
+    public interface IPersonService : ISimpleDbContextCrudService<Person>
     {
+        /// <summary>
+        /// Creates a <see cref="IPerson"/> without saving it.
+        /// </summary>
+        /// <param name="firstName">
+        /// The first name.
+        /// </param>
+        /// <param name="lastName">
+        /// The last name.
+        /// </param>
+        /// <param name="birthDay">
+        /// The birth day.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IPerson"/>.
+        /// </returns>
+        Person Create(string firstName, string lastName, DateTime birthDay);
+
         /// <summary>
         /// Gets a <see cref="IPerson"/> by it's slug.
         /// </summary>
@@ -16,6 +35,6 @@
         /// <returns>
         /// The <see cref="IPerson"/>.
         /// </returns>
-        IPerson GetBySlug(string slug);
+        Person GetBySlug(string slug);
     }
 }

@@ -37,7 +37,7 @@
         /// <summary>
         /// Gets an instance of the <see cref="ICatalystDbContext"/>.
         /// </summary>
-        internal static ICatalystDbContext DbContext => Container.GetInstance<ICatalystDbContext>();
+        internal static ICatalystDbContext DbContext => Container.GetInstance<ICatalystDbContext>(Constants.Database.ConnectionStringName);
 
         /// <summary>
         /// Gets or sets the <see cref="IServiceContainer"/>.

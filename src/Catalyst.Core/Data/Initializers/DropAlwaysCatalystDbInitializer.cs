@@ -3,6 +3,7 @@
     using System.Data.Entity;
 
     using Catalyst.Core.Data.Context;
+    using Catalyst.Core.Data.Migrations.Install;
 
     /// <summary>
     /// Overrides the default DropCreate initializer.

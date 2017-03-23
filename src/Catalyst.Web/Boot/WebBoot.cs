@@ -36,7 +36,7 @@
         /// <param name="container">
         /// The container.
         /// </param>
-        internal override void Compose(IServiceContainer container)
+        protected override void Compose(IServiceContainer container)
         {
             base.Compose(container);
 

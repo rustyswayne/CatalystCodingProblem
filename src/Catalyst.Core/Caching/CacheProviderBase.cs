@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a base cache provider.
     /// </summary>
-    internal abstract class CacheProviderBase
+    public abstract class CacheProviderBase
     {
         /// <summary>
         /// A prefix for cache items.

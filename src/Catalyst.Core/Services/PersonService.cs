@@ -1,17 +1,18 @@
 ﻿namespace Catalyst.Core.Services
 {
     using System;
-    using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
-    using Catalyst.Core.Factories;
     using Catalyst.Core.Logging;
-    using Catalyst.Core.Models;
+    using Catalyst.Core.Models.Domain;
+
+    using LightInject;
 
     /// <inheritdoc />
-    internal class PersonService : CatalystDbContextServiceBase<IPerson>, IPersonService
+    internal class PersonService : CatalystDbContextServiceBase<Person>, IPersonService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
@@ -25,65 +26,74 @@
         /// <param name="logger">
         /// The <see cref="ILogger"/>.
         /// </param>
-        public PersonService(ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        public PersonService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
         }
 
-        /// <inheritdoc />
-        public IEnumerable<IPerson> GetAll()
-        {
-            // fixme - quick hack to simply query all.
-            // this should have a check for cached items based on cached item count and count.
-            var factory = new PersonFactory();
+        /// <summary>
+        /// The <see cref="DbSet{Person}"/>.
+        /// </summary>
+        protected override DbSet<Person> Db => DbContext.People;
 
-            // TODO - fix this Lazy hack
-            var dtos = Db.People.ToArray();
-
-            return dtos.Select(peep => factory.BuildEntity(peep));
-        }
-
+        /// <summary>
+        /// The entity set name.
+        /// </summary>
+        protected override string EntitySetName => "Person";
 
         /// <inheritdoc />
-        public IPerson GetBySlug(string slug)
+        public Person Create(string firstName, string lastName, DateTime birthDay)
         {
-            throw new NotImplementedException();
+            return new Person { FirstName = firstName, LastName = lastName, Birthday = birthDay };
         }
 
         /// <inheritdoc />
-        public int Count()
+        public Person GetBySlug(string slug)
         {
-            throw new NotImplementedException();
+            return Db.AsNoTracking()
+                    .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        /// <inheritdoc />
-        public void Save(IPerson entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        /// <inheritdoc />
-        public void Delete(IPerson entity)
+        /// <summary>
+        /// Get's a unique slug for the <see cref="IPerson"/>.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        internal string GetUniqueSlug(IPerson person)
         {
-            throw new NotImplementedException();
+            var attempt = 0;
+            while (!EnsureUniqueSlug(person.GenerateSlug(attempt)))
+            {
+                attempt++;
+            }
+
+            return person.GenerateSlug(attempt);
         }
 
         /// <summary>
-        /// Gets the entity from the context.
+        /// Ensures the slug is unique.
         /// </summary>
-        /// <param name="id">
-        /// The id.
+        /// <param name="slug">
+        /// The slug.
         /// </param>
         /// <returns>
-        /// The <see cref="IPerson"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        protected override IPerson PerformGet(Guid id)
+        internal bool EnsureUniqueSlug(string slug)
         {
-            var dto = Db.People.Find(id);
-            if (dto == null) return null;
+            return Db.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)) == null;
+        }
 
-            var factory = new PersonFactory();
-            return factory.BuildEntity(dto);
+        /// <inheritdoc />
+        protected override void PerformAdd(Person entity)
+        {
+            ((Person)entity).Slug = GetUniqueSlug(entity);
+            base.PerformAdd(entity);
         }
     }
 }

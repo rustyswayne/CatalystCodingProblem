@@ -1,4 +1,4 @@
-namespace Catalyst.Core.Models.Dto
+namespace Catalyst.Core.Models.Domain
 {
     using System;
 
@@ -7,12 +7,12 @@ namespace Catalyst.Core.Models.Dto
     /// <summary>
     /// Represents an street or postal address.
     /// </summary>
-    public class AddressDto : IAddress, IDto
+    public class Address : IAddress, IDto
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddressDto"/> class.
+        /// Initializes a new instance of the <see cref="Address"/> class.
         /// </summary>
-        public AddressDto()
+        public Address()
         {
             this.Id = GuidComb.GenerateComb();
         }
@@ -53,6 +53,6 @@ namespace Catalyst.Core.Models.Dto
         /// <remarks>
         /// Foreign key
         /// </remarks>
-        public virtual PersonDto PersonDto { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
