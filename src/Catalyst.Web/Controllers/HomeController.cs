@@ -1,16 +1,9 @@
 ﻿namespace Catalyst.Web.Controllers
 {
-    using System.Web.Mvc;
-
     /// <summary>
     /// The home controller.
     /// </summary>
-    public class HomeController : Controller
+    public class HomeController : CatalystControllerBase
     {
-
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 }

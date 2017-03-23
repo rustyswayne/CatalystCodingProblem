@@ -1,32 +1,78 @@
 ﻿namespace Catalyst.Core.Data.Context
 {
+    using System;
     using System.Data.Entity;
 
+    using Catalyst.Core.Data.Mapping;
+    using Catalyst.Core.Logging;
     using Catalyst.Core.Models.Domain;
 
     /// <summary>
     /// Represents a database context for the Catalyst Coding Problem.
     /// </summary>
-    internal class CatalystDbContext : DbContext
+    internal class CatalystDbContext : DbContext, ICatalystDbContext
     {
+        /// <summary>
+        /// The register for the model type configurations.
+        /// </summary>
+        private readonly IMappingConfigurationRegister _register;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
         /// </summary>
         public CatalystDbContext()
-            : base(Constants.Database.ConnectionStringName)
+            : this(Constants.Database.ConnectionStringName)
         {
             // Enables Lazy Loading of relationships
             Configuration.LazyLoadingEnabled = true;
         }
 
         /// <summary>
-        /// Gets or sets the people <see cref="DbSet"/>.
+        /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
         /// </summary>
-        public DbSet<Person> People { get; set; }
+        /// <param name="nameOrConnectionString">
+        /// The name or connection string.
+        /// </param>
+        public CatalystDbContext(string nameOrConnectionString)
+            : this(nameOrConnectionString, new DbMappingRegister(Logger.CreateWithDefaultLog4NetConfiguration()))
+        {
+        }
 
         /// <summary>
-        /// Gets or sets the addresses <see cref="DbSet"/>.
+        /// Initializes a new instance of the <see cref="CatalystDbContext"/> class.
         /// </summary>
+        /// <param name="nameOrConnectionString">
+        /// The name or connection string.
+        /// </param>
+        /// <param name="register">
+        /// The register.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Throws if the register is null
+        /// </exception>
+        internal CatalystDbContext(string nameOrConnectionString, IMappingConfigurationRegister register)
+            : base(nameOrConnectionString)
+        {                   
+            if (register == null) throw new ArgumentNullException(nameof(register));
+
+            _register = register;
+        }
+
+        /// <inheritdoc />
+        public DbSet<Person> People { get; set; }
+
+        /// <inheritdoc />
         public DbSet<Address> Addresses { get; set; }
+
+        /// <inheritdoc />
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            foreach (var configuration in _register.GetInstantiations())
+            {
+                modelBuilder.Configurations.Add(configuration);
+            }
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

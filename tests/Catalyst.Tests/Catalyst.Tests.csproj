@@ -46,7 +46,7 @@
     <Compile Include="Boot\CoreBootTests.cs" />
     <Compile Include="Caching\HttpRuntimeCacheProviderTests.cs" />
     <Compile Include="Caching\RequestCacheProviderTests.cs" />
-    <Compile Include="Data\Mappings\DbMappingTypeResolverTests.cs" />
+    <Compile Include="Data\Mappings\DbMappingRegisterTests.cs" />
     <Compile Include="TestHelpers\CoreBootTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\Fakes\FakeHttpContext.cs" />

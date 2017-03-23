@@ -68,6 +68,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Boot\WebBoot.cs" />
+    <Compile Include="Controllers\CatalystControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -84,6 +85,9 @@
     <Content Include="Config\log4net.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\People\List.cshtml" />
+    <Content Include="Views\People\PersonDetails.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

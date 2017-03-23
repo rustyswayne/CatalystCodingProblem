@@ -80,7 +80,11 @@
         /// </param>
         internal virtual void Compose(IServiceContainer container)
         {
-            container.RegisterFrom<CoreComposition>();
+            // Caching
+            container.RegisterFrom<CacheComposition>();
+
+            // Data and database
+            container.RegisterFrom<DataComposition>();
         }
     }
 }

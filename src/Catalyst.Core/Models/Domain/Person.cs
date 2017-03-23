@@ -2,15 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using Catalyst.Core.Data;
 
     /// <summary>
     /// Represents a person DTO.
     /// </summary>
-    [Table("catPerson")]
     internal sealed class Person : IDto, IExtendedData
     {
         /// <summary>
@@ -27,13 +24,11 @@
         /// <summary>
         /// Gets or sets the first name.
         /// </summary>
-        [MaxLength(50)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
-        [MaxLength(50)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -47,7 +42,6 @@
         /// <summary>
         /// Gets or sets the photo.
         /// </summary>
-        [MaxLength(500)]
         public string Photo { get; set; }
 
         /// <summary>

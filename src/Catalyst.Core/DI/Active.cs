@@ -3,6 +3,7 @@
     using System;
 
     using Catalyst.Core.Caching;
+    using Catalyst.Core.Data.Context;
 
     using global::Catalyst.Core.Logging;
 
@@ -27,6 +28,11 @@
         /// The <see cref="CacheManager"/>.
         /// </summary>
         public static ICacheManager CacheManager => Container.GetInstance<ICacheManager>();
+
+        /// <summary>
+        /// Gets an instance of the <see cref="ICatalystDbContext"/>.
+        /// </summary>
+        internal static ICatalystDbContext DbContext => Container.GetInstance<ICatalystDbContext>();
 
         /// <summary>
         /// Gets or sets the <see cref="IServiceContainer"/>.

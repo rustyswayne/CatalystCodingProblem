@@ -2,14 +2,12 @@
 {
     using Catalyst.Core.Caching;
 
-    using global::Catalyst.Core.Logging;
-
     using LightInject;
 
     /// <summary>
-    /// Adds logging related service mappings to the container
+    /// Adds caching related service mappings to the container
     /// </summary>
-    public class CoreComposition : ICompositionRoot
+    internal class CacheComposition : ICompositionRoot
     {
         /// <inheritdoc />
         public void Compose(IServiceRegistry container)
@@ -18,7 +16,6 @@
 
             // This need to be overridden in .Web
             container.Register<IRuntimeCacheProvider, NullCacheProvider>();
-
             container.RegisterSingleton<ICacheManager, CacheManager>();
         }
     }
