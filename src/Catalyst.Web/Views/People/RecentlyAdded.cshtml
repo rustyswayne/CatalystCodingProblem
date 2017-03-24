@@ -1,4 +1,5 @@
 ﻿@model Catalyst.Web.Models.Boxes.RecentlyAddedBox
+@using Constants = Catalyst.Web.Constants;
 @{
     Layout = "~/Views/Shared/_Box.cshtml";
 }
@@ -6,11 +7,12 @@
 <div class="row box-recently-added">
     <div class="col-sm-9 col-xs-12">
         @Html.Partial("_PersonTable", Model.RecentlyUpdated)
+        <a href="@Constants.PeopleRoute" class="btn btn-primary btn-lg btn-block">Manage People</a>
     </div>
 
-    <div class="col-sm-3 col-xs-12">
+    <div class="col-sm-3 col-xs-12 total-people">
         <h3>Total People</h3>
-        <span class="total-people">@Model.TotalPeople</span>
+        <a href="@Constants.PeopleRoute"><span>@Model.TotalPeople</span></a>
     </div>
 
 </div>

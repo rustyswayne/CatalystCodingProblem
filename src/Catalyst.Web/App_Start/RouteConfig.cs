@@ -2,6 +2,8 @@
 {
     using System.Web.Mvc;
     using System.Web.Routing;
+    
+    using Catalyst.Core;
 
     /// <summary>
     /// Application route configuration class.
@@ -21,7 +23,7 @@
 
             routes.MapRoute(
                 "Person",
-                url: "person/{slug}",
+                url: Web.Constants.PersonRoute.EnsureNotStartsOrEndsWith('/') + "/{slug}",
                 defaults: new { controller = "People", action = "PersonDetails", slug = UrlParameter.Optional });
 
             routes.MapRoute(

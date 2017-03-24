@@ -97,8 +97,13 @@ body.application .return-link:hover,
   float: left;
   border-bottom-width: 0; }
 
+.box-recently-added .person-table {
+  min-height: 280px; }
+
 .box-recently-added .total-people {
-  font-size: x-large; }
+  text-align: center; }
+  .box-recently-added .total-people span {
+    font-size: 3em; }
 
 .chart-wrapper .chart-stage h2 {
   font-size: 1.5em; }

@@ -78,13 +78,6 @@
           "lib/net45/ImageProcessor.Web.dll": {}
         }
       },
-      "ImageProcessor.Web.Config/2.3.0": {
-        "type": "package",
-        "dependencies": {
-          "ImageProcessor": "2.4.0",
-          "ImageProcessor.Web": "4.6.0"
-        }
-      },
       "LightInject/5.0.2": {
         "type": "package",
         "compile": {
@@ -416,13 +409,6 @@
         },
         "runtime": {
           "lib/net45/ImageProcessor.Web.dll": {}
-        }
-      },
-      "ImageProcessor.Web.Config/2.3.0": {
-        "type": "package",
-        "dependencies": {
-          "ImageProcessor": "2.4.0",
-          "ImageProcessor.Web": "4.6.0"
         }
       },
       "LightInject/5.0.2": {
@@ -807,19 +793,6 @@
         "ImageProcessor.Web.nuspec",
         "content/web.config.transform",
         "lib/net45/ImageProcessor.Web.dll"
-      ]
-    },
-    "ImageProcessor.Web.Config/2.3.0": {
-      "sha512": "jm9eRCRcjB2DWOuLWAnKJnMhyl+BRrophldjQWDXmR7/ErOYD42LEiNZArXrlPhThJvgNDt/LqbYab204VAFQg==",
-      "type": "package",
-      "path": "imageprocessor.web.config/2.3.0",
-      "files": [
-        "ImageProcessor.Web.Config.2.3.0.nupkg.sha512",
-        "ImageProcessor.Web.Config.nuspec",
-        "content/config/imageprocessor/cache.config.transform",
-        "content/config/imageprocessor/processing.config.transform",
-        "content/config/imageprocessor/security.config.transform",
-        "content/web.config.transform"
       ]
     },
     "LightInject/5.0.2": {
@@ -1233,7 +1206,6 @@
       "CommonMark.NET >= 0.15.1",
       "ImageProcessor >= 2.5.2",
       "ImageProcessor.Web >= 4.8.2",
-      "ImageProcessor.Web.Config >= 2.3.0",
       "LightInject >= 5.0.2",
       "LightInject.Annotation >= 1.1.0",
       "Microsoft.AspNet.Mvc >= 5.2.3",
@@ -1276,7 +1248,6 @@
       "CommonMark.NET": "0.15.1",
       "ImageProcessor": "2.5.2",
       "ImageProcessor.Web": "4.8.2",
-      "ImageProcessor.Web.Config": "2.3.0",
       "LightInject": "5.0.2",
       "LightInject.Annotation": "1.1.0",
       "Microsoft.AspNet.Mvc": "5.2.3",

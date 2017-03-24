@@ -1,5 +1,5 @@
 ﻿@model Catalyst.Web.Models.Shared.NavTab
-
+@using Constants = Catalyst.Web.Constants;
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,8 +13,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="/"@(Model.Url.Equals("/") ? " class=active" : string.Empty)>Home</a></li>
-                <li><a href="/people/"@(Model.Url.Equals("/people/") ? " class=active" : string.Empty)>People</a></li>
+                <li><a href="/"@(Model.Url.Equals(Constants.HomeRoute) ? " class=active" : string.Empty)>Home</a></li>
+                <li><a href="/people/"@(Model.Url.Equals(Constants.PeopleRoute) ? " class=active" : string.Empty)>People</a></li>
                 @if (Model.Url.StartsWith("/person/"))
                 {
                     <li><a href="@Model.Url" class="person-detail">@Model.Title</a></li>

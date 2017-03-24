@@ -5,6 +5,7 @@
 
     using Catalyst.Core;
     using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.PropData;
 
     /// <summary>
     /// Extension methods for <see cref="Person"/>.
@@ -26,24 +27,7 @@
         }
 
         //// Properties
-
-        /// <summary>
-        /// Checks if an extended property exists.
-        /// </summary>
-        /// <param name="person">
-        /// The person.
-        /// </param>
-        /// <param name="converterAlias">
-        /// The converter alias.
-        /// </param>
-        /// <returns>
-        /// A value indicating whether or not the extended property exists.
-        /// </returns>
-        public static bool HasExtendedProperty(this IPerson person, string converterAlias)
-        {
-            return person.Properties.Any(x => x.ConverterAlias.Equals(converterAlias, System.StringComparison.InvariantCultureIgnoreCase));
-        }
-
+        
         /// <summary>
         /// Checks if the <c>'Photo'</c> property exists.
         /// </summary>
@@ -55,7 +39,7 @@
         /// </returns>
         public static bool HasPhoto(this IPerson person)
         {
-            return person.HasExtendedProperty(Constants.ExtendedProperties.PhotoConverterAlias);
+            return person.HasExtendedProperty(Core.Constants.ExtendedProperties.PhotoConverterAlias);
         }
 
         /// <summary>
@@ -69,7 +53,7 @@
         /// </returns>
         public static bool HasInterests(this IPerson person)
         {
-            return person.HasExtendedProperty(Constants.ExtendedProperties.InterestListConverterAlias);
+            return person.HasExtendedProperty(Core.Constants.ExtendedProperties.InterestListConverterAlias);
         }
 
         /// <summary>
@@ -83,7 +67,7 @@
         /// </returns>
         public static bool HasGitHubFeed(this IPerson person)
         {
-            return person.HasExtendedProperty(Constants.ExtendedProperties.GitHubFeedConverterAlias);
+            return person.HasExtendedProperty(Core.Constants.ExtendedProperties.GitHubFeedConverterAlias);
         }
 
         /// <summary>
@@ -97,7 +81,7 @@
         /// </returns>
         public static bool HasSocialLinks(this IPerson person)
         {
-            return person.HasExtendedProperty(Constants.ExtendedProperties.SocialLinksConverterAlias);
+            return person.HasExtendedProperty(Core.Constants.ExtendedProperties.SocialLinksConverterAlias);
         }
 
         /// <summary>
@@ -111,7 +95,25 @@
         /// </returns>
         public static string PhotoUrl(this IPerson person)
         {
-            throw new NotImplementedException();
+            return person.HasPhoto()
+                       ? person.GetPropertyValue<Photo>(Core.Constants.ExtendedProperties.PhotoConverterAlias).Src
+                       : string.Empty;
         }
+
+
+        /// <summary>
+        /// Gets the update date in local time.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string UpdateDateLocal(this IPerson person)
+        {
+            return person.UpdateDate.ToLocalTime().ToString("g");
+        }
+
     }
 }

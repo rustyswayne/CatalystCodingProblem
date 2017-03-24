@@ -3,7 +3,6 @@
     "CommonMark.NET": "0.15.1",
     "ImageProcessor": "2.5.2",
     "ImageProcessor.Web": "4.8.2",
-    "ImageProcessor.Web.Config": "2.3.0",
     "LightInject": "5.0.2",
     "LightInject.Annotation": "1.1.0",
     "Microsoft.AspNet.Mvc": "5.2.3",

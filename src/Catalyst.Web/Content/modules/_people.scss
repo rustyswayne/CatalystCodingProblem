@@ -1,7 +1,16 @@
 ﻿// recently added
 .box-recently-added {
 
+    .person-table { min-height: 280px;}
+
     .total-people {
-        font-size: x-large;
+        
+        text-align: center;
+
+        span { font-size: 3em; }
     }
+}
+
+.person-table {
+
 }

@@ -68,12 +68,14 @@
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Media\Placeholders\person-placeholder.png" />
     <Content Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Boot\WebBoot.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CatalystControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
@@ -81,7 +83,9 @@
     <Compile Include="Extensions.HtmlHelper.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensions.Person.cs" />
+    <Compile Include="Extensions.Person.cs">
+      <DependentUpon>Extensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

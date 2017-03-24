@@ -1,30 +1,27 @@
-﻿@model IEnumerable<Catalyst.Core.Models.Domain.Person>
+﻿@using Catalyst.Core.Models.Domain
+@model IEnumerable<Catalyst.Core.Models.Domain.Person>
 
-<table class="table table-fixed">
+<table class="table table-striped person-table">
     <thead>
         <tr>
-            <th class="col-xs-2"></th>
-            <th class="col-xs-8">Name</th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-5">Name</th>
+            <th class="col-xs-4">Social</th>
             <th class="col-xs-2">Last Updated</th>
         </tr>
     </thead>
     <tbody>
-        @if (Model.Any())
-        {
-            foreach (var p in Model)
-            {
-                <tr>
-                    <td class="col-xs-2"></td>
-                    <td class="col-xs-8"><a href="@p.Url()">@p.FullName()</a></td>
-                    <td class="col-xs-2">@p.UpdateDate.ToLongDateString()</td>
-                </tr>
-            }
-        }
-        else
+    @if (Model.Any())
+    {
+        foreach (var p in Model)
         {
             <tr>
-                <td colspan="3">No people found.  <a href="/people/">Why not add some?</a></td>
+                <td class="col-xs-1"><a href="@p.Url()">@Html.Thumbnail(p.PhotoUrl(), Catalyst.Web.Constants.PersonEmptyPhoto, p.FullName(), "width=25")</a></td>
+                <td class="col-xs-5"><a href="@p.Url()">@p.FullName()</a></td>
+                <td class="col-xs-4"></td>
+                <td class="col-xs-2">@p.UpdateDateLocal()</td>
             </tr>
         }
+    }
     </tbody>
 </table>
