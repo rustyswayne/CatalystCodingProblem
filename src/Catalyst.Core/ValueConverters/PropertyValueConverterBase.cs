@@ -32,17 +32,32 @@
         public IExtendedProperty Property { get; }
 
         /// <inheritdoc />
-        public virtual void SetValue(TValue value)
+        public Type ModelType => typeof(TValue);
+
+        /// <inheritdoc />
+        public virtual void SetValue(object value)
         {
+            if (value == null) value = Activator.CreateInstance(ModelType);
             Property.Value = JsonConvert.SerializeObject(value);
         }
 
         /// <inheritdoc />
-        public virtual TValue GetValue()
+        public virtual T GetPropertyValue<T>() where T : class, IPropertyValueModel, new()
+        {
+            return GetValue() as T;
+        }
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object GetValue()
         {
             return !this.Property.Value.IsNullOrWhiteSpace()
-                       ? JsonConvert.DeserializeObject<TValue>(this.Property.Value)
-                       : new TValue();
+                       ? JsonConvert.DeserializeObject(Property.Value, ModelType)
+                       : Activator.CreateInstance(ModelType);
         }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Data\Migrations\Install\SeedDataHelper.cs" />
     <Compile Include="Data\Mapping\AddressDbMapping.cs" />
     <Compile Include="DI\Compositions\TypeRegisterComposition.cs" />
+    <Compile Include="Extensions.ExtendedProperty.cs" />
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\PropData\GitHubFeed.cs" />
     <Compile Include="Registers\DbMappingRegister.cs" />

@@ -5,6 +5,7 @@
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
     using Catalyst.Core.Logging;
+    using Catalyst.Core.Registers;
     using Catalyst.Core.Services;
     
     using LightInject;
@@ -38,6 +39,11 @@
         /// Gets an instance of the <see cref="ICatalystDbContext"/>.
         /// </summary>
         internal static ICatalystDbContext DbContext => Container.GetInstance<ICatalystDbContext>(Constants.Database.ConnectionStringName);
+
+        /// <summary>
+        /// Gets the <see cref="IValueConverterRegister"/>.
+        /// </summary>
+        internal static IValueConverterRegister ValueConverterRegister => Container.GetInstance<IValueConverterRegister>();
 
         /// <summary>
         /// Gets or sets the <see cref="IServiceContainer"/>.

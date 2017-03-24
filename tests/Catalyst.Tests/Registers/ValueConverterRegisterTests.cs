@@ -10,8 +10,6 @@
     using Catalyst.Core.ValueConverters;
     using Catalyst.Tests.TestHelpers;
 
-    using LightInject;
-
     using Merchello.Core;
 
     using NUnit.Framework;
