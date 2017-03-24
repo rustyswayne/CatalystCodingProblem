@@ -60,6 +60,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.offcanvas.min.css" />
     <Content Include="Global.asax" />
     <Content Include="project.json" />
   </ItemGroup>
@@ -77,6 +79,12 @@
     <Compile Include="Properties\AssemblyVisibility.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.offcanvas.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.2.min.js" />
+    <Content Include="Scripts\jquery.justifiedGallery.min.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -86,7 +94,9 @@
     <Content Include="Views\People\List.cshtml" />
     <Content Include="Views\People\PersonDetails.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Config\entityFramework.config" />
+    <Content Include="Content\externals\_bootstrapoffcanvas.scss" />
+    <Content Include="Content\externals\_vars.scss" />
+    <Content Include="Content\styles.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,9 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
-    <Folder Include="Content\" />
     <Folder Include="Models\ViewModels\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catalyst.Core\Catalyst.Core.csproj">

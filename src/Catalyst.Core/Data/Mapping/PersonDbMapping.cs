@@ -39,10 +39,13 @@
                     new IndexAnnotation(new IndexAttribute("IX_catalystPerson_Slug") { IsUnique = true }));
 
             Property(x => x.Birthday).IsRequired();
-            Property(x => x.ExtendedData).IsOptional();
-            Property(x => x.Photo).IsOptional();
 
             HasMany(x => x.Addresses)
+                .WithRequired(x => x.Person)
+                .Map(x => x.MapKey("PersonId"))
+                .WillCascadeOnDelete(true);
+
+            HasMany(x => x.Properties)
                 .WithRequired(x => x.Person)
                 .Map(x => x.MapKey("PersonId"))
                 .WillCascadeOnDelete(true);

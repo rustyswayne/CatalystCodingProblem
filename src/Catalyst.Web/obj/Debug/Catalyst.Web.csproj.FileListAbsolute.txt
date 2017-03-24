@@ -77,3 +77,11 @@ C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\System.Data.SqlServ
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll.config
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\log4net.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Semver.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\AjaxMin.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\EcmaScript.NET.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\SquishIt.Framework.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\SquishIt.Framework.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\SquishIt.Mvc.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\SquishIt.Mvc.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\WebActivatorEx.dll
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Yahoo.Yui.Compressor.dll

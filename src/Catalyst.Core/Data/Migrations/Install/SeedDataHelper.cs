@@ -21,9 +21,9 @@
         /// </returns>
         public static IEnumerable<Person> GetDefaultPeople()
         {
-            var ed = new ExtendedDataCollection();
-            var interests = new[] { "Family", "Travel", "Movies", "Skiing", "SCUBA Diving", "Food" };
-            ed.SetValue("interests", JsonConvert.SerializeObject(interests));
+            //var ed = new ExtendedDataCollection();
+            //var interests = new[] { "Family", "Travel", "Movies", "Skiing", "SCUBA Diving", "Food" };
+            //ed.SetValue("interests", JsonConvert.SerializeObject(interests));
 
             return new List<Person>
             {
@@ -31,7 +31,6 @@
                 {
                     FirstName = "Russell",
                     LastName = "Swayne",
-                    ExtendedData = JsonConvert.SerializeObject(ed.AsEnumerable()),
                     Birthday = DateTime.Parse("1971-08-06"),
                     Slug = "russell-swayne",
                     CreateDate = DateTime.UtcNow,

@@ -11,3 +11,6 @@ tests/Catalyst.Tests/obj/
 src/Catalyst.Web.Ui.Client/.idea/
 src/Catalyst.Web/project.lock.json
 src/Catalyst.Web.Ui.Client/node_modules/
+src/packages/
+src/Catalyst.Web/Content/cache/
+tests/Catalyst.Tests/project.lock.json

@@ -7,7 +7,7 @@ namespace Catalyst.Core.Models.Domain
     /// <summary>
     /// Represents an street or postal address.
     /// </summary>
-    public class Address : IAddress, IDto
+    public class Address : EntityBase, IAddress, IDto
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Address"/> class.
@@ -16,9 +16,6 @@ namespace Catalyst.Core.Models.Domain
         {
             this.Id = GuidComb.GenerateComb();
         }
-
-        /// <inheritdoc />
-        public Guid Id { get; set; }
 
         /// <inheritdoc />
         public string Name { get; set; }
@@ -40,12 +37,6 @@ namespace Catalyst.Core.Models.Domain
 
         /// <inheritdoc />
         public string CountryCode { get; set; }
-
-        /// <inheritdoc />
-        public DateTime UpdateDate { get; set; }
-
-        /// <inheritdoc />
-        public DateTime CreateDate { get; set; }
 
         /// <summary>
         /// Gets or sets the person associated with the address.

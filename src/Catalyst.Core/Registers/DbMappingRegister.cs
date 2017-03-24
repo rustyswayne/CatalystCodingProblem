@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Data.Mapping
+﻿namespace Catalyst.Core.Registers
 {
     using System;
     using System.Collections.Generic;
@@ -32,7 +32,7 @@
         public DbMappingRegister(ILogger logger)
         {
             if (logger == null) throw new ArgumentNullException(nameof(logger));
-            _logger = logger;
+            this._logger = logger;
             this.Initialize();
         }
 
@@ -40,7 +40,7 @@
         /// <summary>
         /// The instance types.
         /// </summary>
-        public IEnumerable<Type> InstanceTypes => _types;
+        public IEnumerable<Type> InstanceTypes => this._types;
 
         /// <summary>
         /// Gets the instantiated instances.
@@ -50,7 +50,7 @@
         /// </returns>
         public IEnumerable<dynamic> GetInstantiations()
         {
-            return InstanceTypes.Select(Activator.CreateInstance);
+            return this.InstanceTypes.Select(Activator.CreateInstance);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@
         /// </summary>
         public void Initialize()
         {
-            _logger.Info<DbMappingRegister>("Initializing");
+            this._logger.Info<DbMappingRegister>("Initializing");
 
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
                         .Where(type => !string.IsNullOrEmpty(type.Namespace))
@@ -66,15 +66,15 @@
                         && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>)).ToArray();
 
 
-            _logger.Info<DbMappingRegister>($"Found {typesToRegister.Count()} types to register");
+            this._logger.Info<DbMappingRegister>($"Found {typesToRegister.Count()} types to register");
 
             foreach (var t in typesToRegister)
             {
-                _logger.Info<DbMappingRegister>($"Adding {t.FullName} to registry");
-                _types.Add(t);
+                this._logger.Info<DbMappingRegister>($"Adding {t.FullName} to registry");
+                this._types.Add(t);
             }
 
-            _logger.Info<DbMappingRegister>("Completed adding types to register");
+            this._logger.Info<DbMappingRegister>("Completed adding types to register");
         }
     }
 }

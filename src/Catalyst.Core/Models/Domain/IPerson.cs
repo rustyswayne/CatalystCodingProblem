@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a Person.
     /// </summary>
-    public interface IPerson : IEntity, IExtendedData
+    public interface IPerson : IEntity
     {
         /// <summary>
         /// Gets or sets the first name.
@@ -28,15 +28,14 @@
         /// </summary>
         DateTime Birthday { get; set; }
 
-
-        /// <summary>
-        /// Gets or sets the photo.
-        /// </summary>
-        string Photo { get; set; }
-
         /// <summary>
         /// Gets the addresses.
         /// </summary>
         ICollection<Address> Addresses { get; }
+
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
+        ICollection<ExtendedProperty> Properties { get; }
     }
 }

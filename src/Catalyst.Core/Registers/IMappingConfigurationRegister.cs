@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Core.Data.Mapping
+﻿namespace Catalyst.Core.Registers
 {
     using System;
     using System.Collections.Generic;
@@ -6,13 +6,8 @@
     /// <summary>
     /// Represents a register of Model Type Mapping Configurations.
     /// </summary>
-    public interface IMappingConfigurationRegister
+    public interface IMappingConfigurationRegister : ITypeRegister
     {
-        /// <summary>
-        /// Gets the resolved instance types.
-        /// </summary>
-        IEnumerable<Type> InstanceTypes { get; }
-
         /// <summary>
         /// Returns instantiations of resolved instance types.
         /// </summary>

@@ -2,10 +2,22 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5.2": {
-      "bootstrap/3.3.7": {
+      "AjaxMin/5.14.5506.26202": {
         "type": "package",
-        "dependencies": {
-          "jQuery": "[1.9.1, 4.0.0)"
+        "compile": {
+          "lib/net40/AjaxMin.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AjaxMin.dll": {}
+        }
+      },
+      "EcmaScript.Net/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net20/EcmaScript.NET.dll": {}
         }
       },
       "EntityFramework/6.1.3": {
@@ -34,9 +46,6 @@
         "runtime": {
           "lib/net45/EntityFramework.SqlServerCompact.dll": {}
         }
-      },
-      "jQuery/1.9.1": {
-        "type": "package"
       },
       "LightInject/5.0.2": {
         "type": "package",
@@ -193,7 +202,7 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "Newtonsoft.Json/10.0.1": {
+      "Newtonsoft.Json/6.0.4": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -211,6 +220,56 @@
           "lib/net452/Semver.dll": {}
         }
       },
+      "SquishIt/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "AjaxMin": "5.14.5506.26202",
+          "WebActivatorEx": "2.1.0",
+          "YUICompressor.NET": "2.3.0"
+        },
+        "compile": {
+          "lib/SquishIt.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Framework.dll": {}
+        }
+      },
+      "SquishIt.Mvc/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "SquishIt": "0.9.9"
+        },
+        "compile": {
+          "lib/SquishIt.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Mvc.dll": {}
+        }
+      },
+      "WebActivatorEx/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net40/WebActivatorEx.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {}
+        }
+      },
+      "YUICompressor.NET/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "EcmaScript.Net": "1.0.1"
+        },
+        "compile": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        },
+        "runtime": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        }
+      },
       "Catalyst.Core/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
@@ -219,17 +278,29 @@
           "EntityFramework.SqlServerCompact": "6.1.3",
           "LightInject": "5.0.2",
           "LightInject.Annotation": "1.1.0",
-          "Newtonsoft.Json": "10.0.1",
+          "Newtonsoft.Json": "6.0.4",
           "log4net": "2.0.8",
           "semver": "2.0.4"
         }
       }
     },
     ".NETFramework,Version=v4.5.2/win": {
-      "bootstrap/3.3.7": {
+      "AjaxMin/5.14.5506.26202": {
         "type": "package",
-        "dependencies": {
-          "jQuery": "[1.9.1, 4.0.0)"
+        "compile": {
+          "lib/net40/AjaxMin.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AjaxMin.dll": {}
+        }
+      },
+      "EcmaScript.Net/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net20/EcmaScript.NET.dll": {}
         }
       },
       "EntityFramework/6.1.3": {
@@ -258,9 +329,6 @@
         "runtime": {
           "lib/net45/EntityFramework.SqlServerCompact.dll": {}
         }
-      },
-      "jQuery/1.9.1": {
-        "type": "package"
       },
       "LightInject/5.0.2": {
         "type": "package",
@@ -417,7 +485,7 @@
           "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
-      "Newtonsoft.Json/10.0.1": {
+      "Newtonsoft.Json/6.0.4": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -435,6 +503,56 @@
           "lib/net452/Semver.dll": {}
         }
       },
+      "SquishIt/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "AjaxMin": "5.14.5506.26202",
+          "WebActivatorEx": "2.1.0",
+          "YUICompressor.NET": "2.3.0"
+        },
+        "compile": {
+          "lib/SquishIt.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Framework.dll": {}
+        }
+      },
+      "SquishIt.Mvc/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "SquishIt": "0.9.9"
+        },
+        "compile": {
+          "lib/SquishIt.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Mvc.dll": {}
+        }
+      },
+      "WebActivatorEx/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net40/WebActivatorEx.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {}
+        }
+      },
+      "YUICompressor.NET/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "EcmaScript.Net": "1.0.1"
+        },
+        "compile": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        },
+        "runtime": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        }
+      },
       "Catalyst.Core/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
@@ -443,7 +561,7 @@
           "EntityFramework.SqlServerCompact": "6.1.3",
           "LightInject": "5.0.2",
           "LightInject.Annotation": "1.1.0",
-          "Newtonsoft.Json": "10.0.1",
+          "Newtonsoft.Json": "6.0.4",
           "log4net": "2.0.8",
           "semver": "2.0.4"
         }
@@ -451,28 +569,32 @@
     }
   },
   "libraries": {
-    "bootstrap/3.3.7": {
-      "sha512": "3YTWhPNh6UcnUvzw9u6A2/hy2w0h4lznxPbX6FY47lFia3+Ib4zBixTpW6YieYA/b2fLXbkjoD59OjcVF3cJXw==",
+    "AjaxMin/5.14.5506.26202": {
+      "sha512": "ayrhrlFSQEAw+1w7cdUGozbZ8BxakITQcTezeLKByp69zk0tdto8/Jt3U2ieCq3U1dlvwXGvlthMaTJXeHEaFw==",
       "type": "package",
-      "path": "bootstrap/3.3.7",
+      "path": "ajaxmin/5.14.5506.26202",
       "files": [
-        "bootstrap.3.3.7.nupkg.sha512",
-        "bootstrap.nuspec",
-        "content/Content/bootstrap-theme.css",
-        "content/Content/bootstrap-theme.css.map",
-        "content/Content/bootstrap-theme.min.css",
-        "content/Content/bootstrap-theme.min.css.map",
-        "content/Content/bootstrap.css",
-        "content/Content/bootstrap.css.map",
-        "content/Content/bootstrap.min.css",
-        "content/Content/bootstrap.min.css.map",
-        "content/Scripts/bootstrap.js",
-        "content/Scripts/bootstrap.min.js",
-        "content/fonts/glyphicons-halflings-regular.eot",
-        "content/fonts/glyphicons-halflings-regular.svg",
-        "content/fonts/glyphicons-halflings-regular.ttf",
-        "content/fonts/glyphicons-halflings-regular.woff",
-        "content/fonts/glyphicons-halflings-regular.woff2"
+        "AjaxMin.5.14.5506.26202.nupkg.sha512",
+        "AjaxMin.nuspec",
+        "lib/net20/AjaxMin.dll",
+        "lib/net35/AjaxMin.dll",
+        "lib/net40/AjaxMin.dll",
+        "tools/net35/AjaxMin.dll",
+        "tools/net35/AjaxMin.targets",
+        "tools/net35/AjaxMinTask.dll",
+        "tools/net40/AjaxMin.dll",
+        "tools/net40/AjaxMin.targets",
+        "tools/net40/AjaxMinTask.dll"
+      ]
+    },
+    "EcmaScript.Net/1.0.1": {
+      "sha512": "6U09fonPEr/ONxkJFZSjv/auSpqvw/IGebcRW+9sr7F82nOaRxfpzmN2wuz7Hy/Tr1wcR/hsbTk1j9JNlzRxHg==",
+      "type": "package",
+      "path": "ecmascript.net/1.0.1",
+      "files": [
+        "EcmaScript.Net.1.0.1.nupkg.sha512",
+        "EcmaScript.Net.nuspec",
+        "lib/net20/EcmaScript.NET.dll"
       ]
     },
     "EntityFramework/6.1.3": {
@@ -516,23 +638,6 @@
         "lib/net45/EntityFramework.SqlServerCompact.dll",
         "lib/net45/EntityFramework.SqlServerCompact.xml",
         "tools/install.ps1"
-      ]
-    },
-    "jQuery/1.9.1": {
-      "sha512": "HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
-      "type": "package",
-      "path": "jquery/1.9.1",
-      "files": [
-        "Content/Scripts/jquery-1.9.1-vsdoc.js",
-        "Content/Scripts/jquery-1.9.1.js",
-        "Content/Scripts/jquery-1.9.1.min.js",
-        "Content/Scripts/jquery-1.9.1.min.map",
-        "Tools/common.ps1",
-        "Tools/install.ps1",
-        "Tools/jquery-1.9.1.intellisense.js",
-        "Tools/uninstall.ps1",
-        "jquery.1.9.1.nupkg.sha512",
-        "jquery.nuspec"
       ]
     },
     "LightInject/5.0.2": {
@@ -828,11 +933,13 @@
         "lib/net40/Microsoft.Web.Infrastructure.dll"
       ]
     },
-    "Newtonsoft.Json/10.0.1": {
-      "sha512": "ebWzW9j2nwxQeBo59As2TYn7nYr9BHicqqCwHOD1Vdo+50HBtLPuqdiCYJcLdTRknpYis/DSEOQz5KmZxwrIAg==",
+    "Newtonsoft.Json/6.0.4": {
+      "sha512": "FyQLmEpjsCrEP+znauLDGAi+h6i9YnaMkITlfIoiM4RYyX3nki306bTHsr/0okiIvIc7BJhQTbOAIZVocccFUw==",
       "type": "package",
-      "path": "newtonsoft.json/10.0.1",
+      "path": "newtonsoft.json/6.0.4",
       "files": [
+        "Newtonsoft.Json.6.0.4.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -841,14 +948,12 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.xml",
-        "newtonsoft.json.10.0.1.nupkg.sha512",
-        "newtonsoft.json.nuspec",
+        "lib/netcore45/Newtonsoft.Json.dll",
+        "lib/netcore45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
       ]
     },
@@ -863,6 +968,53 @@
         "lib/netstandard1.1/Semver.xml",
         "semver.2.0.4.nupkg.sha512",
         "semver.nuspec"
+      ]
+    },
+    "SquishIt/0.9.9": {
+      "sha512": "G1sP3UC74lzm85wMLlQBxh63RN5WXkSipD/3Qx5m5DHFY6SFlkqhKcg1xhQKjXs85lhf3EG+ux45N/vqTXLD5A==",
+      "type": "package",
+      "path": "squishit/0.9.9",
+      "files": [
+        "lib/SquishIt.Framework.dll",
+        "lib/SquishIt.Framework.pdb",
+        "lib/SquishIt.Framework.xml",
+        "optional/SquishIt.Mvc.dll",
+        "optional/SquishIt.Mvc.pdb",
+        "squishit.0.9.9.nupkg.sha512",
+        "squishit.nuspec"
+      ]
+    },
+    "SquishIt.Mvc/0.9.9": {
+      "sha512": "2trZ+buogodfcQi3vCu1MXUHLQo1i6zemrURVGRJC4zGqucL7CrFjB6ArlBP0M/MwRr6rjEzc43V1q/T3ZXmlw==",
+      "type": "package",
+      "path": "squishit.mvc/0.9.9",
+      "files": [
+        "lib/SquishIt.Mvc.dll",
+        "lib/SquishIt.Mvc.pdb",
+        "squishit.mvc.0.9.9.nupkg.sha512",
+        "squishit.mvc.nuspec"
+      ]
+    },
+    "WebActivatorEx/2.1.0": {
+      "sha512": "0HJ6DpxcTzSGIgcN6Q0jKAwLX1bWKnbeDOvT7vFXB/e4MIrwWc+1XwzihQp0Sr91EUK2N7j5cjZ1cIvWCraeJg==",
+      "type": "package",
+      "path": "webactivatorex/2.1.0",
+      "files": [
+        "lib/net40/WebActivatorEx.dll",
+        "webactivatorex.2.1.0.nupkg.sha512",
+        "webactivatorex.nuspec"
+      ]
+    },
+    "YUICompressor.NET/2.3.0": {
+      "sha512": "NAU4l/PEePmTQHHIGtad/Z1I9NgT0DcylYTuwb353fmFB9fgAze5T9IypNpWzgeail83NTdQDSfHAZpZwE98jA==",
+      "type": "package",
+      "path": "yuicompressor.net/2.3.0",
+      "files": [
+        "New BSD License.txt",
+        "YUICompressor.NET.2.3.0.nupkg.sha512",
+        "YUICompressor.NET.nuspec",
+        "lib/NET20/Yahoo.Yui.Compressor.dll",
+        "readme.txt"
       ]
     },
     "Catalyst.Core/1.0.0": {
@@ -885,8 +1037,8 @@
       "Microsoft.CodeDom.Providers.DotNetCompilerPlatform >= 1.0.3",
       "Microsoft.Net.Compilers >= 2.0.1",
       "Microsoft.Web.Infrastructure >= 1.0.0",
-      "Newtonsoft.Json >= 10.0.1",
-      "bootstrap >= 3.3.7"
+      "Newtonsoft.Json >= 6.0.4",
+      "SquishIt.Mvc >= 0.9.9"
     ],
     ".NETFramework,Version=v4.5.2": []
   },
@@ -911,7 +1063,6 @@
       }
     },
     "dependencies": {
-      "bootstrap": "3.3.7",
       "LightInject": "5.0.2",
       "LightInject.Annotation": "1.1.0",
       "Microsoft.AspNet.Mvc": "5.2.3",
@@ -924,7 +1075,8 @@
       "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": "1.0.3",
       "Microsoft.Net.Compilers": "2.0.1",
       "Microsoft.Web.Infrastructure": "1.0.0",
-      "Newtonsoft.Json": "10.0.1"
+      "Newtonsoft.Json": "6.0.4",
+      "SquishIt.Mvc": "0.9.9"
     },
     "frameworks": {
       "net452": {}

@@ -9,6 +9,8 @@
 
     using LightInject;
 
+    using Merchello.Core;
+
     /// <summary>
     /// Application boot strap for the Catalyst 'People Search Coding Problem'
     /// </summary>
@@ -83,8 +85,14 @@
         /// </param>
         protected virtual void Compose(IServiceContainer container)
         {
+            // Activator Service
+            container.RegisterSingleton<IActivatorServiceProvider, ActivatorServiceProvider>();
+
             // Caching
             container.RegisterFrom<CacheComposition>();
+
+            // Type registers
+            container.RegisterFrom<TypeRegisterComposition>();
 
             // Data and database
             container.RegisterFrom<DataComposition>();

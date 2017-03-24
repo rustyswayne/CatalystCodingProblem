@@ -17,9 +17,7 @@
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", TestHelper.TestAppDataDirectory);
 
-            var container = new ServiceContainer();
-            container.EnableAnnotatedConstructorInjection();
-            container.EnableAnnotatedPropertyInjection();
+            var container = TestHelper.GetEmptyServiceContainer();
 
             var loader = new CoreBoot(container);
 

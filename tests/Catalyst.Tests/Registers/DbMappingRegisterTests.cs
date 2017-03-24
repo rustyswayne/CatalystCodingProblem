@@ -1,12 +1,13 @@
-﻿namespace Catalyst.Tests.Data.Mappings
+﻿namespace Catalyst.Tests.Registers
 {
-    using Catalyst.Core.Data.Mapping;
+    using System.Linq;
+
     using Catalyst.Core.Logging;
+    using Catalyst.Core.Registers;
 
     using Moq;
 
     using NUnit.Framework;
-    using System.Linq;
 
     [TestFixture]
     public class DbMappingRegisterTests
@@ -15,7 +16,7 @@
         public void InstanceTypes()
         {
             //// Arrange
-            const int expectedCount = 2;
+            const int expectedCount = 3;
             var logger = new Mock<ILogger>().Object;
 
             //// Act
@@ -30,7 +31,7 @@
         public void GetInstantiations()
         {
             //// Arrange
-            const int expectedCount = 2;
+            const int expectedCount = 3;
             var logger = new Mock<ILogger>().Object;
 
             //// Act

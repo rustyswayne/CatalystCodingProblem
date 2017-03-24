@@ -1,6 +1,5 @@
 ﻿{
   "dependencies": {
-    "bootstrap": "3.3.7",
     "LightInject": "5.0.2",
     "LightInject.Annotation": "1.1.0",
     "Microsoft.AspNet.Mvc": "5.2.3",
@@ -13,7 +12,8 @@
     "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": "1.0.3",
     "Microsoft.Net.Compilers": "2.0.1",
     "Microsoft.Web.Infrastructure": "1.0.0",
-    "Newtonsoft.Json": "10.0.1"
+    "Newtonsoft.Json": "6.0.4",
+    "SquishIt.Mvc": "0.9.9"
   },
   "frameworks": {
     "net452": {}

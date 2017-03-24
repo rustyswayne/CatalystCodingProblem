@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivatorProviderTests.cs" />
     <Compile Include="Boot\ActiveTests.cs" />
     <Compile Include="Boot\CacheSetupTests.cs" />
     <Compile Include="Boot\CoreBootTests.cs" />
     <Compile Include="Caching\HttpRuntimeCacheProviderTests.cs" />
     <Compile Include="Caching\RequestCacheProviderTests.cs" />
-    <Compile Include="Data\Mappings\DbMappingRegisterTests.cs" />
+    <Compile Include="Registers\DbMappingRegisterTests.cs" />
+    <Compile Include="Registers\ValueConverterRegisterTests.cs" />
     <Compile Include="TestHelpers\CoreBootTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\Fakes\FakeHttpContext.cs" />
@@ -68,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\Mappings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

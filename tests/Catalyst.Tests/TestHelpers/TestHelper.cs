@@ -3,6 +3,8 @@
     using System;
     using System.IO;
 
+    using LightInject;
+
     /// <summary>
     /// Common helper properties and methods useful to testing
     /// </summary>
@@ -30,7 +32,7 @@
                 var assembly = CurrentAssemblyDirectory;
                 var baseDir = assembly.Substring(0, assembly.LastIndexOf("\\bin", StringComparison.Ordinal));
 
-                return $"{baseDir}\\AppData\\";
+                return $"{baseDir}\\App_Data\\";
             }
         }
 
@@ -46,5 +48,14 @@
             return relativePath.Replace("~/", CurrentAssemblyDirectory + "/");
         }
 
+
+        public static IServiceContainer GetEmptyServiceContainer()
+        {
+            var container = new ServiceContainer();
+            container.EnableAnnotatedConstructorInjection();
+            container.EnableAnnotatedPropertyInjection();
+
+            return container;
+        }
     }
 }

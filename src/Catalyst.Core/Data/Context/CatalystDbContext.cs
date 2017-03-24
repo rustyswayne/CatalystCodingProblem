@@ -2,12 +2,14 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Validation;
     using System.Linq;
 
     using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Registers;
 
     /// <summary>
     /// Represents a database context for the Catalyst Coding Problem.
@@ -47,6 +49,29 @@
 
             _register = register;
             _logger = logger;
+
+            // Register the event to update last modified date
+            var objectContext = ((IObjectContextAdapter)this).ObjectContext;
+            objectContext.SavingChanges += (sender, args) =>
+            {
+                var now = DateTime.UtcNow;
+                foreach (var entry in this.ChangeTracker.Entries<EntityBase>())
+                {
+                    var entity = entry.Entity;
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreateDate = now;
+                            entity.UpdateDate = now;
+                            break;
+                        case EntityState.Modified:
+                            entity.UpdateDate = now;
+                            break;
+                    }
+                }
+
+                this.ChangeTracker.DetectChanges();
+            };
 
             Configuration.LazyLoadingEnabled = true;
         }

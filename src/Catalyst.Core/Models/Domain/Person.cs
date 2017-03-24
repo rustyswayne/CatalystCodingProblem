@@ -8,7 +8,7 @@
     /// <summary>
     /// Represents a person DTO.
     /// </summary>
-    public class Person : IPerson, IDto
+    public class Person : EntityBase, IPerson, IDto
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.
@@ -17,9 +17,6 @@
         {
             this.Id = GuidComb.GenerateComb();
         }
-
-        /// <inheritdoc />
-        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.
@@ -41,23 +38,14 @@
         /// </summary>
         public DateTime Birthday { get; set; }
 
-        /// <inheritdoc />
-        public string ExtendedData { get; set; }
-
-        /// <summary>
-        /// Gets or sets the photo.
-        /// </summary>
-        public string Photo { get; set; }
-
         /// <summary>
         /// Gets or sets the addresses.
         /// </summary>
         public virtual ICollection<Address> Addresses { get; set; }
 
-        /// <inheritdoc />
-        public DateTime UpdateDate { get; set; }
-
-        /// <inheritdoc />
-        public DateTime CreateDate { get; set; }
+        /// <summary>
+        /// Gets or sets the properties.
+        /// </summary>
+        public virtual ICollection<ExtendedProperty> Properties { get; set; }
     }
 }

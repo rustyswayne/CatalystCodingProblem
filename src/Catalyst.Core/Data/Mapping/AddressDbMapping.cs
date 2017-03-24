@@ -1,6 +1,5 @@
 ﻿namespace Catalyst.Core.Data.Mapping
 {
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
     using Catalyst.Core.Models.Domain;

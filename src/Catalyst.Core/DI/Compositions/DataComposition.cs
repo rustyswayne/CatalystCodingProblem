@@ -3,6 +3,7 @@
     using Catalyst.Core.Data.Context;
     using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
+    using Catalyst.Core.Registers;
 
     using LightInject;
 
@@ -14,8 +15,6 @@
         /// <inheritdoc />
         public void Compose(IServiceRegistry container)
         {
-            container.RegisterSingleton<IMappingConfigurationRegister, DbMappingRegister>();
-
             // Transient
             container.Register<ICatalystDbContext, CatalystDbContext>();
 
