@@ -255,6 +255,15 @@
           "lib/SquishIt.Mvc.dll": {}
         }
       },
+      "TidyNetPortable/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/TidyNetPortable.dll": {}
+        },
+        "runtime": {
+          "lib/TidyNetPortable.dll": {}
+        }
+      },
       "WebActivatorEx/2.1.0": {
         "type": "package",
         "dependencies": {
@@ -546,6 +555,15 @@
         },
         "runtime": {
           "lib/SquishIt.Mvc.dll": {}
+        }
+      },
+      "TidyNetPortable/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/TidyNetPortable.dll": {}
+        },
+        "runtime": {
+          "lib/TidyNetPortable.dll": {}
         }
       },
       "WebActivatorEx/2.1.0": {
@@ -1048,6 +1066,16 @@
         "squishit.mvc.nuspec"
       ]
     },
+    "TidyNetPortable/1.0.0": {
+      "sha512": "JCnQ7XQ6gNT1vGn7otrrHCKMaNgwGRm22dZ6hYwQ+EbHK572mSqv1FCBlm8wIGb71aMrpLF3LFkaHRcN9iRlXg==",
+      "type": "package",
+      "path": "tidynetportable/1.0.0",
+      "files": [
+        "lib/TidyNetPortable.dll",
+        "tidynetportable.1.0.0.nupkg.sha512",
+        "tidynetportable.nuspec"
+      ]
+    },
     "WebActivatorEx/2.1.0": {
       "sha512": "0HJ6DpxcTzSGIgcN6Q0jKAwLX1bWKnbeDOvT7vFXB/e4MIrwWc+1XwzihQp0Sr91EUK2N7j5cjZ1cIvWCraeJg==",
       "type": "package",
@@ -1091,7 +1119,8 @@
       "Microsoft.Net.Compilers >= 2.0.1",
       "Microsoft.Web.Infrastructure >= 1.0.0",
       "Newtonsoft.Json >= 6.0.4",
-      "SquishIt.Mvc >= 0.9.9"
+      "SquishIt.Mvc >= 0.9.9",
+      "TidyNetPortable >= 1.0.0"
     ],
     ".NETFramework,Version=v4.5.2": []
   },
@@ -1129,7 +1158,8 @@
       "Microsoft.Net.Compilers": "2.0.1",
       "Microsoft.Web.Infrastructure": "1.0.0",
       "Newtonsoft.Json": "6.0.4",
-      "SquishIt.Mvc": "0.9.9"
+      "SquishIt.Mvc": "0.9.9",
+      "TidyNetPortable": "1.0.0"
     },
     "frameworks": {
       "net452": {}

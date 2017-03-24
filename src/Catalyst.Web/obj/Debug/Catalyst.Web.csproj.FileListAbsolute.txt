@@ -87,3 +87,4 @@ C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\WebActivatorEx.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Yahoo.Yui.Compressor.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\CommonMark.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\CommonMark.pdb
+C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\TidyNetPortable.dll

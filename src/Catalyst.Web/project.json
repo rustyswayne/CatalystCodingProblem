@@ -13,7 +13,8 @@
     "Microsoft.Net.Compilers": "2.0.1",
     "Microsoft.Web.Infrastructure": "1.0.0",
     "Newtonsoft.Json": "6.0.4",
-    "SquishIt.Mvc": "0.9.9"
+    "SquishIt.Mvc": "0.9.9",
+    "TidyNetPortable": "1.0.0"
   },
   "frameworks": {
     "net452": {}

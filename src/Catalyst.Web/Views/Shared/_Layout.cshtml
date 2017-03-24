@@ -13,15 +13,12 @@
         .MvcRender("~/Content/cache/combined_#.css"))
 </head>
 <body>
-    @Html.Partial("_Header")
-    <div>
-        @RenderBody()
-    </div>
-    
-@(Bundle.JavaScript()
-    .Add("~/Scripts/bootstrap.min.js")
-    .Add("~/Scripts/jquery-2.2.2.min.js")
-    .MvcRender("~/Scripts/cache/combined_#.js"))
-    
+@Html.Partial("_Header")
+
+<div>
+    @RenderBody()
+</div>
+
+@(Bundle.JavaScript().Add("~/Scripts/bootstrap.min.js").Add("~/Scripts/jquery-2.2.2.min.js").MvcRender("~/Scripts/cache/combined_#.js"))
 </body>
 </html>
