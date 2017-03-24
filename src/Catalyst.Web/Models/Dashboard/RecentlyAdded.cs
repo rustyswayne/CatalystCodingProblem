@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Web.Models.Boxes
+﻿namespace Catalyst.Web.Models.Dashboard
 {
     using System.Collections.Generic;
 
@@ -7,7 +7,7 @@
     /// <summary>
     /// The recently added box.
     /// </summary>
-    public class RecentlyAddedBox : BoxBase
+    public class RecentlyAdded : DashboardItemBase
     {
         /// <inheritdoc />
         public override string Title => "Recently Added";

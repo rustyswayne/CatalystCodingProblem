@@ -1,9 +1,8 @@
-﻿@model Catalyst.Web.Models.Boxes.RecentlyAddedBox
+﻿@model Catalyst.Web.Models.Dashboard.RecentlyAdded
 @using Constants = Catalyst.Web.Constants;
 @{
-    Layout = "~/Views/Shared/_Box.cshtml";
+    Layout = "_DashboardItem.cshtml";
 }
-
 <div class="row box-recently-added">
     <div class="col-sm-9 col-xs-12">
         @Html.Partial("_PersonTable", Model.RecentlyUpdated)

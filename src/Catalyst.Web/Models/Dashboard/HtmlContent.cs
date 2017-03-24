@@ -1,21 +1,21 @@
-﻿namespace Catalyst.Web.Models.Boxes
+﻿namespace Catalyst.Web.Models.Dashboard
 {
     using System.Web;
 
     /// <summary>
-    /// Represents a generic content box.
+    /// Represents a rich text dashboard item.
     /// </summary>
-    public class ContentBox : BoxBase
+    public class RichText : DashboardItemBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContentBox"/> class.
+        /// Initializes a new instance of the <see cref="RichText"/> class.
         /// </summary>
         /// <param name="title">
         /// The title.
         /// </param>
-        public ContentBox(string title)
+        public RichText(string title)
         {
-            Title = title;
+            this.Title = title;
         }
 
         /// <inheritdoc />

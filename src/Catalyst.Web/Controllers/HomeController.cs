@@ -5,12 +5,12 @@
 
     using Catalyst.Core;
     using Catalyst.Web.Models;
-    using Catalyst.Web.Models.Boxes;
+    using Catalyst.Web.Models.Dashboard;
 
     /// <summary>
     /// The home controller.
     /// </summary>
-    public class HomeController : CatalystControllerBase
+    public class HomeController : ViewModelControllerBase
     {
         /// <summary>
         /// The default action.
@@ -24,7 +24,7 @@
             var model = GetViewModel<Home>();
             model.CurrentTab.Title = "Home";
 
-            model.Instructions = new ContentBox("Requirements")
+            model.Instructions = new RichText("Requirements")
             {
                 Content = GetReadmeMarkdown(),
                 Notes = "Recieved view email"

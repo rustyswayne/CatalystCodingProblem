@@ -16,6 +16,7 @@
         public Person()
         {
             this.Id = GuidComb.GenerateComb();
+            this.Initialize();
         }
 
         /// <summary>
@@ -47,5 +48,14 @@
         /// Gets or sets the properties.
         /// </summary>
         public virtual ICollection<ExtendedProperty> Properties { get; set; }
+
+        /// <summary>
+        /// The initialize.
+        /// </summary>
+        private void Initialize()
+        {
+            Addresses = new List<Address>();
+            Properties = new List<ExtendedProperty>();
+        }
     }
 }

@@ -77,8 +77,10 @@
     <Compile Include="Boot\WebBoot.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CatalystControllerBase.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ViewModelControllerBase.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Extensions.HtmlHelper.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
@@ -89,11 +91,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Boxes\ContentBox.cs" />
-    <Compile Include="Models\Boxes\RecentlyAddedBox.cs" />
+    <Compile Include="Models\Dashboard\HtmlContent.cs" />
+    <Compile Include="Models\Dashboard\RecentlyAdded.cs" />
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
-    <Compile Include="Models\Boxes\BoxBase.cs" />
+    <Compile Include="Models\Dashboard\DashboardItemBase.cs" />
     <Compile Include="Models\Shared\NavTab.cs" />
     <Compile Include="Models\Shared\Meta.cs" />
     <Compile Include="Models\Home.cs" />
@@ -131,16 +133,19 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Views\Shared\_Box.cshtml" />
-    <Content Include="Views\People\RecentlyAdded.cshtml" />
+    <Content Include="Views\Dashboard\_DashboardItem.cshtml" />
+    <Content Include="Views\Dashboard\RecentlyAdded.cshtml" />
     <Content Include="Content\modules\_tables.scss" />
     <Content Include="Content\modules\_boxes.scss" />
     <Content Include="Views\Shared\_PersonTable.cshtml" />
-    <Content Include="Views\Shared\_ContentBox.cshtml" />
+    <Content Include="Views\Dashboard\RichText.cshtml" />
     <Content Include="Views\Shared\_PersonTableFixed.cshtml" />
     <Content Include="Config\imageprocessor\security.config" />
     <Content Include="Config\imageprocessor\cache.config" />
     <Content Include="Config\imageprocessor\processing.config" />
+    <Content Include="Views\Dashboard\CountriesSnapshot.cshtml" />
+    <Content Include="Views\Dashboard\PeoplePropertyStats.cshtml" />
+    <Content Include="Views\Dashboard\RandomLastTweet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

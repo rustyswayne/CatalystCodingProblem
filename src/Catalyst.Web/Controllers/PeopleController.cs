@@ -4,12 +4,11 @@
 
     using Catalyst.Core;
     using Catalyst.Web.Models;
-    using Catalyst.Web.Models.Boxes;
 
     /// <summary>
     /// The person controller.
     /// </summary>
-    public class PeopleController : CatalystControllerBase
+    public class PeopleController : ViewModelControllerBase
     {
         /// <inheritdoc />
         public override ActionResult Index()
@@ -46,25 +45,6 @@
 
 
             return View("PersonDetails", model);
-        }
-
-        // Child Actions
-
-        /// <summary>
-        /// Returns the recently added box.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        [ChildActionOnly]
-        public ActionResult RecentlyAdded()
-        {
-            var model = new RecentlyAddedBox()
-            {
-                RecentlyUpdated = Services.Person.GetRecentlyUpdated(),
-                TotalPeople = Services.Person.Count()
-            };
-            return PartialView(model);
         }
     }
 }

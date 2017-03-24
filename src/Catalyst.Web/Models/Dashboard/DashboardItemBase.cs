@@ -1,9 +1,9 @@
-﻿namespace Catalyst.Web.Models.Boxes
+﻿namespace Catalyst.Web.Models.Dashboard
 {
     /// <summary>
     /// Represents a base UI box model.
     /// </summary>
-    public abstract class BoxBase
+    public abstract class DashboardItemBase
     {
         /// <summary>
         /// Gets the box title.
