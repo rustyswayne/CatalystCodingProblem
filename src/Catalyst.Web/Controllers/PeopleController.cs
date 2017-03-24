@@ -3,29 +3,27 @@
     using System.Web.Mvc;
 
     using Catalyst.Core;
+    using Catalyst.Web.Models;
 
     /// <summary>
-    /// The people controller.
+    /// The person controller.
     /// </summary>
     public class PeopleController : CatalystControllerBase
     {
         /// <inheritdoc />
         public override ActionResult Index()
         {
-            return List();
-        }
+            var model = new PeopleList
+            {
+                Meta =
+                    {
+                        PageTitle = "People List - People Problem",
+                        Description = "Displays a list of all people that have been saved to the database"
+                    },
+                People = Services.Person.GetAll()
+            };
 
-        /// <summary>
-        /// Renders the peoples "List" view.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        public ActionResult List()
-        {
-            var model = Services.Person.GetAll();
-
-            return View("List", model);
+            return View(model);
         }
 
         /// <summary>
@@ -41,10 +39,23 @@
         {
             if (slug.IsNullOrWhiteSpace())
             {
-                return RedirectToAction("List");
+                return RedirectToAction("Index");
             }
 
-            return View("PersonDetails", (object)slug);
+            var person = Services.Person.GetBySlug(slug);
+            if (person == null) return RedirectToAction("Index");
+
+            var model = new PersonDetail
+                {
+                    Meta =
+                    {
+                        PageTitle = $"{person.FullName()} - People Problem",
+                        Description = "Provides access to all records associated with a person"
+                    },
+                    Person = person
+                };
+
+            return View("PersonDetails", model);
         }
     }
 }

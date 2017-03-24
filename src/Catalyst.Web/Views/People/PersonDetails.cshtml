@@ -1,16 +1,6 @@
-﻿@model string
-
-@section TitleAndMeta
-{
-    <title>Person Details - Health Catalyst People Problem</title>
-    <meta name="description" content="Detailed view of person record" />
-}
-
-
-
-
+﻿@model Catalyst.Web.Models.PersonDetail
 <div>
-    <strong>Person details: @Model</strong>
+    <strong>Person details: @Model.Person.FirstName</strong>
 
 </div>
 

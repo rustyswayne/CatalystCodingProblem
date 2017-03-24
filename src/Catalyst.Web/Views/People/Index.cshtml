@@ -1,0 +1,17 @@
+﻿@using Catalyst.Core
+@model Catalyst.Web.Models.PeopleList
+
+<h3>List people here</h3>
+@if (Model.People.Any())
+{
+    <table class="table table-striped">
+        @foreach (var p in Model.People)
+        {
+            <tr>
+                <td>Photo</td>
+                <td><a href="@p.Url()">@p.FullName()</a></td>
+
+            </tr>
+        }
+    </table>
+}

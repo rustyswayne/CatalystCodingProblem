@@ -75,6 +75,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PeopleList.cs" />
+    <Compile Include="Models\PersonDetail.cs" />
+    <Compile Include="Models\Shared\Meta.cs" />
+    <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVisibility.cs" />
   </ItemGroup>
@@ -91,12 +96,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Config\log4net.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\People\List.cshtml" />
+    <Content Include="Views\People\Index.cshtml" />
     <Content Include="Views\People\PersonDetails.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Content\externals\_bootstrapoffcanvas.scss" />
     <Content Include="Content\externals\_vars.scss" />
     <Content Include="Content\styles.scss" />
+    <Content Include="Views\Shared\_MetaInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -106,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catalyst.Core\Catalyst.Core.csproj">

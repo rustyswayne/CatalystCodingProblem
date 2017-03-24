@@ -1,10 +1,7 @@
 ﻿namespace Catalyst.Core
 {
-    using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
-    using System.Data.Entity.Core.Objects.DataClasses;
+    using System.Threading;
 
-    using Catalyst.Core.Models;
     using Catalyst.Core.Models.Domain;
 
     /// <summary>
@@ -12,6 +9,35 @@
     /// </summary>
     public static partial class Extensions
     {
+        /// <summary>
+        /// The full name.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string FullName(this IPerson person)
+        {
+            var textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
+            return textInfo.ToTitleCase($"{person.FirstName} {person.LastName}");
+        }
+
+        /// <summary>
+        /// Gets the Url for the person.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string Url(this IPerson person)
+        {
+            return $"person/{person.Slug}".EnsureStartsAndEndsWith('/');
+        }
+
         /// <summary>
         /// Adds an address to <see cref="IPerson"/>.
         /// </summary>

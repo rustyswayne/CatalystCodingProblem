@@ -76,7 +76,12 @@
     <Compile Include="Data\Migrations\Install\SeedDataHelper.cs" />
     <Compile Include="Data\Mapping\AddressDbMapping.cs" />
     <Compile Include="DI\Compositions\TypeRegisterComposition.cs" />
-    <Compile Include="Extensions.ExtendedProperty.cs" />
+    <Compile Include="Extensions.ExtendedProperty.cs">
+      <DependentUpon>Extensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.Person.cs">
+      <DependentUpon>Extensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\PropData\GitHubFeed.cs" />
     <Compile Include="Registers\DbMappingRegister.cs" />
@@ -87,9 +92,6 @@
     <Compile Include="DI\Compositions\CacheComposition.cs" />
     <Compile Include="DI\Compositions\ServiceComposition.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Extensions.Entity.cs">
-      <DependentUpon>Extensions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extensions.LightInject.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
