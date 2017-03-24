@@ -6,13 +6,14 @@
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
+    using Catalyst.Core.Events;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Models.Domain;
 
     using LightInject;
 
     /// <inheritdoc />
-    internal class PersonService : CatalystDbContextServiceBase<Person>, IPersonService
+    internal partial class PersonService : CatalystDbContextServiceBase<Person>, IPersonService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
@@ -29,12 +30,15 @@
         public PersonService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
+            // Fill in the slug on add
+            this.Adding += (s, e) => { e.Entity.Slug = GetUniqueSlug(e.Entity); };
         }
+
 
         /// <summary>
         /// The <see cref="DbSet{Person}"/>.
         /// </summary>
-        protected override DbSet<Person> Db => DbContext.People;
+        protected override DbSet<Person> Context => DbContext.People;
 
         /// <summary>
         /// The entity set name.
@@ -50,7 +54,7 @@
         /// <inheritdoc />
         public Person GetBySlug(string slug)
         {
-            return Db.AsNoTracking()
+            return this.Context.AsNoTracking()
                     .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
         }
 
@@ -86,14 +90,15 @@
         /// </returns>
         internal bool EnsureUniqueSlug(string slug)
         {
-            return Db.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)) == null;
+            return this.Context.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase)) == null;
         }
 
         /// <inheritdoc />
-        protected override void PerformAdd(Person entity)
+        protected override Person PerformGet(Guid id, bool lazy = true)
         {
-            ((Person)entity).Slug = GetUniqueSlug(entity);
-            base.PerformAdd(entity);
+            return lazy ? 
+                base.PerformGet(id) : 
+                this.Context.Include(p => p.Addresses).Include(p => p.Properties).FirstOrDefault(x => x.Id == id);
         }
     }
 }

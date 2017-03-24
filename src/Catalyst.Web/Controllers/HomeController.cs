@@ -5,6 +5,7 @@
 
     using Catalyst.Core;
     using Catalyst.Web.Models;
+    using Catalyst.Web.Models.Boxes;
 
     /// <summary>
     /// The home controller.
@@ -22,7 +23,12 @@
 
             var model = GetViewModel<Home>();
             model.CurrentTab.Title = "Home";
-            model.BodyText = GetReadmeMarkdown();
+
+            model.Instructions = new ContentBox("Requirements")
+            {
+                Content = GetReadmeMarkdown(),
+                Notes = "Recieved view email"
+            };
             
             return View(model);
         }

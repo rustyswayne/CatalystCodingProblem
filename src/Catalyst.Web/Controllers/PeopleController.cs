@@ -4,6 +4,7 @@
 
     using Catalyst.Core;
     using Catalyst.Web.Models;
+    using Catalyst.Web.Models.Boxes;
 
     /// <summary>
     /// The person controller.
@@ -42,9 +43,28 @@
             var model = GetViewModel<PersonDetail>();
             model.CurrentTab.Title = person.FullName();
             model.Person = person;
-               
+
 
             return View("PersonDetails", model);
+        }
+
+        // Child Actions
+
+        /// <summary>
+        /// Returns the recently added box.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [ChildActionOnly]
+        public ActionResult RecentlyAdded()
+        {
+            var model = new RecentlyAddedBox()
+            {
+                RecentlyUpdated = Services.Person.GetRecentlyUpdated(),
+                TotalPeople = Services.Person.Count()
+            };
+            return PartialView(model);
         }
     }
 }

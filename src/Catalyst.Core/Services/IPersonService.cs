@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents a service that manages <see cref="Person"/> entities.
     /// </summary>
-    public interface IPersonService : ISimpleDbContextCrudService<Person>
+    public interface IPersonService : ISimpleDbContextCrudService<Person>, IPersonQueryService
     {
         /// <summary>
         /// Creates a <see cref="IPerson"/> without saving it.

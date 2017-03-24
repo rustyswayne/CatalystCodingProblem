@@ -76,6 +76,7 @@
     <Compile Include="Data\Migrations\Install\SeedDataHelper.cs" />
     <Compile Include="Data\Mapping\AddressDbMapping.cs" />
     <Compile Include="DI\Compositions\TypeRegisterComposition.cs" />
+    <Compile Include="Events\EntityEventArgs.cs" />
     <Compile Include="Extensions.ExtendedProperty.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
@@ -84,6 +85,7 @@
     </Compile>
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\PropData\GitHubFeed.cs" />
+    <Compile Include="Models\PropData\InterestList.cs" />
     <Compile Include="Registers\DbMappingRegister.cs" />
     <Compile Include="Registers\IMappingConfigurationRegister.cs" />
     <Compile Include="DI\Compositions\DataComposition.cs" />
@@ -119,14 +121,19 @@
     <Compile Include="Properties\AssemblyVisibility.cs" />
     <Compile Include="Registers\ITypeRegister.cs" />
     <Compile Include="Services\CatalystDbContextServiceBase.cs" />
+    <Compile Include="Services\IPersonQueryService.cs" />
     <Compile Include="Services\ISimpleDbContextCrudService.cs" />
     <Compile Include="Services\IPersonService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\IServiceContext.cs" />
     <Compile Include="Services\PersonService.cs" />
+    <Compile Include="Services\PersonService.Query.cs">
+      <DependentUpon>PersonService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\ServiceContext.cs" />
     <Compile Include="ValueConverters\ConverterAliasAttribute.cs" />
     <Compile Include="ValueConverters\GitHubFeedValueConverter.cs" />
+    <Compile Include="ValueConverters\InterestListValueConverter.cs" />
     <Compile Include="ValueConverters\IPropertyValueConverter.cs" />
     <Compile Include="Registers\IValueConverterRegister.cs" />
     <Compile Include="ValueConverters\PhotoValueConverter.cs" />

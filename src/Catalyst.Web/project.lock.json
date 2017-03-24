@@ -56,6 +56,35 @@
           "lib/net45/EntityFramework.SqlServerCompact.dll": {}
         }
       },
+      "ImageProcessor/2.5.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/ImageProcessor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.dll": {}
+        }
+      },
+      "ImageProcessor.Web/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.5.2",
+          "Microsoft.IO.RecyclableMemoryStream": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        }
+      },
+      "ImageProcessor.Web.Config/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.4.0",
+          "ImageProcessor.Web": "4.6.0"
+        }
+      },
       "LightInject/5.0.2": {
         "type": "package",
         "compile": {
@@ -185,6 +214,15 @@
         },
         "build": {
           "build/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props": {}
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
         }
       },
       "Microsoft.Net.Compilers/2.0.1": {
@@ -358,6 +396,35 @@
           "lib/net45/EntityFramework.SqlServerCompact.dll": {}
         }
       },
+      "ImageProcessor/2.5.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/ImageProcessor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.dll": {}
+        }
+      },
+      "ImageProcessor.Web/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.5.2",
+          "Microsoft.IO.RecyclableMemoryStream": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        }
+      },
+      "ImageProcessor.Web.Config/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.4.0",
+          "ImageProcessor.Web": "4.6.0"
+        }
+      },
       "LightInject/5.0.2": {
         "type": "package",
         "compile": {
@@ -487,6 +554,15 @@
         },
         "build": {
           "build/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props": {}
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
         }
       },
       "Microsoft.Net.Compilers/2.0.1": {
@@ -711,6 +787,41 @@
         "tools/install.ps1"
       ]
     },
+    "ImageProcessor/2.5.2": {
+      "sha512": "PwcbjoYJIRUHMWL/WTY9PT42+HHcwNQkvG+/doca4F2TJH2hCXwpSBZd3LN6LmBEmMl0Y9VE5i2XmfB7EDITzA==",
+      "type": "package",
+      "path": "imageprocessor/2.5.2",
+      "files": [
+        "ImageProcessor.2.5.2.nupkg.sha512",
+        "ImageProcessor.nuspec",
+        "lib/net40/ImageProcessor.dll",
+        "lib/net45/ImageProcessor.dll"
+      ]
+    },
+    "ImageProcessor.Web/4.8.2": {
+      "sha512": "H5ND02QHminfp7di4dII4Po45dJWTgdvmn7so6f+8KbIYZ6eDWoWgVwSHAu00fP5KYFFlviYG7RHNreolgFAbA==",
+      "type": "package",
+      "path": "imageprocessor.web/4.8.2",
+      "files": [
+        "ImageProcessor.Web.4.8.2.nupkg.sha512",
+        "ImageProcessor.Web.nuspec",
+        "content/web.config.transform",
+        "lib/net45/ImageProcessor.Web.dll"
+      ]
+    },
+    "ImageProcessor.Web.Config/2.3.0": {
+      "sha512": "jm9eRCRcjB2DWOuLWAnKJnMhyl+BRrophldjQWDXmR7/ErOYD42LEiNZArXrlPhThJvgNDt/LqbYab204VAFQg==",
+      "type": "package",
+      "path": "imageprocessor.web.config/2.3.0",
+      "files": [
+        "ImageProcessor.Web.Config.2.3.0.nupkg.sha512",
+        "ImageProcessor.Web.Config.nuspec",
+        "content/config/imageprocessor/cache.config.transform",
+        "content/config/imageprocessor/processing.config.transform",
+        "content/config/imageprocessor/security.config.transform",
+        "content/web.config.transform"
+      ]
+    },
     "LightInject/5.0.2": {
       "sha512": "2gLh8UtRUJIqhb0EmkIKNKFkWW4FRs4tY/P0e2IR1Y4CYVjPWHGa8NT0ASJOk8gxrgzj7ZJ9VwWPvTrZTL43EA==",
       "type": "package",
@@ -899,6 +1010,19 @@
         "microsoft.codedom.providers.dotnetcompilerplatform.nuspec",
         "tools/install.ps1",
         "tools/uninstall.ps1"
+      ]
+    },
+    "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+      "sha512": "j2EO0JM4snuIXMRKaTX7AYrmfHkj8I7ySi+tOoNddB0CucEp1M3uRmK8MJfM6jaKNKGlTZkVCGA937896iNmPA==",
+      "type": "package",
+      "path": "microsoft.io.recyclablememorystream/1.2.1",
+      "files": [
+        "Microsoft.IO.RecyclableMemoryStream.1.2.1.nupkg.sha512",
+        "Microsoft.IO.RecyclableMemoryStream.nuspec",
+        "lib/net40/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/net40/Microsoft.IO.RecyclableMemoryStream.pdb",
+        "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/net45/Microsoft.IO.RecyclableMemoryStream.pdb"
       ]
     },
     "Microsoft.Net.Compilers/2.0.1": {
@@ -1107,6 +1231,9 @@
   "projectFileDependencyGroups": {
     "": [
       "CommonMark.NET >= 0.15.1",
+      "ImageProcessor >= 2.5.2",
+      "ImageProcessor.Web >= 4.8.2",
+      "ImageProcessor.Web.Config >= 2.3.0",
       "LightInject >= 5.0.2",
       "LightInject.Annotation >= 1.1.0",
       "Microsoft.AspNet.Mvc >= 5.2.3",
@@ -1147,6 +1274,9 @@
     },
     "dependencies": {
       "CommonMark.NET": "0.15.1",
+      "ImageProcessor": "2.5.2",
+      "ImageProcessor.Web": "4.8.2",
+      "ImageProcessor.Web.Config": "2.3.0",
       "LightInject": "5.0.2",
       "LightInject.Annotation": "1.1.0",
       "Microsoft.AspNet.Mvc": "5.2.3",

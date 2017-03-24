@@ -30,12 +30,15 @@
         /// <param name="person">
         /// The person.
         /// </param>
+        /// <param name="baseRoute">
+        /// The base Route.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string Url(this IPerson person)
+        public static string Url(this IPerson person, string baseRoute = "")
         {
-            return $"person/{person.Slug}".EnsureStartsAndEndsWith('/');
+            return $"{baseRoute}/{person.Slug}".EnsureStartsAndEndsWith('/');
         }
 
         /// <summary>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Catalyst.Core.Models.Domain.Person>
+
+<table class="table table-fixed">
+    <thead>
+        <tr>
+            <th class="col-xs-2"></th>
+            <th class="col-xs-8">Name</th>
+            <th class="col-xs-2">Last Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var p in Model)
+            {
+                <tr>
+                    <td class="col-xs-2"></td>
+                    <td class="col-xs-8"><a href="@p.Url()">@p.FullName()</a></td>
+                    <td class="col-xs-2">@p.UpdateDate.ToLongDateString()</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No people found.  <a href="/people/">Why not add some?</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

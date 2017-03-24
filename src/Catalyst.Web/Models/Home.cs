@@ -1,7 +1,6 @@
 ﻿namespace Catalyst.Web.Models
 {
-    using System.Web;
-
+    using Catalyst.Web.Models.Boxes;
     using Catalyst.Web.Models.Shared;
 
     /// <summary>
@@ -24,6 +23,6 @@
         /// <summary>
         /// Gets or sets the body text.
         /// </summary>
-        public IHtmlString BodyText { get; set; }
+        public ContentBox Instructions { get; set; }
     }
 }

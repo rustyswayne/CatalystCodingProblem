@@ -97,3 +97,12 @@ body.application .return-link:hover,
   float: left;
   border-bottom-width: 0; }
 
+.box-recently-added .total-people {
+  font-size: x-large; }
+
+.chart-wrapper .chart-stage h2 {
+  font-size: 1.5em; }
+
+.chart-wrapper .chart-stage h3 {
+  font-size: 1.25em; }
+

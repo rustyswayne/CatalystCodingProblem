@@ -1,0 +1,15 @@
+﻿@model Catalyst.Web.Models.Boxes.BoxBase
+@{
+    Layout = null;
+}
+<div class="chart-wrapper">
+    <div class="chart-title">
+        @Model.Title
+    </div>
+    <div class="chart-stage">
+        @RenderBody()
+    </div>
+    <div class="chart-notes">
+        Notes: @Html.If(() => !Model.Notes.IsNullOrWhiteSpace(), Model.Notes)
+    </div>
+</div>

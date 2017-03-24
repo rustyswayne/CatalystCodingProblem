@@ -40,10 +40,13 @@
         /// <param name="id">
         /// The id.
         /// </param>
+        /// <param name="lazy">
+        /// Lazy property load.
+        /// </param>
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        TEntity Get(Guid id);
+        TEntity Get(Guid id, bool lazy = true);
 
         /// <summary>
         /// Saves the entity.

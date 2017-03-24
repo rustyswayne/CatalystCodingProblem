@@ -25,6 +25,11 @@
             /// </summary>
             // ReSharper disable once StyleCop.SA1650
             public const string GitHubFeedConverterAlias = "github";
+
+            /// <summary>
+            /// The interest list converter alias.
+            /// </summary>
+            public const string InterestListConverterAlias = "interests";
         }
     }
 }

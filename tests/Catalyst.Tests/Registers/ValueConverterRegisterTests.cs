@@ -33,7 +33,7 @@
         public void InstanceTypes()
         {
             //// Arrange
-            const int expected = 3;
+            const int expected = 4;
             
             //// Act
             var types = register.InstanceTypes;
@@ -45,6 +45,7 @@
         [TestCase(typeof(PhotoValueConverter))]
         [TestCase(typeof(SocialLinksValueConverter))]
         [TestCase(typeof(GitHubFeedValueConverter))]
+        [TestCase(typeof(InterestListValueConverter))]
         [Test]
         public void InstanceTypesContain(Type type)
         {
@@ -54,6 +55,7 @@
         [TestCase(Constants.ExtendedProperties.GitHubFeedConverterAlias)]
         [TestCase(Constants.ExtendedProperties.PhotoConverterAlias)]
         [TestCase(Constants.ExtendedProperties.SocialLinksConverterAlias)]
+        [TestCase(Constants.ExtendedProperties.InterestListConverterAlias)]
         [Test]
         public void KnownCoverterAliases(string alias)
         {
@@ -63,6 +65,7 @@
         [TestCase(Constants.ExtendedProperties.GitHubFeedConverterAlias, typeof(GitHubFeedValueConverter))]
         [TestCase(Constants.ExtendedProperties.PhotoConverterAlias, typeof(PhotoValueConverter))]
         [TestCase(Constants.ExtendedProperties.SocialLinksConverterAlias, typeof(SocialLinksValueConverter))]
+        [TestCase(Constants.ExtendedProperties.InterestListConverterAlias, typeof(InterestListValueConverter))]
         [Test]
         public void GetInstanceFor(string alias, Type expected)
         {

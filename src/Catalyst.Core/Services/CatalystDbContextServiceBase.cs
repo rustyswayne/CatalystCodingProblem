@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
-    using System.Data.Entity.Core.Objects.DataClasses;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
+    using Catalyst.Core.Events;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Models.Domain;
 
@@ -48,11 +48,49 @@
             Logger = logger;
         }
 
+        #region events
+
+        /// <summary>
+        /// Occurs before adding a new entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Adding;
+
+        /// <summary>
+        /// Occurs after adding a new entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Added;
+
+        /// <summary>
+        /// Occurs before saving an entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Saving;
+
+        /// <summary>
+        /// Occurs after saving an entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Saved;
+
+        /// <summary>
+        /// Occurs before deleting an entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Deleting;
+
+        /// <summary>
+        /// Occurs after deleting an entity.
+        /// </summary>
+        protected event EventHandler<EntityEventArgs<TEntity>> Deleted;
+
+        #endregion
+
         /// <summary>
         /// Gets or sets the <see cref="DbContext"/>.
         /// </summary>
         protected CatalystDbContext DbContext { get; set; }
 
+        /// <summary>
+        /// Gets the <see cref="CatalystDbContext"/>.
+        /// </summary>
+        protected abstract DbSet<TEntity> Context { get; }
 
         /// <summary>
         /// Gets the logger.
@@ -69,12 +107,10 @@
         /// </summary>
         protected IRuntimeCacheProvider RuntimeCache => CacheManager.RuntimeCache;
 
-        protected abstract string EntitySetName { get; }
-
         /// <summary>
-        /// Gets the <see cref="CatalystDbContext"/>.
+        /// Gets the entity set name.
         /// </summary>
-        protected  abstract DbSet<TEntity> Db { get; }
+        protected abstract string EntitySetName { get; }
 
         /// <summary>
         /// Gets an entity by it's id.
@@ -82,10 +118,13 @@
         /// <param name="id">
         /// The id of the entity.
         /// </param>
+        /// <param name="lazy">
+        /// Lazy properties.
+        /// </param>
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        public virtual TEntity Get(Guid id)
+        public virtual TEntity Get(Guid id, bool lazy = true)
         {
             var cacheKey = GetCacheKey(id);
             var result = RuntimeCache.GetCacheItem(cacheKey);
@@ -100,10 +139,10 @@
         {
             if (!ids.Any())
             {
-                return Db.ToArray().Select(x => Get(x.Id)).Where(x => x != null);
+                return this.Context.ToArray().Select(x => Get(x.Id)).Where(x => x != null);
             }
 
-            return ids.Select(this.Get).Where(x => x != null);
+            return ids.Select(id => this.Get(id)).Where(x => x != null);
         }
 
         /// <inheritdoc />
@@ -113,37 +152,59 @@
             switch (state)
             {
                 case EntityState.Added:
-                    PerformAdd(entity);
+                    Emit(Adding, entity);
+                    this.Context.Add(entity);
+                    Emit(Added, entity);
+
+                    Emit(Saving, entity);
+                    DbContext.SaveChanges();
+                    Emit(Saved, entity);
                     break;
                 case EntityState.Detached:
-                    Db.Attach(entity);
-                    PerformUpdate(entity);
+                    this.Context.Attach(entity);
+
+                    Emit(Saving, entity);
+                    DbContext.SaveChanges();
+                    Emit(Saved, entity);
                     break;
                 case EntityState.Modified:
-                    PerformUpdate(entity);
+
+                    Emit(Saving, entity);
+                    DbContext.SaveChanges();
+                    Emit(Saved, entity);
+
                     break;
                 case EntityState.Deleted:
+                    // remove from cache
+                    break;
                 case EntityState.Unchanged:
                 default:
                     return;
             }
+
+            RuntimeCache.ClearCacheItem(GetCacheKey(entity.Id));
         }
 
         /// <inheritdoc />
         public virtual void Delete(TEntity entity)
         {
-            var dto = Db.Find(entity.Id);
+            var dto = this.Context.Find(entity.Id);
             if (dto != null)
             {
-                Db.Remove(dto);
+                Emit(Deleting, entity);
+                this.Context.Remove(dto);
+                Emit(Deleted, entity);
+
                 DbContext.SaveChanges();
             }
+
+            RuntimeCache.ClearCacheItem(GetCacheKey(entity.Id));
         }
 
         /// <inheritdoc />
         public virtual int Count()
         {
-            return Db.AsNoTracking().Count();
+            return this.Context.AsNoTracking().Count();
         }
 
         /// <summary>
@@ -152,13 +213,15 @@
         /// <param name="id">
         /// The id.
         /// </param>
+        /// <param name="lazy">
+        /// Use lazy properties.
+        /// </param>
         /// <returns>
         /// The <see cref="TEntity"/>.
         /// </returns>
-        protected virtual TEntity PerformGet(Guid id)
+        protected virtual TEntity PerformGet(Guid id, bool lazy = true)
         {
-            return Db.Find(id);
-
+            return this.Context.Find(id);
         }
 
         /// <summary>
@@ -173,32 +236,6 @@
         protected string GetCacheKey(Guid id)
         {
             return $"{typeof(TEntity).Name}.{id}";
-        }
-
-
-        /// <summary>
-        /// Performs the work of adding an entity.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity.
-        /// </param>
-        protected virtual void PerformAdd(TEntity entity)
-        {
-            Db.Add(entity);
-            DbContext.SaveChanges();
-        }
-
-        /// <summary>
-        /// Performs the work of updating an entity.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity.
-        /// </param>
-        protected virtual void PerformUpdate(TEntity entity)
-        {
-            throw new NotImplementedException();
-            // Db.Attach(dto);
-            DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -253,6 +290,20 @@
             
             // New entry
             return EntityState.Added;
+        }
+
+        /// <summary>
+        /// Emits an event.
+        /// </summary>
+        /// <param name="handler">
+        /// The <see cref="EventHandler"/>.
+        /// </param>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        private void Emit(EventHandler<EntityEventArgs<TEntity>> handler, TEntity entity)
+        {
+            handler?.Invoke(this, new EntityEventArgs<TEntity>(entity));
         }
     }
 }

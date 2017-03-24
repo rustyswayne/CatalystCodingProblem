@@ -1,0 +1,16 @@
+﻿@model Catalyst.Web.Models.Boxes.RecentlyAddedBox
+@{
+    Layout = "~/Views/Shared/_Box.cshtml";
+}
+
+<div class="row box-recently-added">
+    <div class="col-sm-9 col-xs-12">
+        @Html.Partial("_PersonTable", Model.RecentlyUpdated)
+    </div>
+
+    <div class="col-sm-3 col-xs-12">
+        <h3>Total People</h3>
+        <span class="total-people">@Model.TotalPeople</span>
+    </div>
+
+</div>
