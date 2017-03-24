@@ -19,6 +19,10 @@
         /// Gets or sets the page <see cref="Meta"/>.
         /// </summary>
         public Meta Meta { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the current url.
+        /// </summary>
+        public NavTab CurrentTab { get; set; }
     }
 }

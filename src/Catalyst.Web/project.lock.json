@@ -1106,6 +1106,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "CommonMark.NET >= 0.15.1",
       "LightInject >= 5.0.2",
       "LightInject.Annotation >= 1.1.0",
       "Microsoft.AspNet.Mvc >= 5.2.3",
@@ -1145,6 +1146,7 @@
       }
     },
     "dependencies": {
+      "CommonMark.NET": "0.15.1",
       "LightInject": "5.0.2",
       "LightInject.Annotation": "1.1.0",
       "Microsoft.AspNet.Mvc": "5.2.3",

@@ -62,6 +62,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.offcanvas.min.css" />
+    <Content Include="Content\styles.css">
+      <DependentUpon>styles.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles.min.css">
+      <DependentUpon>styles.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="project.json" />
   </ItemGroup>
@@ -77,6 +83,7 @@
     </Compile>
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
+    <Compile Include="Models\Shared\NavTab.cs" />
     <Compile Include="Models\Shared\Meta.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
@@ -86,10 +93,15 @@
   <ItemGroup>
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.offcanvas.min.js" />
-    <Content Include="Scripts\jquery-2.2.1.min.js" />
-    <Content Include="Scripts\jquery-2.2.2.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.justifiedGallery.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\lib\keen\keen-tracker.js" />
+    <Content Include="Scripts\lib\keen\keen-tracker.min.js" />
+    <Content Include="Scripts\lib\keen\keen.js" />
+    <Content Include="Scripts\lib\keen\keen.min.js" />
+    <Content Include="Scripts\lib\holder\holder.js" />
     <Content Include="Web.config" />
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -103,6 +115,14 @@
     <Content Include="Content\externals\_vars.scss" />
     <Content Include="Content\styles.scss" />
     <Content Include="Views\Shared\_MetaInfo.cshtml" />
+    <Content Include="App_Data\README.md" />
+    <Content Include="Content\modules\_people.scss" />
+    <Content Include="Content\externals\_keen.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\modules\_nav.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

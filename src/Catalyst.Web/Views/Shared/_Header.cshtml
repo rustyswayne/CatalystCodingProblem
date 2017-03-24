@@ -1,7 +1,25 @@
-﻿<div class="row">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/people/">People</a></li>
-    </ul>
-</div>
+﻿@model Catalyst.Web.Models.Shared.NavTab
 
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Catalyst People Problem</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/"@(Model.Url.Equals("/") ? " class=active" : string.Empty)>Home</a></li>
+                <li><a href="/people/"@(Model.Url.Equals("/people/") ? " class=active" : string.Empty)>People</a></li>
+                @if (Model.Url.StartsWith("/person/"))
+                {
+                    <li><a href="@Model.Url" class="person-detail">@Model.Title</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

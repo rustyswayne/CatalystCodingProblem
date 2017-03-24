@@ -1,27 +1,5 @@
-﻿// Import Bootstrap Compass integration
-//@import "bootstrap-compass"
-// Import custom Bootstrap variables
-//@import "bootstrap-variables"
+﻿// externals
+@import "externals/_keen";
 
-// External Styles
-
-/*// Global Styles
-@import "globals/settings";
-@import "globals/base";
-@import "globals/responsivetables";
-
-// Modules
-@import "modules/aexpatsLegacy";
-@import "modules/adzones";
-@import "modules/content";
-@import "modules/header";
-@import "modules/footer";
-@import "modules/grid";
-@import "modules/listing";
-
-// AJAX animation
-@import "modules/escapingBallG";
-
-// Page Specific Modules
-@import "modules/home.scss";
-@import "modules/galleries";*/
+// modules
+@import "modules/_people";

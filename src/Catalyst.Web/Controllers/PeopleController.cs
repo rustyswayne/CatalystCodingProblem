@@ -13,15 +13,9 @@
         /// <inheritdoc />
         public override ActionResult Index()
         {
-            var model = new PeopleList
-            {
-                Meta =
-                    {
-                        PageTitle = "People List - People Problem",
-                        Description = "Displays a list of all people that have been saved to the database"
-                    },
-                People = Services.Person.GetAll()
-            };
+            var model = GetViewModel<PeopleList>();
+            model.CurrentTab.Title = "People";
+            model.People = Services.Person.GetAll();
 
             return View(model);
         }
@@ -45,15 +39,10 @@
             var person = Services.Person.GetBySlug(slug);
             if (person == null) return RedirectToAction("Index");
 
-            var model = new PersonDetail
-                {
-                    Meta =
-                    {
-                        PageTitle = $"{person.FullName()} - People Problem",
-                        Description = "Provides access to all records associated with a person"
-                    },
-                    Person = person
-                };
+            var model = GetViewModel<PersonDetail>();
+            model.CurrentTab.Title = person.FullName();
+            model.Person = person;
+               
 
             return View("PersonDetails", model);
         }

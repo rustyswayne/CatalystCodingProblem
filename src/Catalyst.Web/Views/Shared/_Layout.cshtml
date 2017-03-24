@@ -1,7 +1,5 @@
 ﻿@model Catalyst.Web.Models.ViewModelBase
 <!DOCTYPE html>
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 ie"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9 ie"> <![endif]-->
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,15 +8,23 @@
     @Html.Partial("_MetaInfo", Model.Meta)
     @(Bundle.Css()
         .Add("~/Content/bootstrap.min.css")
+        .Add("~/Content/styles.min.css")
         .MvcRender("~/Content/cache/combined_#.css"))
 </head>
-<body>
-@Html.Partial("_Header")
-
-<div>
+<body class="application">
+    @Html.Partial("_Header", Model.CurrentTab)
+    
+<div class="container-fluid">
     @RenderBody()
 </div>
 
-@(Bundle.JavaScript().Add("~/Scripts/bootstrap.min.js").Add("~/Scripts/jquery-2.2.2.min.js").MvcRender("~/Scripts/cache/combined_#.js"))
+
+
+        @(Bundle.JavaScript()
+    .Add("~/Scripts/jquery.min.js")
+    .Add("~/Scripts/bootstrap.min.js")
+    .Add("~/Scripts/lib/holder/holder.js")
+    .Add("/Scripts/lib/keen/keen.min.js")
+    .MvcRender("~/Scripts/cache/combined_#.js"))
 </body>
 </html>
