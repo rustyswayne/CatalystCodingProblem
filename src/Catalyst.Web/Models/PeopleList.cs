@@ -1,8 +1,5 @@
 ﻿namespace Catalyst.Web.Models
 {
-    using System.Collections.Generic;
-
-    using Catalyst.Core.Models.Domain;
     using Catalyst.Web.Models.Shared;
 
     /// <summary>
@@ -21,10 +18,5 @@
                 Description = "Displays a list of all people that have been saved to the database"
             };
         }
-
-        /// <summary>
-        /// Gets or sets the people.
-        /// </summary>
-        public IEnumerable<Person> People { get; set; }
     }
 }

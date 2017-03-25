@@ -1,12 +1,15 @@
-﻿@model Catalyst.Web.Models.Dashboard.RecentlyAdded
+@model Catalyst.Web.Models.Dashboard.PeopleListing
 @using Constants = Catalyst.Web.Constants;
 @{
     Layout = "_DashboardItem.cshtml";
 }
 <div class="row box-recently-added">
     <div class="col-sm-9 col-xs-12">
-        @Html.Partial("_PersonTable", Model.RecentlyUpdated)
-        <a href="@Constants.PeopleRoute" class="btn btn-primary btn-lg btn-block">Manage People</a>
+        @Html.Partial("_PersonTable", Model.People)
+        @if (Model.ShowManage)
+        {
+            <a href="@Constants.PeopleRoute" class="btn btn-primary btn-lg btn-block">Manage People</a>
+        }
     </div>
 
     <div class="col-sm-3 col-xs-12 total-people">

@@ -13,9 +13,8 @@
         /// <inheritdoc />
         public override ActionResult Index()
         {
-            var model = GetViewModel<PeopleList>();
+            var model = GetViewModel<PeopleList>("About this page");
             model.CurrentTab.Title = "People";
-            model.People = Services.Person.GetAll();
 
             return View(model);
         }
@@ -39,7 +38,7 @@
             var person = Services.Person.GetBySlug(slug);
             if (person == null) return RedirectToAction("Index");
 
-            var model = GetViewModel<PersonDetail>();
+            var model = GetViewModel<PersonDetail>($"About {person.FullName()} Details");
             model.CurrentTab.Title = person.FullName();
             model.Person = person;
 

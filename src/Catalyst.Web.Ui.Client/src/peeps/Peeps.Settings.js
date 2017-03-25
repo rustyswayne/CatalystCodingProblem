@@ -11,10 +11,10 @@ Peeps.Settings = {
     enableApiDelays: true,
 
     apiRoutes: [
-     // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", delay: NOT REQUIRE (FOR DEMO) }
-        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", delay: 750 },
-        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", delay: 1250 },
-        { id: 'randomtweet', value: '/dashboard/randomlasttweet', title: "Checking Twitter...", delay: 0 }
+     // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
+        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
+        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", notes: 'Property filter queries not implemented.', delay: 1250 },
+        { id: 'randomtweet', value: '/dashboard/randomwatched', title: "Selecting random...", notes: '', delay: 0 }
     ]
 
 }

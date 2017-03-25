@@ -13,25 +13,7 @@
     public class DashboardController : CatalystControllerBase
     {
         /// <summary>
-        /// Returns the recently added box.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        [ChildActionOnly]
-        public ActionResult RecentlyAdded()
-        {
-            var model = new RecentlyAdded()
-            {
-                RecentlyUpdated = Services.Person.GetRecentlyUpdated(),
-                TotalPeople = Services.Person.Count()
-            };
-
-            return PartialView(model);
-        }
-
-        /// <summary>
-        /// Returns a placeholder for an asynchronous dashboard item.
+        /// Renders a placeholder for an asynchronous dashboard item.
         /// </summary>
         /// <param name="apiRouteId">
         /// The API route id.
@@ -47,6 +29,45 @@
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Renders the recently updated people.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [ChildActionOnly]
+        public ActionResult RecentlyAdded()
+        {
+            var model = new PeopleListing("Recent Updates")
+            {
+                People = Services.Person.GetRecentlyUpdated(),
+                ShowManage = true,
+                TotalPeople = Services.Person.Count()
+            };
+
+            return PartialView("PeopleList", model);
+        }
+
+        /// <summary>
+        /// Renders the people list.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [ChildActionOnly]
+        public ActionResult PeopleList()
+        {
+            var people = Services.Person.GetAll().OrderBy(x => x.FirstName).ToArray();
+
+            var model = new PeopleListing("All People")
+            {
+                People = people,
+                ShowDelete = true,
+                TotalPeople = people.Count()
+            };
+
+            return PartialView(model);
+        }
 
         // - ASYNCHRONOUS ----------------
 
@@ -79,7 +100,6 @@
                 {
                     AjaxRouteAlias = Constants.AjaxRouteAliases.CompanySnapshot,
                     Metrics = metrics.OrderByDescending(x => x.PeopleCount).Take(5)
-                    
                 };
 
             return PartialView(model);
@@ -111,11 +131,11 @@
         /// </returns>
         [HttpGet]
         [CheckAjaxRequest]
-        public ActionResult RandomLastTweet()
+        public ActionResult RandomLastWatch()
         {
-            var model = new RandomTweet
+            var model = new RandomWatch
             {
-                AjaxRouteAlias = Constants.AjaxRouteAliases.RandomLastTweet
+                AjaxRouteAlias = Constants.AjaxRouteAliases.RandomWatched
             };
 
             return PartialView(model);

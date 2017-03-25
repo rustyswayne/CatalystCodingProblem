@@ -16,7 +16,7 @@ namespace Catalyst.Web
         {
             public const string CompanySnapshot = "countrymetrics";
             public const string PeoplePropertyStats = "peopleprops";
-            public const string RandomLastTweet = "randomtweet";
+            public const string RandomWatched = "randomwatch";
 
             // only used to get the UI to display the spinner e.g. used for templating
             public const string DevDoNothing = "donothing"; 

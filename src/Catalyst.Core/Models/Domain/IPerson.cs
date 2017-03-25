@@ -29,6 +29,11 @@
         DateTime Birthday { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this person is watched.
+        /// </summary>
+        bool Watch { get; set; }
+
+        /// <summary>
         /// Gets the addresses.
         /// </summary>
         ICollection<Address> Addresses { get; }

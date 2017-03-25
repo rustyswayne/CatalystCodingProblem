@@ -39,6 +39,9 @@
         /// </summary>
         public DateTime Birthday { get; set; }
 
+        /// <inheritdoc />
+        public bool Watch { get; set; }
+
         /// <summary>
         /// Gets or sets the addresses.
         /// </summary>

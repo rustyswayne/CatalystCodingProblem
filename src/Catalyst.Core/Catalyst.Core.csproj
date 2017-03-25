@@ -65,9 +65,6 @@
     <Compile Include="Constants.Database.cs">
       <DependentUpon>Constants.cs</DependentUpon>
     </Compile>
-    <Compile Include="Constants.ExtendedData.cs">
-      <DependentUpon>Constants.cs</DependentUpon>
-    </Compile>
     <Compile Include="Constants.ExtendedProperties.cs">
       <DependentUpon>Constants.cs</DependentUpon>
     </Compile>

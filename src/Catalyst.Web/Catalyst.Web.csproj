@@ -94,9 +94,9 @@
     <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
     <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
     <Compile Include="Models\Dashboard\HtmlContent.cs" />
-    <Compile Include="Models\Dashboard\RandomTweet.cs" />
+    <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
-    <Compile Include="Models\Dashboard\RecentlyAdded.cs" />
+    <Compile Include="Models\Dashboard\PeopleListing.cs" />
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
     <Compile Include="Models\Dashboard\DashboardItemBase.cs" />
@@ -128,26 +128,28 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Content\styles.scss" />
     <Content Include="Views\Shared\_MetaInfo.cshtml" />
-    <Content Include="App_Data\README.md" />
+    <Content Include="App_Data\Markdown\Home.md" />
     <Content Include="Content\modules\_people.scss" />
     <Content Include="Content\externals\_keen.scss" />
+    <Content Include="App_Data\Markdown\PeopleList.md" />
+    <Content Include="App_Data\Markdown\PersonDetail.md" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Views\Dashboard\_DashboardItem.cshtml" />
-    <Content Include="Views\Dashboard\RecentlyAdded.cshtml" />
+    <Content Include="Views\Dashboard\PeopleList.cshtml" />
     <Content Include="Content\modules\_tables.scss" />
     <Content Include="Content\modules\_dashboards.scss" />
     <Content Include="Views\Shared\_PersonTable.cshtml" />
-    <Content Include="Views\Dashboard\RichText.cshtml" />
+    <Content Include="Views\Shared\_RichText.cshtml" />
     <Content Include="Views\Shared\_PersonTableFixed.cshtml" />
     <Content Include="Config\imageprocessor\security.config" />
     <Content Include="Config\imageprocessor\cache.config" />
     <Content Include="Config\imageprocessor\processing.config" />
     <Content Include="Views\Dashboard\CountriesSnapshot.cshtml" />
     <Content Include="Views\Dashboard\PeoplePropertyStats.cshtml" />
-    <Content Include="Views\Dashboard\RandomLastTweet.cshtml" />
+    <Content Include="Views\Dashboard\RandomWatched.cshtml" />
     <Content Include="Views\Dashboard\Placeholder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -14,9 +14,17 @@
 <body class="application">
     @Html.Partial("_Header", Model.CurrentTab)
     
-<div class="container-fluid">
-    @RenderBody()
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.Partial("_RichText", Model.Content)
+            </div>
+            <div class="col-sm-9">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
 
     @(Bundle.JavaScript()
     .Add("~/Scripts/jquery.min.js")
