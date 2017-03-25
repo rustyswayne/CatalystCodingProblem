@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using Catalyst.Core.Logging;
     using Catalyst.Web.Boot;
 
     using LightInject;
@@ -39,6 +40,25 @@
             // Bootstrap!
             var loader = new WebBoot(container);
             loader.Boot();
+        }
+
+        /// <summary>
+        /// Log the application errors.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void Application_Error(object sender, EventArgs e)
+        {
+            // Get the exception object.
+            var ex = Server.GetLastError();
+
+            var logger = Logger.CreateWithDefaultLog4NetConfiguration();
+
+            logger.Error<Global>("Application Error", ex);
         }
     }
 }

@@ -18,13 +18,11 @@
     @RenderBody()
 </div>
 
-
-
-        @(Bundle.JavaScript()
+    @(Bundle.JavaScript()
     .Add("~/Scripts/jquery.min.js")
     .Add("~/Scripts/bootstrap.min.js")
     .Add("~/Scripts/lib/holder/holder.js")
-    .Add("/Scripts/lib/keen/keen.min.js")
+    .Add("~/Scripts/lib/catalyst/peeps.js")
     .MvcRender("~/Scripts/cache/combined_#.js"))
 </body>
 </html>

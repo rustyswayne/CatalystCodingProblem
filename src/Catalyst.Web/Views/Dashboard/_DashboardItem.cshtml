@@ -1,8 +1,8 @@
-﻿@model Catalyst.Web.Models.Dashboard.DashboardItemBase
+@model Catalyst.Web.Models.Dashboard.DashboardItemBase
 @{
     Layout = null;
 }
-<div class="chart-wrapper">
+<div class="chart-wrapper"@Html.If(() => Model.IsAsync, " data-dashboard=\'async\'")>
     <div class="chart-title">
         @Model.Title
     </div>

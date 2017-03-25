@@ -14,5 +14,10 @@
         /// Gets or sets the notes.
         /// </summary>
         public string Notes { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this item gets it's data asyncronously.
+        /// </summary>
+        public bool IsAsync { get; set; } = false;
     }
 }
