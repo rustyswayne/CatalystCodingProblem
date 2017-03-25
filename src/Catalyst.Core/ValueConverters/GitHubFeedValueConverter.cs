@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a property value converter for <see cref="GitHubFeed"/>.
     /// </summary>
-    [ConverterAlias(Constants.ExtendedProperties.GitHubFeedConverterAlias)]
+    [ConverterAlias(Constants.ExtendedProperties.GitHubFeedConverterAlias, 4)]
     public class GitHubFeedValueConverter : PropertyValueConverterBase<GitHubFeed>
     {
         /// <summary>

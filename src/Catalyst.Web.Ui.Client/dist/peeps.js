@@ -1,6 +1,8 @@
 /**
  * Created by rusty on 3/24/2017.
  * scaffold based on https://github.com/rustyswayne/Merchello/blob/merchello-dev/src/Merchello.Mui.Client/src/jquery/mui/MUI.js
+ *
+ * REQUIRES:  underscore.js
  */
 var Peeps = (function() {
 
@@ -136,44 +138,127 @@ var Peeps = (function() {
 Peeps.Settings = {
 
     // path to the spinner svg file
-    spinnerSvg: '/Media/Placeholders/balls.svg'
+    spinnerSvg: '/Media/Placeholders/balls.svg',
+
+    // flag for demoing api delays
+    enableApiDelays: true,
+
+    apiRoutes: [
+     // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", delay: NOT REQUIRE (FOR DEMO) }
+        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", delay: 750 },
+        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", delay: 1250 },
+        { id: 'randomtweet', value: '/dashboard/randomlasttweet', title: "Checking Twitter...", delay: 0 }
+    ]
 
 }
 /**
  * Created by rusty on 3/24/2017.
  */
 // Dashboards
+// REQUIRES:  underscore.js
 Peeps.Dashboards = {
 
     // initializes the component
     init: function() {
-        Peeps.debugConsole('Dashboards initializing ...');
 
         var dashboards = $('div[data-dashboard]');
         if (dashboards.length) {
             _.each(dashboards, function(d) {
-                Peeps.Dashboards.bind(d);
+                // invoke the binder
+                Peeps.Dashboards.binder.invoke(d);
+            });
+        }
+    },
+
+    // method to bind individual dashboard item
+    binder: {
+
+        // invokes the initialization of the dashboard component
+        invoke: function(dashboard) {
+
+            // if the alias from the data value is 'donothing' skip making the ajax call (but log).
+            const skipflag = 'donothing';
+
+            var routeAlias = $(dashboard).data('dashboard');
+
+            // Append the ajax spinner to the dashboard item content
+            // todo remove this entire "id" concept.  turns out not need
+            var id = Peeps.Dashboards.spinner.makeId();
+            Peeps.Dashboards.spinner.appendSpinner(dashboard, id);
+
+            var dashParams = {
+                dashboard: dashboard,
+                args: {},
+                skip: true
+            };
+
+            // Lookup what controller action needs to be called
+            // IF skipflag - leave spinner spinning
+            if (routeAlias === skipflag) {
+                return; // bail
+            }
+
+            // find the route record (hard code in Peeps.Settings)
+            var route = _.find(Peeps.Settings.apiRoutes, function (r) {
+                if (r.id === routeAlias) {
+                    return r;
+                }
+            });
+
+            // update the dash params
+            if (route !== undefined) {
+                dashParams.args = route;
+                dashParams.skip = false;
+                Peeps.Dashboards.binder.query(dashParams);
+            }
+        },
+
+        // query the controller for the partial view content
+        query: function(params) {
+            if (params === undefined) throw new Error('Routing params have not been defined.');
+
+            var panel = params.dashboard;
+            $(panel).find('.chart-title').text(params.args.title);
+
+            // adding a note here for the demo
+            // the load is pretty quick and you can't really see the ajax loader if running locally
+            // update the note
+            var delay = params.args.delay === undefined ? 0 : params.args.delay;
+            if (!Peeps.Settings.enableApiDelays) delay = 0;
+
+            if (delay > 0) {
+                $(panel).find('.chart-notes').text('FAKE DELAY of (' + params.args.delay + ' ms) added for demo!');
+            }
+
+            $(panel).find('');
+            // replace the dashboard
+            $.ajax({
+                url: params.args.value,
+                dataType: "html"
+            }).done(function(data) {
+
+                setTimeout(function(){
+                    $(panel).parent().html(data);
+                    $(panel).find('.chart-notes').text('Note:');
+                    }, delay);
+
+            }).fail(function() {
+                console.log('Failure not implemented.');
             });
         }
 
-        Peeps.debugConsole('Dashboards initialized!')
-    },
-
-    bind: function(dashboard) {
-        Peeps.Dashboards.spinner.appendSpinner(dashboard);
     },
 
     spinner: {
 
         activeIds: [],
 
-        appendSpinner: function(dashboard) {
-            var id = Peeps.Dashboards.spinner.makeId();
+        appendSpinner: function(dashboard, id) {
+
             Peeps.Dashboards.spinner.activeIds.push(id);
-
             var spinner = Peeps.Dashboards.spinner.build(id);
-
             $(dashboard).find(".chart-stage").html(spinner);
+
         },
 
         build: function(id) {

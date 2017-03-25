@@ -16,13 +16,18 @@
         /// <param name="alias">
         /// The alias.
         /// </param>
+        /// <param name="sortOrder">
+        /// Sort order.
+        /// </param>
         /// <exception cref="ArgumentNullException">
         /// Alias is required
         /// </exception>
-        public ConverterAliasAttribute(string alias)
+        public ConverterAliasAttribute(string alias, int sortOrder)
         {
             if (alias.IsNullOrWhiteSpace()) throw new ArgumentNullException(nameof(alias));
+
             ConverterAlias = alias;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -32,5 +37,10 @@
         /// This MUST match the "ConverterAlias" property associated with the <see cref="IExtendedProperty"/> value
         /// </remarks>
         public string ConverterAlias { get; }
+
+        /// <summary>
+        /// Gets or sets the sort order.
+        /// </summary>
+        public int SortOrder { get; set; }
     }
 }

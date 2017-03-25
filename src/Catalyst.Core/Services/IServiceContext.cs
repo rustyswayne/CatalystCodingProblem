@@ -9,5 +9,10 @@
         /// Gets the <see cref="IPersonService"/>.
         /// </summary>
         IPersonService Person { get; }
+
+        /// <summary>
+        /// Gets the <see cref="IAddressService"/>.
+        /// </summary>
+        IAddressService AddressService { get; }
     }
 }

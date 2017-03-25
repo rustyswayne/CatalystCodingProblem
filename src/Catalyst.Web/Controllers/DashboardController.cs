@@ -1,5 +1,6 @@
 ﻿namespace Catalyst.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -46,8 +47,11 @@
             return PartialView(model);
         }
 
+
+        // - ASYNCHRONOUS ----------------
+
         /// <summary>
-        /// Responsible for rendering the countries snap shot.
+        /// Responsible for rendering "Country Snap Shot" dashboard item.
         /// </summary>
         /// <returns>
         /// The <see cref="ActionResult"/>.
@@ -56,11 +60,63 @@
         [CheckAjaxRequest]
         public ActionResult CountriesSnapshot()
         {
+
+            var countries = Services.AddressService.GetAssociatedCountries();
+
+            var metrics = new List<CountryMetric>();
+            foreach (var c in countries)
+            {
+                metrics.Add(
+                    new CountryMetric
+                        {
+                            CountryCode = c.Code,
+                            EnglishCountryName = c.Name,
+                            PeopleCount = Services.AddressService.GetPeopleCountryCount(c.Code)
+                        });
+            }
+
             var model = new CountriesSnapshot
                 {
                     AjaxRouteAlias = Constants.AjaxRouteAliases.CompanySnapshot,
-                    Metrics = Enumerable.Empty<CountryMetric>()
+                    Metrics = metrics.OrderByDescending(x => x.PeopleCount).Take(5)
+                    
                 };
+
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Responsible for rendering the "People Property Stats" dashboard item.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [CheckAjaxRequest]
+        public ActionResult PeoplePropertyStats()
+        {
+            var model = new PeoplePropertyStats
+                {
+                    AjaxRouteAlias = Constants.AjaxRouteAliases.PeoplePropertyStats
+                };
+
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Responsible for rendering the "Random Last Tweet" dashboard item.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [CheckAjaxRequest]
+        public ActionResult RandomLastTweet()
+        {
+            var model = new RandomTweet
+            {
+                AjaxRouteAlias = Constants.AjaxRouteAliases.RandomLastTweet
+            };
 
             return PartialView(model);
         }

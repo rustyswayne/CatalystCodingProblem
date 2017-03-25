@@ -70,6 +70,9 @@
 
             try
             {
+                // TODO Fixme
+                if (timeout == null) timeout = TimeSpan.FromMinutes(1);
+
                 result = getCacheItem();
                 var absolute = isSliding ? System.Web.Caching.Cache.NoAbsoluteExpiration : (timeout == null ? System.Web.Caching.Cache.NoAbsoluteExpiration : DateTime.Now.Add(timeout.Value));
                 var sliding = isSliding == false ? System.Web.Caching.Cache.NoSlidingExpiration : (timeout ?? System.Web.Caching.Cache.NoSlidingExpiration);

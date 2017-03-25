@@ -27,6 +27,20 @@
         }
 
         /// <summary>
+        /// Gets the sort order for the property.
+        /// </summary>
+        /// <param name="prop">
+        /// The prop.
+        /// </param>
+        /// <returns>
+        /// The sort order.
+        /// </returns>
+        public static int SortOrder(this IExtendedProperty prop)
+        {
+            return prop.Converter().SortOrder;
+        }
+
+        /// <summary>
         /// The get property value.
         /// </summary>
         /// <param name="prop">

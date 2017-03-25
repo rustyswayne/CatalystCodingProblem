@@ -6,6 +6,7 @@
     using System.Linq;
 
     using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.PropData;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -79,6 +80,86 @@
 
                 imports.Add(person);
             }
+
+            // me
+            var me = new Person { FirstName = "Rusty", LastName = "Swayne", Birthday = DateTime.Parse("8/6/1971"), Slug = "rusty-swayne", CreateDate = DateTime.UtcNow, UpdateDate = DateTime.UtcNow.AddSeconds(25) };
+            var adr = new Address { Name = "Space Needle", Address1 = "400 Broad St", Locality = "Seattle", Region = "WA", PostalCode = "98109", CountryCode = "US", CreateDate = DateTime.UtcNow, UpdateDate = DateTime.UtcNow };
+
+            me.Addresses.Add(adr);
+
+            var interestValue = new InterestList
+                    {
+                    // "Family", "Travel", "Movies", "Skiing", "SCUBA Diving", "Food"
+                    Values = new List<Interest>
+                            {
+                                new Interest { Title = "Family", Url = string.Empty },
+                                new Interest { Title = "Skiing", Url = "https://www.mtbaker.us/" },
+                                new Interest { Title = "Travel", Url = string.Empty },
+                                new Interest { Title = "SCUBA Diving", Url = string.Empty },
+                                new Interest { Title = "Cooking", Url = string.Empty } 
+                            }
+                    };
+
+            // PROPERTIES (concept)
+
+            var interest = new ExtendedProperty
+            {
+                ConverterAlias = Constants.ExtendedProperties.InterestListConverterAlias,
+                UpdateDate = DateTime.UtcNow,
+                CreateDate = DateTime.UtcNow
+            };
+
+            interest.Converter().SetValue(interestValue);
+
+
+            var socialValue = new SocialLinks
+            {
+                Facebook = "https://www.facebook.com/rustyswayne",
+                Twitter = "https://twitter.com/rustyswayne",
+                LinkedIn = "https://www.linkedin.com/in/rustyswayne/"
+            };
+
+            var social = new ExtendedProperty
+                {
+                    ConverterAlias = Constants.ExtendedProperties.SocialLinksConverterAlias,
+                    UpdateDate = DateTime.UtcNow,
+                    CreateDate = DateTime.UtcNow
+                };
+
+            social.Converter().SetValue(socialValue);
+
+            var gitValue = new GitHubFeed { RepositoryUrl = "https://github.com/rustyswayne" };
+            var git = new ExtendedProperty
+                {
+                    ConverterAlias = Constants.ExtendedProperties.GitHubFeedConverterAlias,
+                    UpdateDate = DateTime.UtcNow,
+                    CreateDate = DateTime.UtcNow
+                };
+
+            git.Converter().SetValue(gitValue);
+
+
+            //// TODO remove hard coded ref to .Web proj
+            var photoVal = new Photo { Src = "/media/placeholders/rss.jpg" };
+
+            var photo = new ExtendedProperty
+            {
+                ConverterAlias = Constants.ExtendedProperties.PhotoConverterAlias,
+                UpdateDate = DateTime.UtcNow,
+                CreateDate = DateTime.UtcNow
+            };
+
+            photo.Converter().SetValue(photoVal);
+
+
+            me.Properties.Add(interest);
+            me.Properties.Add(social);
+            me.Properties.Add(git);
+            me.Properties.Add(photo);
+
+
+            imports.Add(me);
+
 
             return imports;
             

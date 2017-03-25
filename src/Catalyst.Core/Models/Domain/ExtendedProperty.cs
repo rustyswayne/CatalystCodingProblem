@@ -1,10 +1,20 @@
 ﻿namespace Catalyst.Core.Models.Domain
 {
+    using Catalyst.Core.Data;
+
     /// <summary>
     /// Represents an extended property
     /// </summary>
     public class ExtendedProperty : EntityBase, IExtendedProperty
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExtendedProperty"/> class.
+        /// </summary>
+        public ExtendedProperty()
+        {
+            this.Id = GuidComb.GenerateComb();
+        }
+
         /// <inheritdoc />
         public string ConverterAlias { get; set; }
 

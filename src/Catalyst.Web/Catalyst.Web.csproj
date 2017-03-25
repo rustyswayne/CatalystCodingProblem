@@ -94,6 +94,8 @@
     <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
     <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
     <Compile Include="Models\Dashboard\HtmlContent.cs" />
+    <Compile Include="Models\Dashboard\RandomTweet.cs" />
+    <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
     <Compile Include="Models\Dashboard\RecentlyAdded.cs" />
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />

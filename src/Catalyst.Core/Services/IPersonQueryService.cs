@@ -19,5 +19,7 @@
         /// The <see cref="IEnumerable{Person}"/>.
         /// </returns>
         IEnumerable<Person> GetRecentlyUpdated(int count = 5);
+
+
     }
 }

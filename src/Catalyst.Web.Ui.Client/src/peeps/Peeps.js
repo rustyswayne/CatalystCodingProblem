@@ -1,6 +1,8 @@
 /**
  * Created by rusty on 3/24/2017.
  * scaffold based on https://github.com/rustyswayne/Merchello/blob/merchello-dev/src/Merchello.Mui.Client/src/jquery/mui/MUI.js
+ *
+ * REQUIRES:  underscore.js
  */
 var Peeps = (function() {
 

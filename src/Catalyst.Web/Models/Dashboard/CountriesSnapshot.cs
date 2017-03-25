@@ -8,7 +8,7 @@
     public class CountriesSnapshot : DashboardItemBase
     {
         /// <inheritdoc />                                     
-        public override string Title => "Top Countries";
+        public override string Title => "Top 5 Countries";
 
         /// <summary>
         /// Gets or sets the country metrics.

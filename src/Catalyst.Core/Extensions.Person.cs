@@ -118,31 +118,6 @@
         }
 
         /// <summary>
-        /// Adds an address to <see cref="IPerson"/>.
-        /// </summary>
-        /// <param name="person">
-        /// The person.
-        /// </param>
-        /// <param name="address">
-        /// The address.
-        /// </param>
-        public static void AddAddress(this IPerson person, IAddress address)
-        {
-            var adr = new Address
-            {
-                Name = address.Name,
-                Address1 = address.Address1,
-                Address2 = address.Address2,
-                Locality = address.Locality,
-                Region = address.Region,
-                PostalCode = address.PostalCode,
-                CountryCode = address.CountryCode
-            };
-
-            person.Addresses.Add(adr);
-        }
-
-        /// <summary>
         /// Generates a slug for the person.
         /// </summary>
         /// <param name="person">

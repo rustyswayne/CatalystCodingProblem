@@ -131,7 +131,9 @@
 
             if (result != null) return (TEntity)result;
 
-            return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
+            return PerformGet(id);
+            // TODO detach from context before caching!!!
+            //// return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
         }
 
         /// <inheritdoc />

@@ -1,6 +1,7 @@
 ﻿namespace Catalyst.Core.ValueConverters
 {
     using System;
+    using System.Reflection;
 
     using Catalyst.Core.Models.Domain;
     using Catalyst.Core.Models.PropData;
@@ -33,6 +34,18 @@
 
         /// <inheritdoc />
         public Type ModelType => typeof(TValue);
+
+        /// <summary>
+        /// Gets the sort order.
+        /// </summary>
+        public int SortOrder
+        {
+            get
+            {
+                var att = this.GetType().GetCustomAttribute<ConverterAliasAttribute>(false);
+                return att?.SortOrder ?? 1000;
+            }
+        }
 
         /// <inheritdoc />
         public virtual void SetValue(object value)

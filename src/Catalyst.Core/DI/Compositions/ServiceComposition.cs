@@ -13,6 +13,7 @@
         public void Compose(IServiceRegistry container)
         {
             container.RegisterSingleton<IPersonService, PersonService>();
+            container.RegisterSingleton<IAddressService, AddressService>();
 
             // Register the service context
             container.RegisterSingleton<IServiceContext, ServiceContext>();
