@@ -8,7 +8,7 @@
     @Html.Partial("_MetaInfo", Model.Meta)
     @(Bundle.Css()
         .Add("~/Content/bootstrap.min.css")
-        .Add("~/Content/styles.min.css")
+        .Add("~/Content/styles.css")
         .MvcRender("~/Content/cache/combined_#.css"))
 </head>
 <body class="application">
@@ -21,6 +21,7 @@
     @(Bundle.JavaScript()
     .Add("~/Scripts/jquery.min.js")
     .Add("~/Scripts/bootstrap.min.js")
+    .Add("~/Scripts/lib/underscore.min.js")
     .Add("~/Scripts/lib/holder/holder.js")
     .Add("~/Scripts/lib/catalyst/peeps.js")
     .MvcRender("~/Scripts/cache/combined_#.js"))

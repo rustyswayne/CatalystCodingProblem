@@ -1,5 +1,7 @@
 ﻿namespace Catalyst.Web.Models.Dashboard
 {
+    using Catalyst.Core;
+
     /// <summary>
     /// Represents a base UI box model.
     /// </summary>
@@ -16,8 +18,16 @@
         public string Notes { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this item gets it's data asyncronously.
+        /// Gets or sets the alias for the route.
         /// </summary>
-        public bool IsAsync { get; set; } = false;
+        /// <remarks>
+        /// Have to instantiate here because of model check
+        /// </remarks>
+        public string AjaxRouteAlias { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this item gets it's data asynchronously.
+        /// </summary>
+        public bool IsAsync => !this.AjaxRouteAlias.IsNullOrWhiteSpace();
     }
 }

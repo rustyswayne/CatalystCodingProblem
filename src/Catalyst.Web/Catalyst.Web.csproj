@@ -91,6 +91,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
+    <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
     <Compile Include="Models\Dashboard\HtmlContent.cs" />
     <Compile Include="Models\Dashboard\RecentlyAdded.cs" />
     <Compile Include="Models\PeopleList.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Models\Shared\Meta.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Mvc\AjaxRouteMappingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVisibility.cs" />
   </ItemGroup>
@@ -111,6 +114,7 @@
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\lib\holder\holder.js" />
+    <Content Include="Scripts\lib\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -132,7 +136,7 @@
     <Content Include="Views\Dashboard\_DashboardItem.cshtml" />
     <Content Include="Views\Dashboard\RecentlyAdded.cshtml" />
     <Content Include="Content\modules\_tables.scss" />
-    <Content Include="Content\modules\_boxes.scss" />
+    <Content Include="Content\modules\_dashboards.scss" />
     <Content Include="Views\Shared\_PersonTable.cshtml" />
     <Content Include="Views\Dashboard\RichText.cshtml" />
     <Content Include="Views\Shared\_PersonTableFixed.cshtml" />
@@ -142,6 +146,7 @@
     <Content Include="Views\Dashboard\CountriesSnapshot.cshtml" />
     <Content Include="Views\Dashboard\PeoplePropertyStats.cshtml" />
     <Content Include="Views\Dashboard\RandomLastTweet.cshtml" />
+    <Content Include="Views\Dashboard\Placeholder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

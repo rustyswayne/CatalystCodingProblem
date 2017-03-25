@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<div class="chart-wrapper"@Html.If(() => Model.IsAsync, " data-dashboard=\'async\'")>
+<div class="chart-wrapper"@Html.If(Model.IsAsync, $" data-dashboard=\'{Model.AjaxRouteAlias.ToLowerInvariant()}\'")>
     <div class="chart-title">
         @Model.Title
     </div>

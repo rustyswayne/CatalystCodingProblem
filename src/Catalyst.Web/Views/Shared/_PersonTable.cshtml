@@ -18,7 +18,7 @@
                 <td class="col-xs-1"><a href="@p.Url()">@Html.Thumbnail(p.PhotoUrl(), Catalyst.Web.Constants.PersonEmptyPhoto, p.FullName(), "width=25")</a></td>
                 <td class="col-xs-5"><a href="@p.Url()">@p.FullName()</a></td>
                 <td class="col-xs-4"></td>
-                <td class="col-xs-2">@p.UpdateDateLocal()</td>
+                <td class="col-xs-2 updated">@p.UpdateDateLocal()</td>
             </tr>
         }
     }

@@ -37,6 +37,10 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Users\rusty\.nuget\packages\Microsoft.AspNet.Mvc\5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,6 +90,8 @@
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\PropData\GitHubFeed.cs" />
     <Compile Include="Models\PropData\InterestList.cs" />
+    <Compile Include="Mvc\AjaxRouteMappingAttribute.cs" />
+    <Compile Include="Mvc\CheckAjaxRequestAttribute.cs" />
     <Compile Include="Registers\DbMappingRegister.cs" />
     <Compile Include="Registers\IMappingConfigurationRegister.cs" />
     <Compile Include="DI\Compositions\DataComposition.cs" />

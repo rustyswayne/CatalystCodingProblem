@@ -110,9 +110,17 @@ body.application .return-link:hover,
     .box-recently-added .total-people span {
       font-size: 5em; }
 
-.chart-wrapper .chart-stage h2 {
-  font-size: 1.5em; }
+.person-table .updated {
+  font-size: .8em; }
 
-.chart-wrapper .chart-stage h3 {
-  font-size: 1.25em; }
+.chart-wrapper .chart-stage {
+  min-height: 120px; }
+  .chart-wrapper .chart-stage h2 {
+    font-size: 1.5em; }
+  .chart-wrapper .chart-stage h3 {
+    font-size: 1.25em; }
+
+.dashboard-spinner img {
+  display: block;
+  margin: auto; }
 
