@@ -54,7 +54,10 @@
         /// <param name="entity">
         /// The entity.
         /// </param>
-        void Save(TEntity entity);
+        /// <param name="noStateCheck">
+        /// A value indicating to ignore the parent entity state check
+        /// </param>
+        void Save(TEntity entity, bool noStateCheck = false);
 
         /// <summary>
         /// Deletes the entity.

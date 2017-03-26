@@ -10,13 +10,13 @@
     using LightInject;
 
     /// <inheritdoc />
-    internal partial class AddressService : CatalystDbContextServiceBase<Address>, IAddressService
+    internal partial class AddressService : DbContextServiceBase<CatalystDbContext, Address>, IAddressService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddressService"/> class.
         /// </summary>
         /// <param name="context">
-        /// The <see cref="ICatalystDbContext"/>.
+        /// The <see cref="CatalystDbContext"/>.
         /// </param>
         /// <param name="cache">
         /// The <see cref="ICacheManager"/>.
@@ -24,7 +24,7 @@
         /// <param name="logger">
         /// The <see cref="ILogger"/>.
         /// </param>
-        public AddressService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        public AddressService([Inject(Constants.Database.ConnectionStringName)]CatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
         }

@@ -29,11 +29,18 @@
         /// <param name="logger">
         /// The <see cref="ILogger"/>.
         /// </param>
-        public PersonService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        public PersonService([Inject(Constants.Database.ConnectionStringName)]CatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
             // Fill in the slug on add
             this.Adding += (s, e) => { e.Entity.Slug = GetUniqueSlug(e.Entity); };
+            this.Saving += (s, e) =>
+                {
+                    if (!e.Entity.Slug.StartsWith(e.Entity.GenerateSlug()))
+                    {
+                        e.Entity.Slug = GetUniqueSlug(e.Entity);
+                    }
+                };
         }
 
 
@@ -113,7 +120,7 @@
         protected override Person PerformGet(Guid id, bool lazy = true)
         {
             return lazy ? 
-                base.PerformGet(id) : 
+                Context.Find(id) : 
                 this.Context.Include(p => p.Addresses).Include(p => p.Properties).FirstOrDefault(x => x.Id == id);
         }
     }

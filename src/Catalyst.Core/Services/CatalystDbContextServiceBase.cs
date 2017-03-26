@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
-    using System.Data.Entity.Infrastructure;
     using System.Linq;
 
     using Catalyst.Core.Caching;
@@ -19,7 +17,7 @@
     /// <typeparam name="TEntity">
     /// The type of <see cref="IEntity"/>
     /// </typeparam>
-    internal abstract class CatalystDbContextServiceBase<TEntity> : ISimpleDbContextCrudService<TEntity>
+    internal abstract class CatalystDbContextServiceBase<TEntity> : DbContextServiceBase<CatalystDbContext, TEntity>, ISimpleDbContextCrudService<TEntity>
         where TEntity : class, IEntity
     {
         /// <summary>
@@ -37,15 +35,9 @@
         /// <exception cref="ArgumentNullException">
         /// Throws on any argument null
         /// </exception>
-        protected CatalystDbContextServiceBase(ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        protected CatalystDbContextServiceBase(CatalystDbContext context, ICacheManager cache, ILogger logger)
+            : base(context, cache, logger)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            if (cache == null) throw new ArgumentNullException(nameof(cache));
-            if (logger == null) throw new ArgumentNullException(nameof(logger));
-
-            DbContext = (CatalystDbContext)context;
-            CacheManager = cache;
-            Logger = logger;
         }
 
         #region events
@@ -82,35 +74,6 @@
 
         #endregion
 
-        /// <summary>
-        /// Gets or sets the <see cref="DbContext"/>.
-        /// </summary>
-        protected CatalystDbContext DbContext { get; set; }
-
-        /// <summary>
-        /// Gets the <see cref="CatalystDbContext"/>.
-        /// </summary>
-        protected abstract DbSet<TEntity> Context { get; }
-
-        /// <summary>
-        /// Gets the logger.
-        /// </summary>
-        protected ILogger Logger { get; }
-
-        /// <summary>
-        /// Gets the cache manager.
-        /// </summary>
-        protected ICacheManager CacheManager { get; }
-
-        /// <summary>
-        /// The runtime cache.
-        /// </summary>
-        protected IRuntimeCacheProvider RuntimeCache => CacheManager.RuntimeCache;
-
-        /// <summary>
-        /// Gets the entity set name.
-        /// </summary>
-        protected abstract string EntitySetName { get; }
 
         /// <summary>
         /// Gets an entity by it's id.
@@ -131,10 +94,10 @@
 
             if (result != null) return (TEntity)result;
 
-            return PerformGet(id);
-
-            // TODO detach from context before caching!!!
-            //// return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
+            return PerformGet(id, lazy);
+            
+            /// TODO detach from context before caching!!!
+            /// return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
         }
 
         /// <inheritdoc />
@@ -149,9 +112,11 @@
         }
 
         /// <inheritdoc />
-        public virtual void Save(TEntity entity)
+        public virtual void Save(TEntity entity, bool noStateCheck = false)
         {
             var state = GetEntityState(entity);
+
+            if (state == EntityState.Unchanged && noStateCheck) state = EntityState.Modified;
 
             switch (state)
             {

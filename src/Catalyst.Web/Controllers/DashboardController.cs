@@ -6,6 +6,7 @@
     using System.Web.Mvc;
 
     using Catalyst.Core;
+    using Catalyst.Core.Controllers;
     using Catalyst.Core.Mvc;
     using Catalyst.Web.Models.Dashboard;
 

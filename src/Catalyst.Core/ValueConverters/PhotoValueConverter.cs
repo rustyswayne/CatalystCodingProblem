@@ -16,7 +16,7 @@
         /// <param name="prop">
         /// The prop.
         /// </param>
-        public PhotoValueConverter(IExtendedProperty prop)
+        public PhotoValueConverter(ExtendedProperty prop)
             : base(prop)
         {
         }

@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a service that manages <see cref="ExtendedProperty"/> entities.
     /// </summary>
-    public interface IExtendedPropertyService : ISimpleDbContextCrudService<ExtendedProperty>, IExtendedPropertyQueryService
+    public interface IExtendedPropertyService : IExtendedPropertyQueryService
     {
     }
 }

@@ -4,7 +4,7 @@
 }
 <div class="chart-wrapper"@Html.If(Model.IsAsync, $" data-dashboard=\'{Model.AjaxRouteAlias.ToLowerInvariant()}\'")>
     <div class="chart-title">
-        @Model.Title
+        @Model.Title @RenderSection("Controls", false)
     </div>
     <div class="chart-stage">
         @RenderBody()

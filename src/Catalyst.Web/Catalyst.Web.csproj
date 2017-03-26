@@ -90,11 +90,16 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Editors\Controllers\PersonEditorController.cs" />
+    <Compile Include="Areas\Editors\Controllers\SocialLinksEditorController.cs" />
     <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
+    <Compile Include="Areas\Editors\Models\EditorFormBase.cs" />
+    <Compile Include="Areas\Editors\Models\IEditorForm.cs" />
+    <Compile Include="Areas\Editors\Models\PersonEntry.cs" />
+    <Compile Include="Areas\Editors\Models\SocialLinksEditor.cs" />
     <Compile Include="Boot\WebBoot.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\Api\SearchApiController.cs" />
-    <Compile Include="Controllers\CatalystControllerBase.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
@@ -120,7 +125,6 @@
     <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
     <Compile Include="Models\Dashboard\PeopleListing.cs" />
-    <Compile Include="Models\FormData\NewPerson.cs" />
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
     <Compile Include="Models\Dashboard\DashboardItemBase.cs" />
@@ -139,6 +143,9 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.slim.min.js" />
+    <Content Include="Areas\Editors\Views\PersonEditor\AddEditPerson.cshtml" />
+    <Content Include="Areas\Editors\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Editors\Views\SocialLinksEditor\Editor.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -213,7 +220,6 @@
     <Content Include="Content\css\modules\_socialbar.scss" />
     <Content Include="Views\Shared\_InterestList.cshtml" />
     <Content Include="Content\css\externals\typeahead\_typeahead.scss" />
-    <Content Include="Views\People\NewPerson.cshtml" />
     <Content Include="Views\Shared\_TwoColumn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -224,8 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
-    <Folder Include="Areas\Editors\Controllers\" />
-    <Folder Include="Areas\Editors\Models\" />
     <Folder Include="Areas\Editors\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

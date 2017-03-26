@@ -29,5 +29,6 @@
         /// Gets or sets the YouTube Url.
         /// </summary>
         public string YouTube { get; set; }
+
     }
 }

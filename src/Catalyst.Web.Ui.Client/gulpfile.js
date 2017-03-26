@@ -29,7 +29,7 @@ gulp.task('clean:vs', function(done) {
 
 // assembles scripts - concatenation and minification
 gulp.task('assemble', function() {
-    return gulp.src([ paths.peeps + 'Peeps.js', paths.peeps + 'Peeps.Settings.js', paths.peeps + 'modules/**/*.js', paths.peeps + 'bootstrap.js' ])
+    return gulp.src([ paths.peeps + 'Peeps.js', paths.peeps + 'Peeps.Settings.js', paths.peeps + 'modules/**/*.js', paths.peeps + 'editors/**/*.js', paths.peeps + 'bootstrap.js' ])
         .pipe(concat('peeps.js'))
         .pipe(gulp.dest(paths.dist))
         .pipe(rename('peeps.min.js'))

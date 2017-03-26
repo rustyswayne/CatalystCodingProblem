@@ -1,6 +1,6 @@
-﻿@model Catalyst.Web.Models.FormData.NewPerson
+﻿@model Catalyst.Web.Areas.Editors.Models.PersonEntry
 
-@using (Html.BeginForm("DoNewPerson", "People", FormMethod.Post, new { @id = "new-person-form"}))
+@using (Html.BeginForm("SavePerson", "PersonEditor", FormMethod.Post, new { @id = "person-entry" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,13 +17,19 @@
     <div class="form-group">
         @Html.LabelFor(x => x.Birthday, new { @class = "control-label" })
         @Html.ValidationMessageFor(x => x.Birthday)
-        <div id="birthday-picker"></div>
-        @Html.HiddenFor(x => x.Birthday)
+        @Html.TextBoxFor(x => x.Birthday, new { @class = "form-control"})
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(x => x.Watch)
+            Watch this person.
+        </label>
     </div>
     <div class="form-group">
         <div class="pull-right">
             <input type="submit" class="btn btn-default" value="Save" />
-            <button type="button" class="btn btn-default cancel">Cancel</button>
         </div>
     </div>
+    @Html.HiddenFor(x => x.PersonId)
+    @Html.HiddenFor(x => x.ReturnUrl)
 }

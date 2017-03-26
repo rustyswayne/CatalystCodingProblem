@@ -18,6 +18,9 @@ namespace Catalyst.Web
             public const string PeoplePropertyStats = "peopleprops";
             public const string RandomWatched = "randomwatched";
 
+            // editors
+            public const string AddPerson = "addperson";
+
             // only used to get the UI to display the spinner e.g. used for templating
             public const string DevDoNothing = "donothing"; 
         }

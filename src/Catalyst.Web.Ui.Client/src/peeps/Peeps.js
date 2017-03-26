@@ -23,11 +23,11 @@ var Peeps = (function() {
             // intialize the search
             Peeps.Search.init();
 
-            // bind the people records
-            Peeps.People.init();
-
             // initialize the dashboards
             Peeps.Dashboards.init();
+
+            // bind the people records
+            Peeps.Editors.init();
 
         });
     }
@@ -129,6 +129,7 @@ var Peeps = (function() {
     return {
         // ensures the settings object is created
         Settings: { },
+        Editors: { },
         // ensures the services object is created
         init: init,
         willWork: willWork,

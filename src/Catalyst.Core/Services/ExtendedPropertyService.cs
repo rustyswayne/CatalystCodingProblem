@@ -10,7 +10,7 @@
     using LightInject;
 
     /// <inheritdoc />
-    internal partial class ExtendedPropertyService : CatalystDbContextServiceBase<ExtendedProperty>, IExtendedPropertyService
+    internal partial class ExtendedPropertyService : DbContextServiceBase<CatalystDbContext, ExtendedProperty>, IExtendedPropertyService
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedPropertyService"/> class.
@@ -24,7 +24,7 @@
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public ExtendedPropertyService([Inject(Constants.Database.ConnectionStringName)]ICatalystDbContext context, ICacheManager cache, ILogger logger)
+        public ExtendedPropertyService([Inject(Constants.Database.ConnectionStringName)]CatalystDbContext context, ICacheManager cache, ILogger logger)
             : base(context, cache, logger)
         {
         }
