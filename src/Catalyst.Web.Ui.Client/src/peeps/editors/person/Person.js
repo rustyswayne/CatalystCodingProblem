@@ -2,11 +2,16 @@ Peeps.Editors.Person = {
 
     init: function() {
 
-        // have to wait to bind the form since they are loaded async
+        // for the new have to wait to bind the form since they are loaded async
         Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
 
         // always do this
         Peeps.Editors.Person.bind.deletes();
+
+        if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
+
+            Peeps.Editors.Person.bind.birthday($('#person-entry'));
+        }
 
     },
 
@@ -38,7 +43,6 @@ Peeps.Editors.Person = {
 
         personEntry: function(args) {
 
-            console.info(args);
             if (!Peeps.willWork('#person-entry')) return;
 
 
@@ -47,6 +51,10 @@ Peeps.Editors.Person = {
             // rebind the unobtrusive validation
             Peeps.Forms.rebind(frm);
 
+            Peeps.Editors.Person.bind.birthday(frm);
+        },
+
+        birthday: function(frm) {
             $(frm).find('#Birthday').datepicker({
                 changeYear: true,
                 yearRange: "1930:2017"

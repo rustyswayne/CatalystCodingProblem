@@ -68,7 +68,8 @@
             social.LinkedIn = model.LinkedIn;
             social.YouTube = model.YouTube;
 
-            var prop = person.Properties.SingleOrDefault(x => x.ConverterAlias == ConverterMapping.ConverterAlias);
+            var prop = (ExtendedProperty)person.GetProperty(ConverterMapping.ConverterAlias);
+
             if (prop == null)
             {
                 prop = new ExtendedProperty { ConverterAlias = ConverterMapping.ConverterAlias };
