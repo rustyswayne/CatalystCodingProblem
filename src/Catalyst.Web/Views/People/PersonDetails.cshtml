@@ -9,7 +9,7 @@
             @Html.Action("EditPerson", "PersonEditor", new { area = "Editors", person = Model.Person })
         </div>
         <div class="col-sm-6">
-
+            @Html.Action("Editor", "InterestEditor", new { area = "Editors", person = Model.Person })
         </div>
         <div class="col-sm-3">
             @Html.Action("Editor", "SocialLinksEditor", new { area = "Editors", person = Model.Person })

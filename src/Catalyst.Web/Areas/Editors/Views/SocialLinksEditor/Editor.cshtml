@@ -1,6 +1,6 @@
 ﻿@model Catalyst.Web.Areas.Editors.Models.SocialLinksEditor
 
-@using (Html.BeginForm("SaveSocialLinks", "SocialLinksEditor", FormMethod.Post, new { @id = "social-links-editor" }))
+@using (Html.BeginForm("Save", "SocialLinksEditor", FormMethod.Post, new { @id = "social-links-editor" }))
 {
     @Html.AntiForgeryToken()
 

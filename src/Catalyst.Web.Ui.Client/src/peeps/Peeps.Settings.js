@@ -23,7 +23,8 @@ Peeps.Settings = {
         { id: 'randomwatched', value: '/dashboard/randomwatched', title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 },
 
         // editors
-        { id: 'addperson', value: '/editors/personeditor/addperson', title: 'Initializing...', notes: '', delay: 0 }
+        { id: 'addperson', value: '/editors/personeditor/addperson', title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'interestlist', value: '/editors/interesteditor/editor', title: 'Loading form...', notes: '', delay: 0 }
     ]
 
 }

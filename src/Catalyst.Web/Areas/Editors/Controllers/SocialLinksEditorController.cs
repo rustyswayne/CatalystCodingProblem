@@ -13,7 +13,7 @@
     /// <summary>
     /// Property editor controller responsible for <see cref="SocialLinks"/>.
     /// </summary>
-    public class SocialLinksEditorController : PropertyEditorControllerBase<SocialLinks>
+    public class SocialLinksEditorController : PropertyEditorControllerBase<SocialLinks, SocialLinksEditor>
     {
         /// <summary>
         /// Responsible for rendering the editor.
@@ -25,7 +25,7 @@
         /// The <see cref="ActionResult"/>.
         /// </returns>
         [ChildActionOnly]
-        public ActionResult Editor(Person person)
+        public override ActionResult Editor(Person person)
         {
             var value = person.GetPropertyValue<SocialLinks>(true);
 
@@ -57,7 +57,7 @@
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveSocialLinks(SocialLinksEditor model)
+        public override ActionResult Save(SocialLinksEditor model)
         {
             var person = Services.Person.Get(model.PersonId, false);
 
