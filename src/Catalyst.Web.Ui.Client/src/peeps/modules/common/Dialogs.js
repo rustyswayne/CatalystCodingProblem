@@ -35,6 +35,24 @@ Peeps.Dialogs = {
                 }
             }
         });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
     }
 
 }

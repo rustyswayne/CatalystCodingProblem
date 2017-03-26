@@ -1,7 +1,10 @@
-﻿@model Catalyst.Web.Models.PersonDetail
+﻿@using Catalyst.Web.Models.FormData
+@model Catalyst.Web.Models.PersonDetail
 @{
     var person = Model.Person;
 }
+
+
 <div class="row">
     <div class="col-sm-9">
         <h1>@person.FullName()</h1>        

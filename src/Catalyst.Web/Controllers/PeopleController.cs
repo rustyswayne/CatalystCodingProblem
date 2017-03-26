@@ -5,23 +5,15 @@
 
     using Catalyst.Core;
     using Catalyst.Core.Logging;
+    using Catalyst.Core.Mvc;
     using Catalyst.Web.Models;
+    using Catalyst.Web.Models.FormData;
 
     /// <summary>
     /// The person controller.
     /// </summary>
     public class PeopleController : ViewModelControllerBase
     {
-        ///// <inheritdoc />
-        //[NonAction]
-        //public override ActionResult Index()
-        //{
-        //    var model = GetViewModel<PeopleList>("About this page");
-        //    model.CurrentTab.Title = "People";
-
-        //    return View(model);
-        //}
-
         /// <summary>
         /// The index.
         /// </summary>
@@ -65,6 +57,35 @@
 
 
             return View("PersonDetails", model);
+        }
+
+        /// <summary>
+        /// Gets the new person form.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        [CheckAjaxRequest]
+        public ActionResult NewPerson()
+        {
+            var model = new NewPerson();
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoNewPerson(NewPerson model)
+        {
+            if (ModelState.IsValid)
+            {
+                var person = Services.Person.Create(model.FirstName, model.LastName, model.Birthday);
+                Services.Person.Save(person);
+
+                return Redirect(person.Url(Web.Constants.PersonRoute));
+            }
+
+            return Redirect("/");
         }
 
         /// <summary>

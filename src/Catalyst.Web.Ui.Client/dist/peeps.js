@@ -159,6 +159,8 @@ Peeps.Settings = {
 
     searchApiEndpoint: '/api/searchapi/getall/',
 
+    newPerson: '/people/newperson/',
+
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
         { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
@@ -204,6 +206,24 @@ Peeps.Dialogs = {
                 }
             }
         });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
     }
 
 }
@@ -342,6 +362,9 @@ Peeps.People = {
     init: function() {
         // always do this
         Peeps.People.bind.deletes();
+
+        Peeps.People.bind.newPerson();
+
     },
     bind: {
         deletes: function() {
@@ -359,9 +382,47 @@ Peeps.People = {
 
             });
             }
+        },
+
+        newPerson: function() {
+            if (Peeps.willWork('#new-person')) {
+                // bind the new person button
+                $('#new-person').bind('click', function(e) {
+
+                    $.get(Peeps.Settings.newPerson).done(function(frm) {
+
+                        var dialog = Peeps.Dialogs.popForm({ frm: frm });
+                        dialog.dialog('open');
+
+                        // rebind the validation
+                        Peeps.Forms.rebind(dialog);
+
+                        $(dialog).find('.cancel').bind('click', function(e) {
+                           dialog.dialog('close');
+                        });
+                        // wire up the date box
+                        $(dialog).find('#birthday-picker').birthdayPicker({
+                            minAge: 16
+                        });
+
+                        $(dialog).find('form').bind('submit', function(e) {
+                           $(this).find('#Birthday').val($(this).find('.birthDay').val());
+
+                        });
+                    });
+
+                });
+            }
         }
     }
 }
+
+Peeps.Forms = {
+
+    rebind: function(frm) {
+        $.validator.unobtrusive.parse(frm);
+    }
+};
 
 /**
  * Created by rusty on 3/25/2017.
