@@ -24,7 +24,7 @@
                 <td class="col-xs-3 date-column">@p.Birthday.ToShortDateString() @($"({p.Age()})")</td>
                 <td class="col-xs-2 text-center">@Html.ActionLink(p.Watch ? "Yes" : "No", "ToggleWatched", "People", new { id = p.Id, r = current }, null)</td>
                 <td class="col-xs-2 date-column">@p.UpdateDateLocal()</td>
-                <td class="col-xs-1 text-center"><i class="glyphicon glyphicon-trash"></i></td>
+                <td class="col-xs-1 text-center"><a href="@Url.Action("Delete", "People", new { id = p.Id, r = current })" class="delete-person"><i class="glyphicon glyphicon-trash"></i></a></td>
             </tr>
         }
     }

@@ -96,5 +96,34 @@
 
             return Redirect(r);
         }
+
+        /// <summary>
+        /// Deletes a person.
+        /// </summary>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="r">
+        /// The redirect url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [HttpGet]
+        public ActionResult Delete(Guid id, string r = "/")
+        {
+            var person = Services.Person.Get(id);
+
+            if (person == null)
+            {
+                var nullRef = new NullReferenceException("Person record was null in Delete");
+                Logger.Error<PeopleController>("Person not found", nullRef);
+                throw nullRef;
+            }
+
+            Services.Person.Delete(person);
+
+            return Redirect(r);
+        }
     }
 }
