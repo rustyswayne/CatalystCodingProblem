@@ -13,17 +13,6 @@
     /// </summary>
     public abstract class ViewModelControllerBase : CatalystControllerBase
     {
-        ///// <summary>
-        ///// The default action.
-        ///// </summary>
-        ///// <returns>
-        ///// The <see cref="ActionResult"/>.
-        ///// </returns>
-        //public virtual ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         /// <summary>
         /// Instantiates a view model.
         /// </summary>
