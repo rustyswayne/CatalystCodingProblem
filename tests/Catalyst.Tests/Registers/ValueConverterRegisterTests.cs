@@ -44,7 +44,6 @@
 
         [TestCase(typeof(PhotoValueConverter))]
         [TestCase(typeof(SocialLinksValueConverter))]
-        [TestCase(typeof(GitHubFeedValueConverter))]
         [TestCase(typeof(InterestListValueConverter))]
         [Test]
         public void InstanceTypesContain(Type type)
@@ -52,17 +51,15 @@
             Assert.That(register.InstanceTypes.Contains(type), Is.True);
         }
 
-        [TestCase(Constants.ExtendedProperties.GitHubFeedConverterAlias)]
         [TestCase(Constants.ExtendedProperties.PhotoConverterAlias)]
         [TestCase(Constants.ExtendedProperties.SocialLinksConverterAlias)]
         [TestCase(Constants.ExtendedProperties.InterestListConverterAlias)]
         [Test]
-        public void KnownCoverterAliases(string alias)
+        public void ConverterMappings(string alias)
         {
-            Assert.That(register.KnownCoverterAliases.Contains(alias), Is.True);
+            Assert.That(register.ConverterMappings.Any(x => x.ConverterAlias.Equals(alias)), Is.True);
         }
 
-        [TestCase(Constants.ExtendedProperties.GitHubFeedConverterAlias, typeof(GitHubFeedValueConverter))]
         [TestCase(Constants.ExtendedProperties.PhotoConverterAlias, typeof(PhotoValueConverter))]
         [TestCase(Constants.ExtendedProperties.SocialLinksConverterAlias, typeof(SocialLinksValueConverter))]
         [TestCase(Constants.ExtendedProperties.InterestListConverterAlias, typeof(InterestListValueConverter))]

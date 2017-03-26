@@ -1,13 +1,15 @@
 ﻿namespace Catalyst.Core.DI
 {
     using System;
+    using System.Collections.Generic;
 
     using Catalyst.Core.Caching;
     using Catalyst.Core.Data.Context;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Registers;
     using Catalyst.Core.Services;
-    
+    using Catalyst.Core.ValueConverters;
+
     using LightInject;
 
     /// <summary>
@@ -34,6 +36,11 @@
         /// The <see cref="IServiceContext"/>.
         /// </summary>
         public static IServiceContext Services => Container.GetInstance<IServiceContext>();
+
+        /// <summary>
+        /// Gets the collection of <see cref="IConverterMappingInfo"/>.
+        /// </summary>
+        public static IEnumerable<IConverterMappingInfo> ConverterMappings => ValueConverterRegister.ConverterMappings;
 
         /// <summary>
         /// Gets an instance of the <see cref="ICatalystDbContext"/>.

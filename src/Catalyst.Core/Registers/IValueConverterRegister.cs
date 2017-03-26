@@ -14,7 +14,7 @@
         /// <summary>
         /// Gets the collection of "distinct known" converter aliases.
         /// </summary>
-        IEnumerable<string> KnownCoverterAliases { get; }
+        IEnumerable<IConverterMappingInfo> ConverterMappings { get; }
 
 
         /// <summary>

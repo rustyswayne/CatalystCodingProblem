@@ -11,5 +11,15 @@ namespace Catalyst.Web
         public const string PersonRoute = "/person/";
 
         public const string PersonEmptyPhoto = "/media/placeholders/person-placeholder.png";
+
+        public static class AjaxRouteAliases
+        {
+            public const string CompanySnapshot = "countrymetrics";
+            public const string PeoplePropertyStats = "peopleprops";
+            public const string RandomWatched = "randomwatched";
+
+            // only used to get the UI to display the spinner e.g. used for templating
+            public const string DevDoNothing = "donothing"; 
+        }
     }
 }

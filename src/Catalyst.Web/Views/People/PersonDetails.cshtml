@@ -1,6 +1,29 @@
 ﻿@model Catalyst.Web.Models.PersonDetail
-<div>
-    <strong>Person details: @Model.Person.FirstName</strong>
+@{
+    var person = Model.Person;
+}
+<div class="row">
+    <div class="col-sm-9">
+        <h1>@person.FullName()</h1>        
+    </div>
+    <div class="col-sm-3">
+        <div>
+            <select>
+                <option>Photo</option>
+                <option>Interests</option>
+                <option>Socail</option>
+            </select>
+            <button>+</button>
+        </div>
+        @if (person.Properties.Any())
+        {
+            <ul>
+                @foreach (var p in person.Properties.OrderBy(x => x.SortOrder()))
+                {
+                    <li>@p.ConverterAlias</li>
+                }
+            </ul>
+        }
+    </div>
 
 </div>
-

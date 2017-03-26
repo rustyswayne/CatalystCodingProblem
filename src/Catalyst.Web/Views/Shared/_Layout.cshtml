@@ -1,26 +1,35 @@
 ﻿@model Catalyst.Web.Models.ViewModelBase
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Html.Partial("_MetaInfo", Model.Meta)
     @(Bundle.Css()
-        .Add("~/Content/bootstrap.min.css")
-        .Add("~/Content/styles.min.css")
+        .Add("~/Content/css/bootstrap.min.css")
+        .Add("~/Content/css/styles.css")
         .MvcRender("~/Content/cache/combined_#.css"))
 </head>
 <body class="application">
     @Html.Partial("_Header", Model.CurrentTab)
     
-<div class="container-fluid">
-    @RenderBody()
-</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                @Html.Partial("_RichText", Model.Content)
+            </div>
+            <div class="col-sm-9">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
 
     @(Bundle.JavaScript()
     .Add("~/Scripts/jquery.min.js")
     .Add("~/Scripts/bootstrap.min.js")
+    .Add("~/Scripts/lib/underscore.min.js")
     .Add("~/Scripts/lib/holder/holder.js")
     .Add("~/Scripts/lib/catalyst/peeps.js")
     .MvcRender("~/Scripts/cache/combined_#.js"))

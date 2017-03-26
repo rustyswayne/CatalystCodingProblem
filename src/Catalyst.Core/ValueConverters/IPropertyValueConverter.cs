@@ -22,6 +22,11 @@
         Type ModelType { get; }
 
         /// <summary>
+        /// Gets the sort order.
+        /// </summary>
+        int SortOrder { get; }
+
+        /// <summary>
         /// Gets the typed property value.
         /// </summary>
         /// <typeparam name="T">

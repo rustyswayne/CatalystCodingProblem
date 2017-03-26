@@ -43,7 +43,7 @@
         /// <summary>
         /// The entity set name.
         /// </summary>
-        protected override string EntitySetName => "Person";
+        protected override string EntitySetName => "People";
 
         /// <inheritdoc />
         public Person Create(string firstName, string lastName, DateTime birthDay)

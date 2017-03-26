@@ -47,15 +47,14 @@
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> KnownCoverterAliases
+        public IEnumerable<IConverterMappingInfo> ConverterMappings
         {
             get
             {
                 return
                     InstanceTypes
-                    .Select(x => x.GetCustomAttribute<ConverterAliasAttribute>(false).ConverterAlias)
-                        .Distinct()
-                        .OrderBy(x => x);
+                    .Select(x => x.GetCustomAttribute<ConverterAliasAttribute>(false))
+                        .OrderBy(x => x.SortOrder);
             }
         }
 

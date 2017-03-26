@@ -1,6 +1,8 @@
 /**
  * Created by rusty on 3/24/2017.
  * scaffold based on https://github.com/rustyswayne/Merchello/blob/merchello-dev/src/Merchello.Mui.Client/src/jquery/mui/MUI.js
+ *
+ * REQUIRES:  underscore.js
  */
 var Peeps = (function() {
 
@@ -17,6 +19,7 @@ var Peeps = (function() {
         $(document).ready(function() {
             // initialize the dashboards
             Peeps.Dashboards.init();
+            
         });
     }
 
@@ -108,6 +111,11 @@ var Peeps = (function() {
         }
     }
 
+    //
+    function willWork(selector) {
+        return $(selector).length > 0;
+    }
+
     // exposed members
     return {
         // ensures the settings object is created
@@ -116,8 +124,8 @@ var Peeps = (function() {
             Endpoints: {}
         },
         // ensures the services object is created
-        Services: {},
         init: init,
+        willWork: willWork,
         hasLogger: hasLogger,
         createCache: createCache,
         on: registerEvent,

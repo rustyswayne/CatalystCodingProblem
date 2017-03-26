@@ -131,7 +131,10 @@
 
             if (result != null) return (TEntity)result;
 
-            return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
+            return PerformGet(id);
+
+            // TODO detach from context before caching!!!
+            //// return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
         }
 
         /// <inheritdoc />
@@ -149,6 +152,7 @@
         public virtual void Save(TEntity entity)
         {
             var state = GetEntityState(entity);
+
             switch (state)
             {
                 case EntityState.Added:
@@ -172,11 +176,9 @@
                     Emit(Saving, entity);
                     DbContext.SaveChanges();
                     Emit(Saved, entity);
-
+                    
                     break;
                 case EntityState.Deleted:
-                    // remove from cache
-                    break;
                 case EntityState.Unchanged:
                 default:
                     return;
@@ -238,35 +240,7 @@
             return $"{typeof(TEntity).Name}.{id}";
         }
 
-        /// <summary>
-        /// Attaches or gets an entity.
-        /// </summary>
-        /// <param name="entity">
-        /// The entity.
-        /// </param>
-        /// <returns>
-        /// A value indicating if the entity is currently attached.
-        /// </returns>
-        protected bool CheckIfAttached(TEntity entity)
-        {
-            var context = ((IObjectContextAdapter)DbContext).ObjectContext;
 
-            ObjectStateEntry entry;
-
-            var detached = false;
-            if (context.ObjectStateManager.TryGetObjectStateEntry(context.CreateEntityKey(EntitySetName, entity), out entry))
-            {
-                // Re-attach if necessary
-                detached = entry.State == EntityState.Detached;
-            }
-            else
-            {
-                // Attach for the first time
-                detached = true;
-            }
-
-            return detached;
-        }
 
         /// <summary>
         /// Attaches or gets an entity.
@@ -279,17 +253,9 @@
         /// </returns>
         protected EntityState GetEntityState(TEntity entity)
         {
-            var context = ((IObjectContextAdapter)DbContext).ObjectContext;
+            var entry = DbContext.ChangeTracker.Entries<TEntity>().FirstOrDefault(e => e.Entity.Id == entity.Id);
 
-            ObjectStateEntry entry;
-            if (context.ObjectStateManager.TryGetObjectStateEntry(context.CreateEntityKey(EntitySetName, entity), out entry))
-            {
-                // Return the entry state
-                return entry.State;
-            }
-            
-            // New entry
-            return EntityState.Added;
+            return entry == null ? EntityState.Added : entry.State;
         }
 
         /// <summary>

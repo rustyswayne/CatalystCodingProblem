@@ -1,12 +1,21 @@
 ﻿namespace Catalyst.Core.Models.PropData
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Gets a list of interests.
     /// </summary>
     public class InterestList : IPropertyValueModel
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InterestList"/> class.
+        /// </summary>
+        public InterestList()
+        {
+            Values = Enumerable.Empty<Interest>();
+        }
+
         /// <summary>
         /// Gets or sets the values.
         /// </summary>

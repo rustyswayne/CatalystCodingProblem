@@ -46,6 +46,25 @@
         }
 
         /// <summary>
+        /// Calculates the person's age.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The age of the person.
+        /// </returns>
+        /// <seealso cref="http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c"/>
+        public static int Age(this IPerson person)
+        {
+            var now = DateTime.Today;
+            var age = now.Year - person.Birthday.Year;
+            if (person.Birthday > now.AddYears(-age)) age--;
+
+            return age;
+        }
+
+        /// <summary>
         /// Checks if an extended property exists.
         /// </summary>
         /// <param name="person">
@@ -93,7 +112,8 @@
         /// </returns>
         public static object GetValue(this IPerson person, string converterAlias)
         {
-            return person.GetProperty(converterAlias).Converter().GetValue();
+            var prop = person.GetProperty(converterAlias);
+            return prop == null ? null : prop.Converter().GetValue();
         }
 
         /// <summary>
@@ -102,8 +122,8 @@
         /// <param name="person">
         /// The person.
         /// </param>
-        /// <param name="converterAlias">
-        /// The converter alias.
+        /// <param name="defaultToNewInstance">
+        /// A value indicating whether or not do default to a new instance of the property value.
         /// </param>
         /// <typeparam name="TValue">
         /// The type of the value
@@ -111,35 +131,19 @@
         /// <returns>
         /// The <see cref="TValue"/>.
         /// </returns>
-        public static TValue GetPropertyValue<TValue>(this IPerson person, string converterAlias)
+        public static TValue GetPropertyValue<TValue>(this IPerson person, bool defaultToNewInstance = false)
             where TValue : class, IPropertyValueModel, new()
         {
-            return person.GetProperty(converterAlias).Converter().GetPropertyValue<TValue>();
-        }
+            var resolved = Active.ValueConverterRegister.ConverterMappings.FirstOrDefault(info => info.ValueType == typeof(TValue));
+            if (resolved == null) return null;
 
-        /// <summary>
-        /// Adds an address to <see cref="IPerson"/>.
-        /// </summary>
-        /// <param name="person">
-        /// The person.
-        /// </param>
-        /// <param name="address">
-        /// The address.
-        /// </param>
-        public static void AddAddress(this IPerson person, IAddress address)
-        {
-            var adr = new Address
-            {
-                Name = address.Name,
-                Address1 = address.Address1,
-                Address2 = address.Address2,
-                Locality = address.Locality,
-                Region = address.Region,
-                PostalCode = address.PostalCode,
-                CountryCode = address.CountryCode
-            };
+            var prop = person.GetProperty(resolved.ConverterAlias);
 
-            person.Addresses.Add(adr);
+            return prop != null ? 
+
+                prop.GetPropertyValue<TValue>() : 
+                
+                defaultToNewInstance ? new TValue() : null;
         }
 
         /// <summary>

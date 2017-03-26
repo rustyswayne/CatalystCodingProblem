@@ -19,10 +19,5 @@
                 Description = "Reads contents of Readme.md file and displays as content"
             };
         }
-
-        /// <summary>
-        /// Gets or sets the body text.
-        /// </summary>
-        public RichText Instructions { get; set; }
     }
 }

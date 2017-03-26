@@ -1,5 +1,8 @@
 ﻿namespace Catalyst.Web.Models
 {
+    using System.Web;
+
+    using Catalyst.Web.Models.Dashboard;
     using Catalyst.Web.Models.Shared;
 
     /// <summary>
@@ -19,6 +22,11 @@
         /// Gets or sets the page <see cref="Meta"/>.
         /// </summary>
         public Meta Meta { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content for the sidebar.
+        /// </summary>
+        public RichText Content { get; set; }
 
         /// <summary>
         /// Gets or sets the current url.

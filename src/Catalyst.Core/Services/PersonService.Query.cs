@@ -18,5 +18,11 @@
                 .ToArray()
                 .Select(id => Get(id));
         }
+
+        /// <inheritdoc />
+        public IEnumerable<Person> GetWatched()
+        {
+            return this.Context.AsNoTracking().Where(x => x.Watch).Select(x => x.Id).ToArray().Select(id => Get(id));
+        }
     }
 }
