@@ -23,6 +23,9 @@ var Peeps = (function() {
             // intialize the search
             Peeps.Search.init();
 
+            // bind the people records
+            Peeps.People.init();
+
             // initialize the dashboards
             Peeps.Dashboards.init();
 
@@ -156,6 +159,8 @@ Peeps.Settings = {
 
     searchApiEndpoint: '/api/searchapi/getall/',
 
+    newPerson: '/people/newperson/',
+
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
         { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
@@ -164,6 +169,65 @@ Peeps.Settings = {
     ]
 
 }
+Peeps.Dialogs = {
+
+    confirmDelete: function(confirm, cancel) {
+        Peeps.Dialogs.confirm({
+            title: 'Delete this person?',
+            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
+            confirm: confirm,
+            cancel: cancel
+        });
+    },
+
+    confirm: function(args) {
+
+        // args { title: '', message: '', confirm: callback, cancel: callback}
+
+        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
+            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
+            '</div>')
+
+        $('#peeps').html(template);
+
+        $('#dialog-confirm').dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Confirm": function () {
+                    if (args.confirm !== undefined) args.confirm();
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    if (args.cancel !== undefined) args.cancel();
+                    $(this).dialog("close");
+                }
+            }
+        });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
+    }
+
+}
+
 /**
  * Created by rusty on 3/24/2017.
  */
@@ -293,6 +357,73 @@ Peeps.Dashboards = {
 
 };
 
+Peeps.People = {
+
+    init: function() {
+        // always do this
+        Peeps.People.bind.deletes();
+
+        Peeps.People.bind.newPerson();
+
+    },
+    bind: {
+        deletes: function() {
+            if (Peeps.willWork('.delete-person')) {
+            _.each($('.delete-person'), function(el) {
+
+                $(el).bind('click', function(e) {
+                    e.preventDefault();
+                    var targetUrl = $(this).attr("href");
+                    Peeps.Dialogs.confirmDelete(function() {
+
+                       window.location = targetUrl;
+                    });
+                });
+
+            });
+            }
+        },
+
+        newPerson: function() {
+            if (Peeps.willWork('#new-person')) {
+                // bind the new person button
+                $('#new-person').bind('click', function(e) {
+
+                    $.get(Peeps.Settings.newPerson).done(function(frm) {
+
+                        var dialog = Peeps.Dialogs.popForm({ frm: frm });
+                        dialog.dialog('open');
+
+                        // rebind the validation
+                        Peeps.Forms.rebind(dialog);
+
+                        $(dialog).find('.cancel').bind('click', function(e) {
+                           dialog.dialog('close');
+                        });
+                        // wire up the date box
+                        $(dialog).find('#birthday-picker').birthdayPicker({
+                            minAge: 16
+                        });
+
+                        $(dialog).find('form').bind('submit', function(e) {
+                           $(this).find('#Birthday').val($(this).find('.birthDay').val());
+
+                        });
+                    });
+
+                });
+            }
+        }
+    }
+}
+
+Peeps.Forms = {
+
+    rebind: function(frm) {
+        $.validator.unobtrusive.parse(frm);
+    }
+};
+
 /**
  * Created by rusty on 3/25/2017.
  */
@@ -363,39 +494,6 @@ Peeps.Search = {
     redirect: function(suggestion) {
         var record = Peeps.Search.peopleMap[suggestion];
         window.location = record.url;
-    }
-}
-
-Peeps.Storage = {
-    Cache: {
-        setItem: function(key, value) {
-            var now = new Date();
-            value.peeps = {};
-            value.peeps.cacheStamp = now;
-            value.peeps.expired = false;
-
-            if (localStorage) {
-                localStorage.setItem('__peeps-' + key, JSON.stringify(value));
-            }
-        },
-
-        getItem: function(key) {
-            var now = new Date();
-            if (localStorage) {
-                var value = JSON.parse(localStorage.getItem('__peeps-' + key));
-                if (!value) {
-                    return null;
-                }
-                var cachedDate = new Date(value.peeps.cacheStamp);
-                var diffMs = now - cachedDate;
-                var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-                if (diffMins > Peeps.Settings.localCacheDuration) {
-                    value.peeps.expired = true;
-                } else {
-                    return value;
-                }
-            }
-        }
     }
 }
 

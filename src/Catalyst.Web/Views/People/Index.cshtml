@@ -1,3 +1,4 @@
-﻿@model Catalyst.Web.Models.PeopleList
+﻿@using Catalyst.Web.Models.FormData
+@model Catalyst.Web.Models.PeopleList
 
 @Html.Action("PeopleList", "Dashboard", new { q = Model.QueryTerm })

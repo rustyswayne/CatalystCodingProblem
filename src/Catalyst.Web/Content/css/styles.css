@@ -2536,6 +2536,12 @@ span.twitter-typeahead {
 .date-column {
   font-size: .8em; }
 
+.birthdayPicker select {
+  height: 34px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px; }
+
 .chart-wrapper .chart-stage {
   min-height: 120px; }
   .chart-wrapper .chart-stage h2 {

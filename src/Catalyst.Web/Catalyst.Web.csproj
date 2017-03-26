@@ -64,6 +64,15 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Content\css\jquery-ui.structure.min.css" />
+    <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -108,6 +117,7 @@
     <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
     <Compile Include="Models\Dashboard\PeopleListing.cs" />
+    <Compile Include="Models\FormData\NewPerson.cs" />
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
     <Compile Include="Models\Dashboard\DashboardItemBase.cs" />
@@ -122,15 +132,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.offcanvas.min.js" />
+    <Content Include="Scripts\jquery-birthday-picker.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.slim.min.js" />
-    <Content Include="Scripts\remove\jquery.js" />
-    <Content Include="Scripts\remove\jquery.justifiedGallery.min.js" />
-    <Content Include="Scripts\remove\jquery.magnific-popup.min.js" />
-    <Content Include="Scripts\remove\jquery.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lib\holder\holder.js" />
     <Content Include="Scripts\lib\underscore.min.js" />
-    <Content Include="Scripts\remove\typeahead.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
@@ -199,6 +210,7 @@
     <Content Include="Content\css\modules\_socialbar.scss" />
     <Content Include="Views\Shared\_InterestList.cshtml" />
     <Content Include="Content\css\externals\typeahead\_typeahead.scss" />
+    <Content Include="Views\People\NewPerson.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
