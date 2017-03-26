@@ -34,9 +34,9 @@
         public long TotalPeople { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to show the delete button.
+        /// Gets or sets the query term.
         /// </summary>
-        public bool ShowDelete { get; set; } = false;
+        public string QueryTerm { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to show the manage button.

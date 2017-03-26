@@ -1,7 +1,9 @@
 ﻿namespace Catalyst.Core.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
 
     using Catalyst.Core.Caching;
@@ -58,6 +60,20 @@
                     .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
         }
 
+        /// <inheritdoc />
+        public IEnumerable<Person> SearchNames(string match, int maxResultCount = 5)
+        {
+            var terms = match.Split(' ').Select(x => x.Trim());
+
+            var predicate = PredicateBuilder.False<Person>();
+
+            foreach (var term in terms)
+            {
+                predicate = predicate.Or(x => x.FirstName.Contains(term) || x.LastName.Contains(term));
+            }
+
+            return Context.AsNoTracking().Where(predicate).OrderBy(p => p.FirstName).Take(maxResultCount);
+        }
 
         /// <summary>
         /// Get's a unique slug for the <see cref="IPerson"/>.

@@ -6,8 +6,6 @@
     using System.Web.Mvc;
 
     using Catalyst.Core;
-    using Catalyst.Core.DI;
-    using Catalyst.Core.Models.PropData;
     using Catalyst.Core.Mvc;
     using Catalyst.Web.Models.Dashboard;
 
@@ -55,18 +53,24 @@
         /// <summary>
         /// Renders the people list.
         /// </summary>
+        /// <param name="q">
+        /// The optional query term.
+        /// </param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
         [ChildActionOnly]
-        public ActionResult PeopleList()
+        public ActionResult PeopleList(string q = "")
         {
-            var people = Services.Person.GetAll().OrderBy(x => x.FirstName).ToArray();
+            var title = q.IsNullOrWhiteSpace() ? "All People" : $"Showing results for '{q}'";
+            var people = q.IsNullOrWhiteSpace()
+                             ? Services.Person.GetAll().OrderBy(x => x.FirstName).ToArray()
+                             : Services.Person.SearchNames(q, int.MaxValue).ToArray();
 
-            var model = new PeopleListing("All People")
+            var model = new PeopleListing(title)
             {
                 People = people,
-                ShowDelete = true,
+                QueryTerm = q,
                 TotalPeople = people.Count()
             };
 

@@ -18,5 +18,10 @@
                 Description = "Displays a list of all people that have been saved to the database"
             };
         }
+
+        /// <summary>
+        /// Gets or sets the query term.
+        /// </summary>
+        public string QueryTerm { get; set; }
     }
 }

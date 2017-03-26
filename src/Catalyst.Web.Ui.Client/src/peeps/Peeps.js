@@ -2,7 +2,9 @@
  * Created by rusty on 3/24/2017.
  * scaffold based on https://github.com/rustyswayne/Merchello/blob/merchello-dev/src/Merchello.Mui.Client/src/jquery/mui/MUI.js
  *
- * REQUIRES:  underscore.js
+ * REQUIRES:    jquery.js
+ *              underscore.js
+ *              typeahead.js
  */
 var Peeps = (function() {
 
@@ -17,9 +19,13 @@ var Peeps = (function() {
     // Initialization
     function init() {
         $(document).ready(function() {
+
+            // intialize the search
+            Peeps.Search.init();
+
             // initialize the dashboards
             Peeps.Dashboards.init();
-            
+
         });
     }
 
@@ -119,10 +125,7 @@ var Peeps = (function() {
     // exposed members
     return {
         // ensures the settings object is created
-        Settings: {
-            Notifications: {},
-            Endpoints: {}
-        },
+        Settings: { },
         // ensures the services object is created
         init: init,
         willWork: willWork,

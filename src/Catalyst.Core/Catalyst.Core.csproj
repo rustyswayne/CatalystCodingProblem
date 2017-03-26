@@ -90,6 +90,7 @@
     <Compile Include="Models\PropData\InterestList.cs" />
     <Compile Include="Mvc\AjaxRouteMappingAttribute.cs" />
     <Compile Include="Mvc\CheckAjaxRequestAttribute.cs" />
+    <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Registers\DbMappingRegister.cs" />
     <Compile Include="Registers\IMappingConfigurationRegister.cs" />
     <Compile Include="DI\Compositions\DataComposition.cs" />

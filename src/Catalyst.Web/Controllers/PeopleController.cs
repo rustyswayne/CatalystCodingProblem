@@ -12,11 +12,30 @@
     /// </summary>
     public class PeopleController : ViewModelControllerBase
     {
-        /// <inheritdoc />
-        public override ActionResult Index()
+        ///// <inheritdoc />
+        //[NonAction]
+        //public override ActionResult Index()
+        //{
+        //    var model = GetViewModel<PeopleList>("About this page");
+        //    model.CurrentTab.Title = "People";
+
+        //    return View(model);
+        //}
+
+        /// <summary>
+        /// The index.
+        /// </summary>
+        /// <param name="q">
+        /// The q.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        public ActionResult Index(string q = "")
         {
             var model = GetViewModel<PeopleList>("About this page");
             model.CurrentTab.Title = "People";
+            model.QueryTerm = q;
 
             return View(model);
         }

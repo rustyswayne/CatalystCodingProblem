@@ -12,6 +12,8 @@ Peeps.Settings = {
     // flag for demoing api delays
     enableApiDelays: true,
 
+    searchApiEndpoint: '/api/searchapi/getall/',
+
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
         { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },

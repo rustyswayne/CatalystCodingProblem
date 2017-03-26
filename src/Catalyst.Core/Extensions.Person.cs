@@ -42,7 +42,7 @@
         /// </returns>
         public static string Url(this IPerson person, string baseRoute = "")
         {
-            return $"{baseRoute}/{person.Slug}".EnsureStartsAndEndsWith('/');
+            return $"{baseRoute.EnsureNotStartsOrEndsWith('/')}/{person.Slug}".EnsureStartsAndEndsWith('/');
         }
 
         /// <summary>

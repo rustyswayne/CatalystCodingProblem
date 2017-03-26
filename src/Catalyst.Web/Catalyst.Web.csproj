@@ -84,6 +84,7 @@
     <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
     <Compile Include="Boot\WebBoot.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\Api\SearchApiController.cs" />
     <Compile Include="Controllers\CatalystControllerBase.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonDetail.cs" />
     <Compile Include="Models\Dashboard\DashboardItemBase.cs" />
+    <Compile Include="Models\WebApi\PersonResult.cs" />
     <Compile Include="Models\Shared\NavTab.cs" />
     <Compile Include="Models\Shared\Meta.cs" />
     <Compile Include="Models\Home.cs" />
@@ -120,12 +122,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.offcanvas.min.js" />
-    <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\jquery.justifiedGallery.min.js" />
-    <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.slim.min.js" />
+    <Content Include="Scripts\remove\jquery.js" />
+    <Content Include="Scripts\remove\jquery.justifiedGallery.min.js" />
+    <Content Include="Scripts\remove\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\remove\jquery.min.js" />
     <Content Include="Scripts\lib\holder\holder.js" />
     <Content Include="Scripts\lib\underscore.min.js" />
+    <Content Include="Scripts\remove\typeahead.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -191,6 +198,7 @@
     <Content Include="Content\css\externals\fa-sass\_variables.scss" />
     <Content Include="Content\css\modules\_socialbar.scss" />
     <Content Include="Views\Shared\_InterestList.cshtml" />
+    <Content Include="Content\css\externals\typeahead\_typeahead.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

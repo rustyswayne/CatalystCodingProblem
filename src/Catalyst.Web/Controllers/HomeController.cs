@@ -18,7 +18,7 @@
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        public override ActionResult Index()
+        public ActionResult Index()
         {
             var model = GetViewModel<Home>("Requirements");
 

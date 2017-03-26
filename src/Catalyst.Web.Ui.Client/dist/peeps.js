@@ -2,7 +2,9 @@
  * Created by rusty on 3/24/2017.
  * scaffold based on https://github.com/rustyswayne/Merchello/blob/merchello-dev/src/Merchello.Mui.Client/src/jquery/mui/MUI.js
  *
- * REQUIRES:  underscore.js
+ * REQUIRES:    jquery.js
+ *              underscore.js
+ *              typeahead.js
  */
 var Peeps = (function() {
 
@@ -17,11 +19,13 @@ var Peeps = (function() {
     // Initialization
     function init() {
         $(document).ready(function() {
+
+            // intialize the search
+            Peeps.Search.init();
+
             // initialize the dashboards
             Peeps.Dashboards.init();
 
-            // initialize GitHub feeds
-            Peeps.GitHub.init();
         });
     }
 
@@ -121,10 +125,7 @@ var Peeps = (function() {
     // exposed members
     return {
         // ensures the settings object is created
-        Settings: {
-            Notifications: {},
-            Endpoints: {}
-        },
+        Settings: { },
         // ensures the services object is created
         init: init,
         willWork: willWork,
@@ -152,6 +153,8 @@ Peeps.Settings = {
 
     // flag for demoing api delays
     enableApiDelays: true,
+
+    searchApiEndpoint: '/api/searchapi/getall/',
 
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
@@ -290,6 +293,79 @@ Peeps.Dashboards = {
 
 };
 
+/**
+ * Created by rusty on 3/25/2017.
+ */
+Peeps.Search = {
+
+    // map for people names
+    peopleMap: {},
+
+    // the names
+    names: [],
+
+    current: {},
+
+    // initializes the search
+    init: function() {
+        if (Peeps.willWork('#person-search')) {
+            $.get(Peeps.Settings.searchApiEndpoint).done(function(results) {
+
+                // build the map
+                _.each(results, function(r) {
+                   Peeps.Search.peopleMap[r.name] = r;
+                   Peeps.Search.names.push(r.name);
+                });
+
+                Peeps.Search.bind.searchBox($('#person-search'));
+            });
+        }
+    },
+
+    bind: {
+        searchBox: function(el) {
+
+            var people = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: Peeps.Search.names
+            });
+
+            $(el)
+            .bind('keydown', function(e) {
+                var regex = new RegExp("^[a-zA-Z0-9]");
+                var code = !e.charCode ? e.which : e.charCode;
+                var key = String.fromCharCode(code);
+                if (!regex.test(key) && code !== 32 && code !== 8) {
+                    e.preventDefault();
+                    return false;
+                }
+            }).typeahead({
+                hint: true,
+                highlight: true, /* Enable substring highlighting */
+                minLength: 1 /* Specify minimum characters required for showing result */
+            },
+            {
+                name: 'names',
+                source: people
+            })
+            .bind('typeahead:select', function(ev, suggestion) {
+                console.log('Selection: ' + suggestion);
+                Peeps.Search.redirect(suggestion);
+            })
+            .bind("typeahead:autocompleted", function(ev, suggestion) {
+                console.log('Auto: ' + suggestion);
+                Peeps.Search.redirect(suggestion);
+            });
+        }
+    },
+
+    redirect: function(suggestion) {
+        var record = Peeps.Search.peopleMap[suggestion];
+        window.location = record.url;
+    }
+}
+
 Peeps.Storage = {
     Cache: {
         setItem: function(key, value) {
@@ -323,104 +399,5 @@ Peeps.Storage = {
     }
 }
 
-// GitHub feeds
-Peeps.GitHub = {
-    feedCount: 20,
-    init: function() {
-        if (Peeps.willWork('.github-activity')) {
-            Peeps.GitHub.getCommitFeeds();
-        }
-    },
-    getCommitFeeds: function() {
-        $('.github-activity').each(function() {
-            var owner = $(this).attr('data-owner');
-            var repo = $(this).attr('data-repo');
-            var storageKey = owner + '-' + repo;
-            Peeps.GitHub.getFeed($(this), UD.GitHub.getCommitApiUrl(owner, repo), storageKey);
-        });
-    },
-    getFeed: function (parent, url, storageKey) {
-        var cached = Peeps.Storage.Cache.getItem(storageKey);
-        if (cached == null || cached.expired == true) {
-            $.ajax({
-                url: url,
-                dataType: 'jsonp',
-                success: function (results) {
-                    if (results != null) {
-                        Peeps.Storage.Cache.setItem(storageKey, results);
-                        Peeps.GitHub.generateList(parent, results);
-                    } else {
-                        // failed call - try to use the expired results if I have them
-                        if (cached != null) {
-                            Peeps.debugConsole('using expired.');
-                            Peeps.GitHub.generateList(parent, cached);
-                        }
-                    }
-                }
-            });
-        } else {
-            Peeps.GitHub.generateList(parent, cached);
-        }
-    },
-    createAvatar: function(src) {
-        var img = document.createElement('img');
-        $(img).attr('src', src).addClass('avatar');
-        return img;
-    },
-    createSpan: function(txt, css) {
-        var span = document.createElement('span');
-        $(span).addClass(css).text(txt);
-        return span;
-    },
-    createAnchor: function(url, txt, css) {
-        var a = document.createElement('a');
-        $(a).attr('href', url).addClass(css).text(txt);
-        return a;
-    },
-    getCommitApiUrl: function (owner, repo) {
-        return 'https://api.github.com/repos/' + owner + '/' + repo + '/commits?callback=?';
-    },
-    generateList: function(parent, results) {
-        if (results.data.length > 0) {
-            // get the commits
-            var ul = document.createElement('ul');
-
-            $.each(results.data.slice(0, UD.GitHub.feedCount), function (key, value) {
-                var li = document.createElement('li'); //.css('commit')
-
-                var avatar = '';
-                if (value.author !== null) {
-                    avatar = value.author.avatar_url;
-                    $(li).append(Peeps.GitHub.createAvatar(avatar));
-                }
-
-                var div = document.createElement('div');
-                $(div).addClass('commit');
-
-                if (value.author !== null) {
-                    $(div).append(Peeps.GitHub.createAnchor(value.author.html_url, value.author.login, 'author'));
-                }
-
-                var icon = document.createElement('i');
-                $(icon).addClass('octicon').addClass('octicon-git-commit');
-                $(div).append(icon);
-                console.info(value);
-                if (value.parents !== null) {
-                    $(div).append(Peeps.GitHub.createAnchor(value.parents[0].html_url, value.commit.message, 'message'));
-                } else {
-                    $(div).append(Peeps.GitHub.createSpan(value.commit.message, 'message'));
-                }
-
-                $(li).append(div);
-                //var date = new Date(value.commit.committer.date);
-                // $(li).append(UD.GitHub.createSpan(date.toLocaleDateString(), 'date'));
-                $(ul).append(li);
-
-            });
-            $(parent).append(ul);
-            $(parent).children('.loading').removeClass('expanded');
-        }
-    }
-}
 //// Bootstrap Peeps!
 Peeps.init();

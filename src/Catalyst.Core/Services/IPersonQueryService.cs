@@ -27,5 +27,19 @@
         /// A collection of watched people.
         /// </returns>
         IEnumerable<Person> GetWatched();
+
+        /// <summary>
+        /// Searches the first and last name fields for a value.
+        /// </summary>
+        /// <param name="match">
+        /// The value to "match".
+        /// </param>
+        /// <param name="maxResultCount">
+        /// The number of results to return.
+        /// </param>
+        /// <returns>
+        /// The collection of matching <see cref="Person"/>.
+        /// </returns>
+        IEnumerable<Person> SearchNames(string match, int maxResultCount = 5);
     }
 }
