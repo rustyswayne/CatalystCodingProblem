@@ -12,6 +12,83 @@
     public static partial class Extensions
     {
         /// <summary>
+        /// Reads markdown content as HTML.
+        /// </summary>
+        /// <param name="html">
+        /// The <see cref="HtmlHelper"/>.
+        /// </param>
+        /// <param name="file">
+        /// The file.
+        /// </param>
+        /// <param name="directory">
+        /// The directory.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHtmlString"/>.
+        /// </returns>
+        public static IHtmlString Markdown(this HtmlHelper html, string file, string directory = "")
+        {
+            var fileName = file.EnsureEndsWith(".md");
+
+            if (directory.IsNullOrWhiteSpace()) directory = "~/App_Data/Markdown/";
+
+            var markdownPath = $"{directory}{fileName}";
+
+            var path = HttpContext.Current.Server.MapPath(markdownPath);
+
+            if (System.IO.File.Exists(path))
+            {
+                var md = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath(markdownPath));
+                if (!md.IsNullOrWhiteSpace())
+                {
+                    return MvcHtmlString.Create(CommonMark.CommonMarkConverter.Convert(md));
+                }
+            }
+
+            return MvcHtmlString.Empty; 
+        }
+
+        /// <summary>
+        /// Reads markdown content as HTML from a file named the same as the type referenced.
+        /// </summary>
+        /// <param name="html">
+        /// The <see cref="HtmlHelper"/>.
+        /// </param>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <param name="directory">
+        /// The directory.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHtmlString"/>.
+        /// </returns>
+        public static IHtmlString Markdown(this HtmlHelper html, Type type, string directory = "")
+        {
+            return html.Markdown(type.Name, directory);
+        }
+
+        /// <summary>
+        /// Reads markdown content as HTML from a file named the same as the type referenced.
+        /// </summary>
+        /// <param name="html">
+        /// The <see cref="HtmlHelper"/>.
+        /// </param>
+        /// <param name="directory">
+        /// The directory.
+        /// </param>
+        /// <typeparam name="TModel">
+        /// The type of the model
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="IHtmlString"/>.
+        /// </returns>
+        public static IHtmlString Markdown<TModel>(this HtmlHelper html, string directory = "")
+        {
+            return html.Markdown(typeof(TModel), directory);
+        }
+
+        /// <summary>
         /// Utility inline if.
         /// </summary>
         /// <param name="html">

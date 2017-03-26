@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a person detail view model.
     /// </summary>
-    public class PersonDetail : ViewModelBase
+    public class PersonDetail : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonDetail"/> class.

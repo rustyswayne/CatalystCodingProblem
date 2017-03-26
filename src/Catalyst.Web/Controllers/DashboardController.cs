@@ -32,6 +32,37 @@
         }
 
         /// <summary>
+        /// Renders a RichText dashboard
+        /// </summary>
+        /// <param name="title">
+        /// The dashboard item title.
+        /// </param>
+        /// <param name="file">
+        /// The markdown file name.
+        /// </param>
+        /// <param name="notes">
+        /// The dashboard item notes.
+        /// </param>
+        /// <param name="directory">
+        /// The directory.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        [ChildActionOnly]
+        public ActionResult RichText(string title, string file, string notes = "", string directory = "")
+        {
+            var model = new RichText(title)
+            {
+                MarkdownFile = file,
+                Notes = notes,
+                Directory = directory
+            };
+
+            return PartialView("RichText", model);
+        }
+
+        /// <summary>
         /// Renders the recently updated people.
         /// </summary>
         /// <returns>

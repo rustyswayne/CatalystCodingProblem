@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents the home view model.
     /// </summary>
-    public class Home : ViewModelBase
+    public class Home : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Home"/> class.

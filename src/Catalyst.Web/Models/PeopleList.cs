@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents the people list page view model.
     /// </summary>
-    public class PeopleList : ViewModelBase
+    public class PeopleList : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleList"/> class.

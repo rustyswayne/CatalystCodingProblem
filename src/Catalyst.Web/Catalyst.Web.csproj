@@ -106,13 +106,16 @@
     <Compile Include="Extensions.Person.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.WebPage.cs">
+      <DependentUpon>Extensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
     <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
     <Compile Include="Models\Dashboard\CountryMetric.cs" />
-    <Compile Include="Models\Dashboard\HtmlContent.cs" />
+    <Compile Include="Models\Dashboard\RichText.cs" />
     <Compile Include="Models\Dashboard\Metric.cs" />
     <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
@@ -170,7 +173,7 @@
     <Content Include="Content\css\modules\_tables.scss" />
     <Content Include="Content\css\modules\_dashboards.scss" />
     <Content Include="Views\Shared\_PersonTable.cshtml" />
-    <Content Include="Views\Shared\_RichText.cshtml" />
+    <Content Include="Views\Dashboard\RichText.cshtml" />
     <Content Include="Config\imageprocessor\security.config" />
     <Content Include="Config\imageprocessor\cache.config" />
     <Content Include="Config\imageprocessor\processing.config" />
@@ -211,6 +214,7 @@
     <Content Include="Views\Shared\_InterestList.cshtml" />
     <Content Include="Content\css\externals\typeahead\_typeahead.scss" />
     <Content Include="Views\People\NewPerson.cshtml" />
+    <Content Include="Views\Shared\_TwoColumn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
