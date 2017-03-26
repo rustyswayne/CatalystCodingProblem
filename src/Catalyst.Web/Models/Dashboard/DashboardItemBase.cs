@@ -24,7 +24,7 @@
         /// Have to instantiate here because of model check
         /// </remarks>
         public string AjaxRouteAlias { get; set; } = string.Empty;
-
+        
         /// <summary>
         /// Gets or sets a value indicating whether this item gets it's data asynchronously.
         /// </summary>

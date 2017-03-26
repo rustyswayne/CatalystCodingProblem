@@ -14,7 +14,7 @@
         /// <summary>
         /// Gets the property.
         /// </summary>
-        IExtendedProperty Property { get; }
+        ExtendedProperty Property { get; }
 
         /// <summary>
         /// Gets the model type.

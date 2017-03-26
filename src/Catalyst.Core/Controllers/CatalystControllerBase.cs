@@ -1,4 +1,4 @@
-﻿namespace Catalyst.Web.Controllers
+﻿namespace Catalyst.Core.Controllers
 {
     using System;
     using System.Web.Mvc;
@@ -6,8 +6,6 @@
     using Catalyst.Core.DI;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Services;
-    using Catalyst.Web.Models;
-    using Catalyst.Web.Models.Shared;
 
     /// <summary>
     /// Represents a base MVC controller for the catalyst context.
@@ -39,8 +37,8 @@
             if (logger == null) throw new ArgumentNullException(nameof(logger));
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            Logger = logger;
-            Services = services;
+            this.Logger = logger;
+            this.Services = services;
         }
 
         /// <summary>

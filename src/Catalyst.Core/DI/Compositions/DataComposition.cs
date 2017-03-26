@@ -1,7 +1,6 @@
 ﻿namespace Catalyst.Core.DI.Compositions
 {
     using Catalyst.Core.Data.Context;
-    using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Registers;
 
@@ -16,15 +15,15 @@
         public void Compose(IServiceRegistry container)
         {
             // Transient
-            container.Register<ICatalystDbContext, CatalystDbContext>();
+            container.Register<CatalystDbContext>();
 
-            container.Register<string, ICatalystDbContext>(
+            container.Register<string, CatalystDbContext>(
                 (factory, connStr) => new CatalystDbContext(
                     connStr,
                     factory.GetInstance<ILogger>(),
                     factory.GetInstance<IMappingConfigurationRegister>()));
 
-            container.Register<ICatalystDbContext>(
+            container.Register<CatalystDbContext>(
                 factory =>
                     new CatalystDbContext(
                         Constants.Database.ConnectionStringName,

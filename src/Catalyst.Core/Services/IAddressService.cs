@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a service that manages <see cref="Address"/> entities.
     /// </summary>
-    public interface IAddressService : ISimpleDbContextCrudService<Address>, IAddressQueryService
+    public interface IAddressService : IAddressQueryService
     {
     }
 }

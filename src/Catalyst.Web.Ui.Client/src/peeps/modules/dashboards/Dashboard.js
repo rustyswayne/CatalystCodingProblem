@@ -5,6 +5,8 @@
 // REQUIRES:  underscore.js
 Peeps.Dashboards = {
 
+    loadedEvtName: 'dashboardLoaded',
+
     // initializes the component
     init: function() {
 
@@ -84,9 +86,10 @@ Peeps.Dashboards = {
                 dataType: "html"
             }).done(function(data) {
 
-                setTimeout(function(){
+                setTimeout(function() {
                     $(panel).parent().html(data);
                     $(panel).find('.chart-notes').text('Note:');
+                    Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: params.args });
                     }, delay);
 
             }).fail(function() {

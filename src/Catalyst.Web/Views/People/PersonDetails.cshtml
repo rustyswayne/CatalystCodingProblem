@@ -1,36 +1,21 @@
-﻿@using Catalyst.Web.Models.FormData
-@model Catalyst.Web.Models.PersonDetail
+﻿@model Catalyst.Web.Models.PersonDetail
 @{
-    var person = Model.Person;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-9">
-        <h1>@person.FullName()</h1>        
-    </div>
-    <div class="col-sm-3">
-        <div>
-            <select>
-                <option>Photo</option>
-                <option>Interests</option>
-                <option>Socail</option>
-            </select>
-            <button>+</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            @Html.Action("EditPerson", "PersonEditor", new { area = "Editors", person = Model.Person })
         </div>
-        @if (person.Properties.Any())
-        {
-            <ul>
-                @foreach (var p in person.Properties.OrderBy(x => x.SortOrder()))
-                {
-                    <li>@p.ConverterAlias</li>
-                }
-            </ul>
-        }
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-3">
+            @Html.Action("Editor", "SocialLinksEditor", new { area = "Editors", person = Model.Person })
+        </div>
     </div>
 </div>
 
-@section Side {
-
-}
 
 

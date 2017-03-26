@@ -15,7 +15,7 @@
         /// <param name="prop">
         /// The <see cref="IExtendedProperty"/>.
         /// </param>
-        public InterestListValueConverter(IExtendedProperty prop)
+        public InterestListValueConverter(ExtendedProperty prop)
             : base(prop)
         {
         }

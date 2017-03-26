@@ -23,11 +23,11 @@ var Peeps = (function() {
             // intialize the search
             Peeps.Search.init();
 
-            // bind the people records
-            Peeps.People.init();
-
             // initialize the dashboards
             Peeps.Dashboards.init();
+
+            // bind the people records
+            Peeps.Editors.init();
 
         });
     }
@@ -129,6 +129,7 @@ var Peeps = (function() {
     return {
         // ensures the settings object is created
         Settings: { },
+        Editors: { },
         // ensures the services object is created
         init: init,
         willWork: willWork,
@@ -165,7 +166,10 @@ Peeps.Settings = {
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
         { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
         { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", notes: 'Property filter queries not implemented.', delay: 1250 },
-        { id: 'randomwatched', value: '/dashboard/randomwatched', title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 }
+        { id: 'randomwatched', value: '/dashboard/randomwatched', title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 },
+
+        // editors
+        { id: 'addperson', value: '/editors/personeditor/addperson', title: 'Initializing...', notes: '', delay: 0 }
     ]
 
 }
@@ -234,6 +238,8 @@ Peeps.Dialogs = {
 // Dashboards
 // REQUIRES:  underscore.js
 Peeps.Dashboards = {
+
+    loadedEvtName: 'dashboardLoaded',
 
     // initializes the component
     init: function() {
@@ -314,9 +320,10 @@ Peeps.Dashboards = {
                 dataType: "html"
             }).done(function(data) {
 
-                setTimeout(function(){
+                setTimeout(function() {
                     $(panel).parent().html(data);
                     $(panel).find('.chart-notes').text('Note:');
+                    Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: params.args });
                     }, delay);
 
             }).fail(function() {
@@ -356,66 +363,6 @@ Peeps.Dashboards = {
     }
 
 };
-
-Peeps.People = {
-
-    init: function() {
-        // always do this
-        Peeps.People.bind.deletes();
-
-        Peeps.People.bind.newPerson();
-
-    },
-    bind: {
-        deletes: function() {
-            if (Peeps.willWork('.delete-person')) {
-            _.each($('.delete-person'), function(el) {
-
-                $(el).bind('click', function(e) {
-                    e.preventDefault();
-                    var targetUrl = $(this).attr("href");
-                    Peeps.Dialogs.confirmDelete(function() {
-
-                       window.location = targetUrl;
-                    });
-                });
-
-            });
-            }
-        },
-
-        newPerson: function() {
-            if (Peeps.willWork('#new-person')) {
-                // bind the new person button
-                $('#new-person').bind('click', function(e) {
-
-                    $.get(Peeps.Settings.newPerson).done(function(frm) {
-
-                        var dialog = Peeps.Dialogs.popForm({ frm: frm });
-                        dialog.dialog('open');
-
-                        // rebind the validation
-                        Peeps.Forms.rebind(dialog);
-
-                        $(dialog).find('.cancel').bind('click', function(e) {
-                           dialog.dialog('close');
-                        });
-                        // wire up the date box
-                        $(dialog).find('#birthday-picker').birthdayPicker({
-                            minAge: 16
-                        });
-
-                        $(dialog).find('form').bind('submit', function(e) {
-                           $(this).find('#Birthday').val($(this).find('.birthDay').val());
-
-                        });
-                    });
-
-                });
-            }
-        }
-    }
-}
 
 Peeps.Forms = {
 
@@ -494,6 +441,75 @@ Peeps.Search = {
     redirect: function(suggestion) {
         var record = Peeps.Search.peopleMap[suggestion];
         window.location = record.url;
+    }
+}
+
+/**
+ * Created by rusty on 3/26/2017.
+ */
+Peeps.Editors = {
+
+    init: function() {
+
+        Peeps.Editors.Person.init();
+    }
+
+}
+Peeps.Editors.Person = {
+
+    init: function() {
+
+        // have to wait to bind the form since they are loaded async
+        Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
+
+        // always do this
+        Peeps.Editors.Person.bind.deletes();
+
+    },
+
+    onDashboardLoaded: function(s, e) {
+
+      if (e.params.id === 'addperson') {
+          Peeps.Editors.Person.bind.personEntry(e);
+      }
+
+    },
+
+    bind: {
+        deletes: function() {
+            if (Peeps.willWork('.delete-person')) {
+            _.each($('.delete-person'), function(el) {
+
+                $(el).bind('click', function(e) {
+                    e.preventDefault();
+                    var targetUrl = $(this).attr("href");
+                    Peeps.Dialogs.confirmDelete(function() {
+
+                       window.location = targetUrl;
+                    });
+                });
+
+            });
+            }
+        },
+
+        personEntry: function(args) {
+
+            console.info(args);
+            if (!Peeps.willWork('#person-entry')) return;
+
+
+            var frm = $('#person-entry');
+
+            // rebind the unobtrusive validation
+            Peeps.Forms.rebind(frm);
+
+            $(frm).find('#Birthday').datepicker({
+                changeYear: true,
+                yearRange: "1930:2017"
+            });
+        }
+
     }
 }
 

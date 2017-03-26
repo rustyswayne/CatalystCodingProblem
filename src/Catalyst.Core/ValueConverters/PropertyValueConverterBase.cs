@@ -21,7 +21,7 @@
         /// <exception cref="ArgumentNullException">
         /// Throws an exception if the property is null
         /// </exception>
-        protected PropertyValueConverterBase(IExtendedProperty prop)
+        protected PropertyValueConverterBase(ExtendedProperty prop)
         {
             if (prop == null) throw new ArgumentNullException(nameof(prop));
             Property = prop;
@@ -30,7 +30,7 @@
         /// <summary>
         /// Gets the property.
         /// </summary>
-        public IExtendedProperty Property { get; }
+        public ExtendedProperty Property { get; }
 
         /// <inheritdoc />
         public Type ModelType => typeof(TValue);

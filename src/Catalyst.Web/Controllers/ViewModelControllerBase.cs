@@ -4,6 +4,7 @@
     using System.Web.Mvc;
 
     using Catalyst.Core;
+    using Catalyst.Core.Controllers;
     using Catalyst.Web.Models;
     using Catalyst.Web.Models.Dashboard;
     using Catalyst.Web.Models.Shared;

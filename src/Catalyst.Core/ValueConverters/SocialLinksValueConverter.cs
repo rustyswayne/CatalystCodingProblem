@@ -15,7 +15,7 @@
         /// <param name="prop">
         /// The prop.
         /// </param>
-        public SocialLinksValueConverter(IExtendedProperty prop)
+        public SocialLinksValueConverter(ExtendedProperty prop)
             : base(prop)
         {
         }

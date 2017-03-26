@@ -68,6 +68,8 @@
     <Compile Include="Constants.ExtendedProperties.cs">
       <DependentUpon>Constants.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CatalystControllerBase.cs" />
+    <Compile Include="Controllers\PropertyEditorControllerBase.cs" />
     <Compile Include="Data\Context\CatalystDbContext.cs" />
     <Compile Include="Data\Context\ICatalystDbContext.cs" />
     <Compile Include="Data\GuidComb.cs" />
@@ -86,6 +88,7 @@
     </Compile>
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Domain\IExtendedProperty.cs" />
     <Compile Include="Models\ICountry.cs" />
     <Compile Include="Models\PropData\InterestList.cs" />
     <Compile Include="Mvc\AjaxRouteMappingAttribute.cs" />
@@ -114,7 +117,6 @@
     <Compile Include="Models\Domain\EntityBase.cs" />
     <Compile Include="Models\Domain\ExtendedProperty.cs" />
     <Compile Include="Models\Domain\IDto.cs" />
-    <Compile Include="Models\Domain\IExtendedProperty.cs" />
     <Compile Include="Models\Domain\Person.cs" />
     <Compile Include="Models\Domain\IEntity.cs" />
     <Compile Include="Models\Domain\IAddress.cs" />
@@ -130,6 +132,7 @@
       <DependentUpon>AddressService.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CatalystDbContextServiceBase.cs" />
+    <Compile Include="Services\DbContextServiceBase.cs" />
     <Compile Include="Services\ExtendedPropertyService.cs" />
     <Compile Include="Services\ExtendedPropertyService.Querying.cs">
       <DependentUpon>ExtendedPropertyService.cs</DependentUpon>
