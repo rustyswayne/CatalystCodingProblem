@@ -1,6 +1,5 @@
 ﻿@model Catalyst.Web.Models.Home
 
-
 <div class="row">
     <div class="col-sm-12">
         @Html.Action("RecentlyAdded", "Dashboard")
@@ -17,4 +16,11 @@
         @Html.Action("Placeholder", "Dashboard", new { apiRouteId = Catalyst.Web.Constants.AjaxRouteAliases.RandomWatched })
     </div>
 </div>
+
+@section Side {
+    
+    @Html.Action("RichText", "Dashboard", new { title = "Requirements", file = "Home", notes = "Recieved via email" })
+
+}
+
 

@@ -26,9 +26,11 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this HtmlHelper html, string file, string directory = "~/App_Data/Markdown/")
+        public static IHtmlString Markdown(this HtmlHelper html, string file, string directory = "")
         {
             var fileName = file.EnsureEndsWith(".md");
+
+            if (directory.IsNullOrWhiteSpace()) directory = "~/App_Data/Markdown/";
 
             var markdownPath = $"{directory}{fileName}";
 
@@ -61,7 +63,7 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this HtmlHelper html, Type type, string directory = "~/App_Data/Markdown/")
+        public static IHtmlString Markdown(this HtmlHelper html, Type type, string directory = "")
         {
             return html.Markdown(type.Name, directory);
         }
@@ -81,7 +83,7 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown<TModel>(this HtmlHelper html, string directory = "~/App_Data/Markdown/")
+        public static IHtmlString Markdown<TModel>(this HtmlHelper html, string directory = "")
         {
             return html.Markdown(typeof(TModel), directory);
         }

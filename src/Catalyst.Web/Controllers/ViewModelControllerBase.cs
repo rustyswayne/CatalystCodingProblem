@@ -25,7 +25,7 @@
         /// <returns>
         /// The <see cref="TModel"/>.
         /// </returns>
-        protected virtual TModel GetViewModel<TModel>(string contentTitle = "") where TModel : ViewModelBase, new()
+        protected virtual TModel GetViewModel<TModel>(string contentTitle = "") where TModel : ViewModel, new()
         {
             var current = Request.Url != null ? Request.RawUrl : string.Empty;
 

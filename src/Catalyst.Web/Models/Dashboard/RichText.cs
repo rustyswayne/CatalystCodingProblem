@@ -22,8 +22,13 @@
         public override string Title { get; }
 
         /// <summary>
-        /// Gets or sets the HTML content.
+        /// Gets or sets the markdown file.
         /// </summary>
-        public IHtmlString Content { get; set; }
+        public string MarkdownFile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the directory.
+        /// </summary>
+        public string Directory { get; set; }
     }
 }
