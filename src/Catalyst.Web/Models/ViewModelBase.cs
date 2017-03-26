@@ -24,11 +24,6 @@
         public Meta Meta { get; set; }
 
         /// <summary>
-        /// Gets or sets the content for the sidebar.
-        /// </summary>
-        public RichText Content { get; set; }
-
-        /// <summary>
         /// Gets or sets the current url.
         /// </summary>
         public NavTab CurrentTab { get; set; }

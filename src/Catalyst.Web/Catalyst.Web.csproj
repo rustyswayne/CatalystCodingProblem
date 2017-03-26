@@ -112,7 +112,7 @@
     <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
     <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
     <Compile Include="Models\Dashboard\CountryMetric.cs" />
-    <Compile Include="Models\Dashboard\HtmlContent.cs" />
+    <Compile Include="Models\Dashboard\RichText.cs" />
     <Compile Include="Models\Dashboard\Metric.cs" />
     <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />

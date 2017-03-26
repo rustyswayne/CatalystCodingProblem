@@ -23,7 +23,6 @@
             var model = GetViewModel<Home>("Requirements");
 
             model.CurrentTab.Title = "Home";
-            model.Content.Notes = "Recieved view email";
 
             return View(model);
         }
