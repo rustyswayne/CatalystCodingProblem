@@ -60,11 +60,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\styles.css">
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\styles.css">
       <DependentUpon>styles.scss</DependentUpon>
     </Content>
-    <Content Include="Content\styles.min.css">
+    <Content Include="Content\css\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
@@ -74,6 +81,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
     <Compile Include="Boot\WebBoot.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CatalystControllerBase.cs" />
@@ -93,7 +101,9 @@
     </Compile>
     <Compile Include="Models\Dashboard\AsyncPlaceholder.cs" />
     <Compile Include="Models\Dashboard\CountriesSnapshot.cs" />
+    <Compile Include="Models\Dashboard\CountryMetric.cs" />
     <Compile Include="Models\Dashboard\HtmlContent.cs" />
+    <Compile Include="Models\Dashboard\Metric.cs" />
     <Compile Include="Models\Dashboard\RandomWatch.cs" />
     <Compile Include="Models\Dashboard\PeoplePropertyStats.cs" />
     <Compile Include="Models\Dashboard\PeopleListing.cs" />
@@ -109,7 +119,6 @@
     <Compile Include="Properties\AssemblyVisibility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.offcanvas.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.justifiedGallery.min.js" />
@@ -126,24 +135,24 @@
     <Content Include="Views\People\Index.cshtml" />
     <Content Include="Views\People\PersonDetails.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Content\styles.scss" />
+    <Content Include="Content\css\styles.scss" />
     <Content Include="Views\Shared\_MetaInfo.cshtml" />
     <Content Include="App_Data\Markdown\Home.md" />
-    <Content Include="Content\modules\_people.scss" />
-    <Content Include="Content\externals\_keen.scss" />
+    <Content Include="Content\css\modules\_people.scss" />
+    <Content Include="Content\css\externals\keen\_keen.scss" />
     <Content Include="App_Data\Markdown\PeopleList.md" />
     <Content Include="App_Data\Markdown\PersonDetail.md" />
+    <Content Include="Areas\Editors\Views\web.config" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Views\Dashboard\_DashboardItem.cshtml" />
     <Content Include="Views\Dashboard\PeopleList.cshtml" />
-    <Content Include="Content\modules\_tables.scss" />
-    <Content Include="Content\modules\_dashboards.scss" />
+    <Content Include="Content\css\modules\_tables.scss" />
+    <Content Include="Content\css\modules\_dashboards.scss" />
     <Content Include="Views\Shared\_PersonTable.cshtml" />
     <Content Include="Views\Shared\_RichText.cshtml" />
-    <Content Include="Views\Shared\_PersonTableFixed.cshtml" />
     <Content Include="Config\imageprocessor\security.config" />
     <Content Include="Config\imageprocessor\cache.config" />
     <Content Include="Config\imageprocessor\processing.config" />
@@ -151,6 +160,37 @@
     <Content Include="Views\Dashboard\PeoplePropertyStats.cshtml" />
     <Content Include="Views\Dashboard\RandomWatched.cshtml" />
     <Content Include="Views\Dashboard\Placeholder.cshtml" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Shared\_SocialLinksBar.cshtml" />
+    <Content Include="Views\Shared\_Empty.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\externals\fa-sass\font-awesome.scss" />
+    <Content Include="Content\css\externals\fa-sass\_animated.scss" />
+    <Content Include="Content\css\externals\fa-sass\_bordered-pulled.scss" />
+    <Content Include="Content\css\externals\fa-sass\_core.scss" />
+    <Content Include="Content\css\externals\fa-sass\_fixed-width.scss" />
+    <Content Include="Content\css\externals\fa-sass\_icons.scss" />
+    <Content Include="Content\css\externals\fa-sass\_larger.scss" />
+    <Content Include="Content\css\externals\fa-sass\_list.scss" />
+    <Content Include="Content\css\externals\fa-sass\_mixins.scss" />
+    <Content Include="Content\css\externals\fa-sass\_path.scss" />
+    <Content Include="Content\css\externals\fa-sass\_rotated-flipped.scss" />
+    <Content Include="Content\css\externals\fa-sass\_screen-reader.scss" />
+    <Content Include="Content\css\externals\fa-sass\_stacked.scss" />
+    <Content Include="Content\css\externals\fa-sass\_variables.scss" />
+    <Content Include="Content\css\modules\_socialbar.scss" />
+    <Content Include="Views\Shared\_InterestList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Logs\" />
+    <Folder Include="Areas\Editors\Controllers\" />
+    <Folder Include="Areas\Editors\Models\" />
+    <Folder Include="Areas\Editors\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Catalyst.Core\Catalyst.Core.csproj">

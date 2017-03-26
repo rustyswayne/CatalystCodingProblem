@@ -20,6 +20,12 @@
         /// </returns>
         IEnumerable<Person> GetRecentlyUpdated(int count = 5);
 
-
+        /// <summary>
+        /// Gets a collection of watched people.
+        /// </summary>
+        /// <returns>
+        /// A collection of watched people.
+        /// </returns>
+        IEnumerable<Person> GetWatched();
     }
 }

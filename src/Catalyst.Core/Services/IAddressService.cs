@@ -7,6 +7,5 @@
     /// </summary>
     public interface IAddressService : ISimpleDbContextCrudService<Address>, IAddressQueryService
     {
-
     }
 }

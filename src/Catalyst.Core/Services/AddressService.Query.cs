@@ -27,7 +27,7 @@
         }
 
         /// <inheritdoc />
-        public int GetPeopleCountryCount(string countryCode)
+        public int CountPeopleAddressInCountry(string countryCode)
         {
             // TODO - review SQL
             return

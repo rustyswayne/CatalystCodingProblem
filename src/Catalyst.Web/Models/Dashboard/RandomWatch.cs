@@ -2,6 +2,9 @@
 {
     using System;
 
+    using Catalyst.Core.Models.Domain;
+    using Catalyst.Core.Models.PropData;
+
     /// <summary>
     /// Model for dashboard item that shows a randomly watched person.
     /// </summary>
@@ -13,28 +16,8 @@
         public override string Title => "Random Watched Person";
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the person.
         /// </summary>
-        public string Name { get; set; } = "No People watched";
-
-        /// <summary>
-        /// Gets or sets the URL.
-        /// </summary>
-        public string Url { get; set; } = Constants.PeopleRoute;
-
-        /// <summary>
-        /// Gets or sets the photo url.
-        /// </summary>
-        public string PhotoUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the birth day.
-        /// </summary>
-        public string Age { get; set; }
-
-        /// <summary>
-        /// Gets or sets the update date.
-        /// </summary>
-        public DateTime UpdateDate { get; set; }
+        public IPerson Person { get; set; }
     }
 }

@@ -8,7 +8,7 @@
     /// Represents an attribute that associates property value converters with <see cref="IExtendedProperty"/> values.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class ConverterAliasAttribute : Attribute
+    public class ConverterAliasAttribute : Attribute, IConverterMappingInfo
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConverterAliasAttribute"/> class.
@@ -16,31 +16,32 @@
         /// <param name="alias">
         /// The alias.
         /// </param>
+        /// <param name="valueType">
+        /// The value Type.
+        /// </param>
         /// <param name="sortOrder">
         /// Sort order.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// Alias is required
         /// </exception>
-        public ConverterAliasAttribute(string alias, int sortOrder)
+        public ConverterAliasAttribute(string alias, Type valueType, int sortOrder)
         {
             if (alias.IsNullOrWhiteSpace()) throw new ArgumentNullException(nameof(alias));
+            if (valueType == null) throw new ArgumentNullException(nameof(valueType));
 
             ConverterAlias = alias;
+            ValueType = valueType;
             SortOrder = sortOrder;
         }
 
-        /// <summary>
-        /// Gets the converter alias.
-        /// </summary>
-        /// <remarks>
-        /// This MUST match the "ConverterAlias" property associated with the <see cref="IExtendedProperty"/> value
-        /// </remarks>
+        /// <inheritdoc />
         public string ConverterAlias { get; }
 
-        /// <summary>
-        /// Gets or sets the sort order.
-        /// </summary>
+        /// <inheritdoc />
+        public Type ValueType { get; }
+
+        /// <inheritdoc />
         public int SortOrder { get; set; }
     }
 }

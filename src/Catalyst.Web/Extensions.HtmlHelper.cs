@@ -74,13 +74,16 @@
         /// <param name="alt">
         /// The alternative text.
         /// </param>
+        /// <param name="cssclass">
+        /// The CSS class.
+        /// </param>
         /// <param name="queryString">
         /// The query string.
         /// </param>
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Thumbnail(this HtmlHelper html, string src, string fallbackSrc = "", string alt = "", string queryString = "")
+        public static IHtmlString Thumbnail(this HtmlHelper html, string src, string fallbackSrc = "", string alt = "", string cssclass = "", string queryString = "")
         {
             if (src.IsNullOrWhiteSpace() && fallbackSrc.IsNullOrWhiteSpace()) return MvcHtmlString.Empty;
 
@@ -88,7 +91,9 @@
 
             var imgSrc = !src.IsNullOrWhiteSpace() ? src : fallbackSrc;
 
-            return MvcHtmlString.Create($"<img src=\"{imgSrc}{queryString}\" alt=\"{HttpUtility.HtmlEncode(alt)}\" class=\"thubnail\" />");
+            var css = $"class=\"{cssclass}\"".Trim();
+
+            return MvcHtmlString.Create($"<img src=\"{imgSrc}{queryString}\" alt=\"{HttpUtility.HtmlEncode(alt)}\" {css} />");
         }
     }
 }

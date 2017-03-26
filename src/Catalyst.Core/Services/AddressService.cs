@@ -33,6 +33,6 @@
         protected override DbSet<Address> Context => DbContext.Addresses;
 
         /// <inheritdoc />
-        protected override string EntitySetName => "Address";
+        protected override string EntitySetName => "Addresses";
     }
 }

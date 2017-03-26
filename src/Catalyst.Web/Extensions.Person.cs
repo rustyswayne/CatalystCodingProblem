@@ -57,20 +57,6 @@
         }
 
         /// <summary>
-        /// Checks if the <c>'GitHub Feed'</c> property exists.
-        /// </summary>
-        /// <param name="person">
-        /// The person.
-        /// </param>
-        /// <returns>
-        /// A value indicating whether or not the <c>'GitHub Feed'</c> property exists.
-        /// </returns>
-        public static bool HasGitHubFeed(this IPerson person)
-        {
-            return person.HasExtendedProperty(Core.Constants.ExtendedProperties.GitHubFeedConverterAlias);
-        }
-
-        /// <summary>
         /// Checks if the <c>'Social Links'</c> property exists.
         /// </summary>
         /// <param name="person">
@@ -96,7 +82,7 @@
         public static string PhotoUrl(this IPerson person)
         {
             return person.HasPhoto()
-                       ? person.GetPropertyValue<Photo>(Core.Constants.ExtendedProperties.PhotoConverterAlias).Src
+                       ? person.GetPropertyValue<Photo>().Src
                        : string.Empty;
         }
 

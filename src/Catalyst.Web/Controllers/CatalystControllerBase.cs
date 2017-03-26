@@ -4,6 +4,7 @@
     using System.Web.Mvc;
 
     using Catalyst.Core.DI;
+    using Catalyst.Core.Logging;
     using Catalyst.Core.Services;
     using Catalyst.Web.Models;
     using Catalyst.Web.Models.Shared;
@@ -17,23 +18,28 @@
         /// Initializes a new instance of the <see cref="CatalystControllerBase"/> class.
         /// </summary>
         protected CatalystControllerBase()
-            : this(Active.Services)
+            : this(Active.Logger, Active.Services)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalystControllerBase"/> class.
         /// </summary>
+        /// <param name="logger">
+        /// The logger.
+        /// </param>
         /// <param name="services">
         /// The services.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// Throws an exception if the <see cref="IServiceContext"/> is null    
         /// </exception>
-        protected CatalystControllerBase(IServiceContext services)
+        protected CatalystControllerBase(ILogger logger, IServiceContext services)
         {
+            if (logger == null) throw new ArgumentNullException(nameof(logger));
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            Logger = logger;
             Services = services;
         }
 
@@ -41,5 +47,10 @@
         /// Gets the <see cref="IServiceContext"/>.
         /// </summary>
         protected IServiceContext Services { get; }
+
+        /// <summary>
+        /// Gets the <see cref="ILogger"/>.
+        /// </summary>
+        protected ILogger Logger { get; }
     }
 }

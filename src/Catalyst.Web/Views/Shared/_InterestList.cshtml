@@ -1,0 +1,14 @@
+﻿@model Catalyst.Core.Models.PropData.InterestList
+   
+
+<dl class="interests">
+    <dt>Interests</dt>
+@foreach (var i in Model.Values)
+{
+    <dd>
+        @Html.If(() => !i.Url.IsNullOrWhiteSpace(), $"<a href=\"{i.Url}\" target=\"_blank\">")
+        @i.Title
+        @Html.If(() => !i.Url.IsNullOrWhiteSpace(), "</a>")
+    </dd>
+}
+</dl>

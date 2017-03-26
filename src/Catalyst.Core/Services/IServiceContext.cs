@@ -14,5 +14,10 @@
         /// Gets the <see cref="IAddressService"/>.
         /// </summary>
         IAddressService AddressService { get; }
+
+        /// <summary>
+        /// Gets the <see cref="IExtendedPropertyService"/>.
+        /// </summary>
+        IExtendedPropertyService ExtendedPropertyService { get; }
     }
 }

@@ -1,9 +1,13 @@
 ﻿namespace Catalyst.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
+    using Catalyst.Core;
+    using Catalyst.Core.DI;
+    using Catalyst.Core.Models.PropData;
     using Catalyst.Core.Mvc;
     using Catalyst.Web.Models.Dashboard;
 
@@ -91,15 +95,15 @@
                     new CountryMetric
                         {
                             CountryCode = c.Code,
-                            EnglishCountryName = c.Name,
-                            PeopleCount = Services.AddressService.GetPeopleCountryCount(c.Code)
+                            Name = c.Name,
+                            Count = Services.AddressService.CountPeopleAddressInCountry(c.Code)
                         });
             }
 
             var model = new CountriesSnapshot
                 {
-                    AjaxRouteAlias = Constants.AjaxRouteAliases.CompanySnapshot,
-                    Metrics = metrics.OrderByDescending(x => x.PeopleCount).Take(5)
+                    AjaxRouteAlias = Web.Constants.AjaxRouteAliases.CompanySnapshot,
+                    Metrics = metrics.OrderByDescending(x => x.Count).Take(5)
                 };
 
             return PartialView(model);
@@ -115,9 +119,37 @@
         [CheckAjaxRequest]
         public ActionResult PeoplePropertyStats()
         {
+            var metrics = new List<Metric>();
+
+            var photo = new Metric
+            {
+                Name = "Photo",
+                Count = Services.ExtendedPropertyService.CountPeopleUsing(Constants.ExtendedProperties.PhotoConverterAlias)
+            };
+
+            metrics.Add(photo);
+
+            // interests
+            var interests = new Metric
+            {
+                Name = "Interests",
+                Count = Services.ExtendedPropertyService.CountPeopleUsing(Constants.ExtendedProperties.InterestListConverterAlias)
+            };
+
+            metrics.Add(interests);
+
+            var sociallinks = new Metric
+            {
+                Name = "Social Links",
+                Count = Services.ExtendedPropertyService.CountPeopleUsing(Constants.ExtendedProperties.SocialLinksConverterAlias)
+            };
+
+            metrics.Add(sociallinks);
+
             var model = new PeoplePropertyStats
                 {
-                    AjaxRouteAlias = Constants.AjaxRouteAliases.PeoplePropertyStats
+                    AjaxRouteAlias = Web.Constants.AjaxRouteAliases.PeoplePropertyStats,
+                    Metrics = metrics
                 };
 
             return PartialView(model);
@@ -131,13 +163,17 @@
         /// </returns>
         [HttpGet]
         [CheckAjaxRequest]
-        public ActionResult RandomLastWatch()
+        public ActionResult RandomWatched()
         {
+            var watched = Services.Person.GetWatched().OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+
+            if (watched == null) return PartialView("_Empty");
+            
             var model = new RandomWatch
             {
-                AjaxRouteAlias = Constants.AjaxRouteAliases.RandomWatched
+                AjaxRouteAlias = Web.Constants.AjaxRouteAliases.RandomWatched,
+                Person = watched
             };
-
             return PartialView(model);
         }
     }

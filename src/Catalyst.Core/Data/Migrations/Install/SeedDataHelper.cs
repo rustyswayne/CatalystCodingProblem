@@ -82,7 +82,7 @@
             }
 
             // me
-            var me = new Person { FirstName = "Rusty", LastName = "Swayne", Birthday = DateTime.Parse("8/6/1971"), Slug = "rusty-swayne", CreateDate = DateTime.UtcNow, UpdateDate = DateTime.UtcNow.AddSeconds(25) };
+            var me = new Person { FirstName = "Rusty", LastName = "Swayne", Birthday = DateTime.Parse("8/6/1971"), Slug = "rusty-swayne", Watch = true, CreateDate = DateTime.UtcNow, UpdateDate = DateTime.UtcNow.AddSeconds(25) };
             var adr = new Address { Name = "Space Needle", Address1 = "400 Broad St", Locality = "Seattle", Region = "WA", PostalCode = "98109", CountryCode = "US", CreateDate = DateTime.UtcNow, UpdateDate = DateTime.UtcNow };
 
             me.Addresses.Add(adr);
@@ -128,15 +128,6 @@
 
             social.Converter().SetValue(socialValue);
 
-            var gitValue = new GitHubFeed { RepositoryUrl = "https://github.com/rustyswayne" };
-            var git = new ExtendedProperty
-                {
-                    ConverterAlias = Constants.ExtendedProperties.GitHubFeedConverterAlias,
-                    UpdateDate = DateTime.UtcNow,
-                    CreateDate = DateTime.UtcNow
-                };
-
-            git.Converter().SetValue(gitValue);
 
 
             //// TODO remove hard coded ref to .Web proj
@@ -154,15 +145,11 @@
 
             me.Properties.Add(interest);
             me.Properties.Add(social);
-            me.Properties.Add(git);
             me.Properties.Add(photo);
-
 
             imports.Add(me);
 
-
-            return imports;
-            
+            return imports;            
         }
     }
 }

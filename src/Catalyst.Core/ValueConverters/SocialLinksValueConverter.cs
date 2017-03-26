@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a property value converter for <see cref="Photo"/>.
     /// </summary>
-    [ConverterAlias(Constants.ExtendedProperties.SocialLinksConverterAlias, 2)]
+    [ConverterAlias(Constants.ExtendedProperties.SocialLinksConverterAlias, typeof(SocialLinks), 2)]
     public class SocialLinksValueConverter : PropertyValueConverterBase<SocialLinks>
     {
         /// <summary>

@@ -1,14 +1,14 @@
 ﻿@model Catalyst.Web.Models.ViewModelBase
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Html.Partial("_MetaInfo", Model.Meta)
     @(Bundle.Css()
-        .Add("~/Content/bootstrap.min.css")
-        .Add("~/Content/styles.css")
+        .Add("~/Content/css/bootstrap.min.css")
+        .Add("~/Content/css/styles.css")
         .MvcRender("~/Content/cache/combined_#.css"))
 </head>
 <body class="application">

@@ -19,6 +19,9 @@ var Peeps = (function() {
         $(document).ready(function() {
             // initialize the dashboards
             Peeps.Dashboards.init();
+
+            // initialize GitHub feeds
+            Peeps.GitHub.init();
         });
     }
 
@@ -110,6 +113,11 @@ var Peeps = (function() {
         }
     }
 
+    //
+    function willWork(selector) {
+        return $(selector).length > 0;
+    }
+
     // exposed members
     return {
         // ensures the settings object is created
@@ -118,8 +126,8 @@ var Peeps = (function() {
             Endpoints: {}
         },
         // ensures the services object is created
-        Services: {},
         init: init,
+        willWork: willWork,
         hasLogger: hasLogger,
         createCache: createCache,
         on: registerEvent,
@@ -137,6 +145,8 @@ var Peeps = (function() {
 // Settings for Peeps
 Peeps.Settings = {
 
+    localCacheDuration: 10, // 10 minutes
+
     // path to the spinner svg file
     spinnerSvg: '/Media/Placeholders/balls.svg',
 
@@ -145,9 +155,9 @@ Peeps.Settings = {
 
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
-        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: '', delay: 750 },
-        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", notes: '', delay: 1250 },
-        { id: 'randomtweet', value: '/dashboard/randomlasttweet', title: "Checking Twitter...", notes: '', delay: 0 }
+        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
+        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", notes: 'Property filter queries not implemented.', delay: 1250 },
+        { id: 'randomwatched', value: '/dashboard/randomwatched', title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 }
     ]
 
 }
@@ -280,5 +290,137 @@ Peeps.Dashboards = {
 
 };
 
+Peeps.Storage = {
+    Cache: {
+        setItem: function(key, value) {
+            var now = new Date();
+            value.peeps = {};
+            value.peeps.cacheStamp = now;
+            value.peeps.expired = false;
+
+            if (localStorage) {
+                localStorage.setItem('__peeps-' + key, JSON.stringify(value));
+            }
+        },
+
+        getItem: function(key) {
+            var now = new Date();
+            if (localStorage) {
+                var value = JSON.parse(localStorage.getItem('__peeps-' + key));
+                if (!value) {
+                    return null;
+                }
+                var cachedDate = new Date(value.peeps.cacheStamp);
+                var diffMs = now - cachedDate;
+                var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+                if (diffMins > Peeps.Settings.localCacheDuration) {
+                    value.peeps.expired = true;
+                } else {
+                    return value;
+                }
+            }
+        }
+    }
+}
+
+// GitHub feeds
+Peeps.GitHub = {
+    feedCount: 20,
+    init: function() {
+        if (Peeps.willWork('.github-activity')) {
+            Peeps.GitHub.getCommitFeeds();
+        }
+    },
+    getCommitFeeds: function() {
+        $('.github-activity').each(function() {
+            var owner = $(this).attr('data-owner');
+            var repo = $(this).attr('data-repo');
+            var storageKey = owner + '-' + repo;
+            Peeps.GitHub.getFeed($(this), UD.GitHub.getCommitApiUrl(owner, repo), storageKey);
+        });
+    },
+    getFeed: function (parent, url, storageKey) {
+        var cached = Peeps.Storage.Cache.getItem(storageKey);
+        if (cached == null || cached.expired == true) {
+            $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                success: function (results) {
+                    if (results != null) {
+                        Peeps.Storage.Cache.setItem(storageKey, results);
+                        Peeps.GitHub.generateList(parent, results);
+                    } else {
+                        // failed call - try to use the expired results if I have them
+                        if (cached != null) {
+                            Peeps.debugConsole('using expired.');
+                            Peeps.GitHub.generateList(parent, cached);
+                        }
+                    }
+                }
+            });
+        } else {
+            Peeps.GitHub.generateList(parent, cached);
+        }
+    },
+    createAvatar: function(src) {
+        var img = document.createElement('img');
+        $(img).attr('src', src).addClass('avatar');
+        return img;
+    },
+    createSpan: function(txt, css) {
+        var span = document.createElement('span');
+        $(span).addClass(css).text(txt);
+        return span;
+    },
+    createAnchor: function(url, txt, css) {
+        var a = document.createElement('a');
+        $(a).attr('href', url).addClass(css).text(txt);
+        return a;
+    },
+    getCommitApiUrl: function (owner, repo) {
+        return 'https://api.github.com/repos/' + owner + '/' + repo + '/commits?callback=?';
+    },
+    generateList: function(parent, results) {
+        if (results.data.length > 0) {
+            // get the commits
+            var ul = document.createElement('ul');
+
+            $.each(results.data.slice(0, UD.GitHub.feedCount), function (key, value) {
+                var li = document.createElement('li'); //.css('commit')
+
+                var avatar = '';
+                if (value.author !== null) {
+                    avatar = value.author.avatar_url;
+                    $(li).append(Peeps.GitHub.createAvatar(avatar));
+                }
+
+                var div = document.createElement('div');
+                $(div).addClass('commit');
+
+                if (value.author !== null) {
+                    $(div).append(Peeps.GitHub.createAnchor(value.author.html_url, value.author.login, 'author'));
+                }
+
+                var icon = document.createElement('i');
+                $(icon).addClass('octicon').addClass('octicon-git-commit');
+                $(div).append(icon);
+                console.info(value);
+                if (value.parents !== null) {
+                    $(div).append(Peeps.GitHub.createAnchor(value.parents[0].html_url, value.commit.message, 'message'));
+                } else {
+                    $(div).append(Peeps.GitHub.createSpan(value.commit.message, 'message'));
+                }
+
+                $(li).append(div);
+                //var date = new Date(value.commit.committer.date);
+                // $(li).append(UD.GitHub.createSpan(date.toLocaleDateString(), 'date'));
+                $(ul).append(li);
+
+            });
+            $(parent).append(ul);
+            $(parent).children('.loading').removeClass('expanded');
+        }
+    }
+}
 //// Bootstrap Peeps!
 Peeps.init();

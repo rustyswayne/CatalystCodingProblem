@@ -18,7 +18,7 @@
         /// <returns>
         /// The count of people.
         /// </returns>
-        int GetPeopleCountryCount(string countryCode);
+        int CountPeopleAddressInCountry(string countryCode);
 
         /// <summary>
         /// Gets a collection of all countries associated with persisted addresses.

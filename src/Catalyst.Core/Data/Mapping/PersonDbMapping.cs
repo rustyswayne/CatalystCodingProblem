@@ -50,6 +50,8 @@
                 .Map(x => x.MapKey("PersonId"))
                 .WillCascadeOnDelete(true);
 
+            Property(x => x.Watch).IsRequired();
+
             Property(x => x.UpdateDate).IsRequired();
             Property(x => x.CreateDate).IsRequired();
         }

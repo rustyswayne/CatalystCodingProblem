@@ -87,7 +87,6 @@
     <Compile Include="IActivatorServiceProvider.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\ICountry.cs" />
-    <Compile Include="Models\PropData\GitHubFeed.cs" />
     <Compile Include="Models\PropData\InterestList.cs" />
     <Compile Include="Mvc\AjaxRouteMappingAttribute.cs" />
     <Compile Include="Mvc\CheckAjaxRequestAttribute.cs" />
@@ -130,8 +129,14 @@
       <DependentUpon>AddressService.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CatalystDbContextServiceBase.cs" />
+    <Compile Include="Services\ExtendedPropertyService.cs" />
+    <Compile Include="Services\ExtendedPropertyService.Querying.cs">
+      <DependentUpon>ExtendedPropertyService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\IAddressQueryService.cs" />
     <Compile Include="Services\IAddressService.cs" />
+    <Compile Include="Services\IExtendedPropertyQueryService.cs" />
+    <Compile Include="Services\IExtendedPropertyService.cs" />
     <Compile Include="Services\IPersonQueryService.cs" />
     <Compile Include="Services\ISimpleDbContextCrudService.cs" />
     <Compile Include="Services\IPersonService.cs" />
@@ -143,7 +148,7 @@
     </Compile>
     <Compile Include="Services\ServiceContext.cs" />
     <Compile Include="ValueConverters\ConverterAliasAttribute.cs" />
-    <Compile Include="ValueConverters\GitHubFeedValueConverter.cs" />
+    <Compile Include="ValueConverters\IConverterMappingInfo.cs" />
     <Compile Include="ValueConverters\InterestListValueConverter.cs" />
     <Compile Include="ValueConverters\IPropertyValueConverter.cs" />
     <Compile Include="Registers\IValueConverterRegister.cs" />

@@ -23,7 +23,7 @@
         /// </returns>
         public static IPropertyValueConverter Converter(this IExtendedProperty prop)
         {
-            return Active.ValueConverterRegister.GetInstanceFor(prop);
+            return prop == null ? null : Active.ValueConverterRegister.GetInstanceFor(prop);
         }
 
         /// <summary>
@@ -38,35 +38,6 @@
         public static int SortOrder(this IExtendedProperty prop)
         {
             return prop.Converter().SortOrder;
-        }
-
-        /// <summary>
-        /// The get property value.
-        /// </summary>
-        /// <param name="prop">
-        /// The prop.
-        /// </param>
-        /// <typeparam name="TValue">
-        /// The type of the value
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="TValue"/>.
-        /// </returns>
-        /// <exception cref="InvalidCastException">
-        /// Throws an exception if the type of the model 
-        /// </exception>
-        public static TValue GetPropertyValue<TValue>(this IExtendedProperty prop) 
-            where TValue : class, IPropertyValueModel, new()
-        {
-            var converter = prop.Converter();
-            if (converter.ModelType == typeof(TValue))
-            {
-                return converter.GetPropertyValue<TValue>();
-            }
-
-            var invalid = new InvalidCastException($"Cannot cast {converter.ModelType.FullName} to {typeof(TValue).FullName}");
-            Active.Logger.Error(typeof(Extensions), "Invalid cast", invalid);
-            throw invalid;
         }
 
         /// <summary>
@@ -95,6 +66,37 @@
         public static void SetValue(this IExtendedProperty prop, object value)
         {
             prop.Converter().SetValue(value);
+        }
+
+        /// <summary>
+        /// The get property value.
+        /// </summary>
+        /// <param name="prop">
+        /// The prop.
+        /// </param>
+        /// <typeparam name="TValue">
+        /// The type of the value
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="TValue"/>.
+        /// </returns>
+        /// <exception cref="InvalidCastException">
+        /// Throws an exception if the type of the model 
+        /// </exception>
+        internal static TValue GetPropertyValue<TValue>(this IExtendedProperty prop)
+            where TValue : class, IPropertyValueModel, new()
+        {
+            var converter = prop.Converter();
+            if (converter == null) return null;
+
+            if (converter.ModelType == typeof(TValue))
+            {
+                return converter.GetPropertyValue<TValue>();
+            }
+
+            var invalid = new InvalidCastException($"Cannot cast {converter.ModelType.FullName} to {typeof(TValue).FullName}");
+            Active.Logger.Error(typeof(Extensions), "Invalid cast", invalid);
+            throw invalid;
         }
     }
 }

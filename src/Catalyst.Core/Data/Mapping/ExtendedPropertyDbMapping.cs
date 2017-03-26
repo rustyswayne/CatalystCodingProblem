@@ -1,5 +1,7 @@
 ﻿namespace Catalyst.Core.Data.Mapping
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using Catalyst.Core.Models.Domain;
@@ -19,7 +21,13 @@
             HasKey(x => x.Id);
             Property(x => x.Id).IsRequired();
 
-            Property(x => x.ConverterAlias).IsRequired().HasMaxLength(50);
+            Property(x => x.ConverterAlias)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName, 
+                    new IndexAnnotation(new IndexAttribute("IX_catalystExtProperty_ConverterAlias")));
+
             Property(x => x.Value).IsOptional();
         }
     }

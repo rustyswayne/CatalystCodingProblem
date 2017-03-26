@@ -1,5 +1,7 @@
 ﻿namespace Catalyst.Core.Models.Domain
 {
+    using System;
+
     using Catalyst.Core.Data;
 
     /// <summary>
@@ -28,5 +30,10 @@
         /// Foreign key
         /// </remarks>
         public virtual Person Person { get; set; }
+
+        ///// <summary>
+        ///// Gets or sets the person id.
+        ///// </summary>
+        //internal Guid PersonId { get; set; }
     }
 }

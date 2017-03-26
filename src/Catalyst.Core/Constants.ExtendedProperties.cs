@@ -21,12 +21,6 @@
             public const string SocialLinksConverterAlias = "sociallinks";
 
             /// <summary>
-            /// The GitHub feed converter alias.
-            /// </summary>
-            // ReSharper disable once StyleCop.SA1650
-            public const string GitHubFeedConverterAlias = "github";
-
-            /// <summary>
             /// The interest list converter alias.
             /// </summary>
             public const string InterestListConverterAlias = "interests";

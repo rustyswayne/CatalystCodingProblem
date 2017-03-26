@@ -82,6 +82,9 @@
         /// <inheritdoc />
         public DbSet<Address> Addresses { get; set; }
 
+        /// <inheritdoc />
+        public DbSet<ExtendedProperty> ExtendedProperties { get; set; }
+
         /// <summary>
         /// Overrides Save changes for logging.
         /// </summary>

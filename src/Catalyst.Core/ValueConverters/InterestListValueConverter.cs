@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a property value converter for <see cref="InterestList"/>.
     /// </summary>
-    [ConverterAlias(Constants.ExtendedProperties.InterestListConverterAlias, 3)]
+    [ConverterAlias(Constants.ExtendedProperties.InterestListConverterAlias, typeof(InterestList), 3)]
     public class InterestListValueConverter : PropertyValueConverterBase<InterestList>
     {
         /// <summary>
