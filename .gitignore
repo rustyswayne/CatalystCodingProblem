@@ -19,3 +19,4 @@ src/Catalyst.Web.Ui.Client/dist/
 src/Catalyst.Web/Media/store/
 src/Catalyst.Web/Scripts/cache/
 src/Catalyst.Web/App_Data/Catalyst.sdf
+src/Catalyst.Core/bin/Release/
