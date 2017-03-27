@@ -80,7 +80,9 @@
                     person.LastName = model.LastName;
                     person.Birthday = birthday;
                 }
-                
+
+                person.Watch = model.Watch;
+
                 Services.Person.Save(person);
 
                 return Redirect(person.Url(Web.Constants.PersonRoute));
