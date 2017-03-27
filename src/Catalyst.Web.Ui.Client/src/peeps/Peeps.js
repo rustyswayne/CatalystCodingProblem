@@ -10,7 +10,7 @@ var Peeps = (function() {
 
     var DEBUG_MODE = {
         events: false,
-        console: true
+        console: false
     };
 
     // Private members

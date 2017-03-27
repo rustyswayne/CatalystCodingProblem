@@ -32,7 +32,7 @@
         /// Gets or sets the interest name.
         /// </summary>
         [Display(Name = "Interset Name")]
-        [Required(ErrorMessage = " * Required")]
+        [Required(ErrorMessage = " * required.")]
         public string InterestName { get; set; }
 
         /// <summary>

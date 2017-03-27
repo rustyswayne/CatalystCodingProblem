@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Controllers\CatalystControllerBase.cs" />
     <Compile Include="Controllers\EditorControllerBase.cs" />
+    <Compile Include="Controllers\IEditorControllerBase.cs" />
     <Compile Include="Data\Context\CatalystDbContext.cs" />
     <Compile Include="Data\Context\ICatalystDbContext.cs" />
     <Compile Include="Data\GuidComb.cs" />
@@ -86,6 +87,7 @@
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.HttpPostedFileBase.cs" />
+    <Compile Include="Extensions.Linq.cs" />
     <Compile Include="Extensions.Person.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>

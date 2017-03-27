@@ -30,5 +30,13 @@
         /// The <see cref="IEnumerable{ICountry}"/>.
         /// </returns>
         IEnumerable<ICountry> GetAssociatedCountries(int count = int.MaxValue);
+
+        /// <summary>
+        /// Gets a collection of all  <see cref="ICountry"/>
+        /// </summary>
+        /// <returns>
+        /// The collection of all countries.
+        /// </returns>
+        IEnumerable<ICountry> GetAllCountries();
     }
 }

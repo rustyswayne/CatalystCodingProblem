@@ -5,7 +5,6 @@
     using System.Web.Mvc;
 
     using Catalyst.Core.DI;
-    using Catalyst.Core.Models.Domain;
     using Catalyst.Core.Models.PropData;
     using Catalyst.Core.ValueConverters;
 
@@ -18,8 +17,7 @@
     /// <typeparam name="TEditorModel">
     /// The type of the editor model
     /// </typeparam>
-    public abstract class EditorControllerBase<TValue, TEditorModel> : CatalystControllerBase
-        where TValue : class, IPropertyValueModel, new()
+    public abstract class EditorControllerBase<TValue, TEditorModel> : CatalystControllerBase, IEditorControllerBase<TEditorModel> where TValue : class, IPropertyValueModel, new()
         where TEditorModel : class, new()
     {
         /// <summary>

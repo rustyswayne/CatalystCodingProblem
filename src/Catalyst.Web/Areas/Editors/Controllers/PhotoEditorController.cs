@@ -14,7 +14,7 @@
     /// <summary>
     /// Property editor controller responsible for <see cref="Photo"/>.
     /// </summary>
-    public class PhotoEditorController : EditorControllerBase<Photo,PhotoEditor>
+    public class PhotoEditorController : EditorControllerBase<Photo, PhotoEditor>
     {
         /// <summary>
         /// Place to store files.

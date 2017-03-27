@@ -98,6 +98,7 @@
     <Compile Include="Areas\Editors\Controllers\PhotoEditorController.cs" />
     <Compile Include="Areas\Editors\Controllers\SocialLinksEditorController.cs" />
     <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
+    <Compile Include="Areas\Editors\Models\AddressEditor.cs" />
     <Compile Include="Areas\Editors\Models\EditorFormBase.cs" />
     <Compile Include="Areas\Editors\Models\IEditorForm.cs" />
     <Compile Include="Areas\Editors\Models\InterestListEditor.cs" />

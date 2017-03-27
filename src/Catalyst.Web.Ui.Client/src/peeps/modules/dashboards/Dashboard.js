@@ -92,8 +92,11 @@ Peeps.Dashboards = {
                     Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: params.args });
                     }, delay);
 
-            }).fail(function() {
-                console.log('Failure not implemented.');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.info({ jqXHR: jqXHR, status: textStatus, error: errorThrown });
+            })
+            .always(function() {
+                Peeps.debugConsole({ msg: 'Finished dashboard $.ajax', params: params });
             });
         }
 

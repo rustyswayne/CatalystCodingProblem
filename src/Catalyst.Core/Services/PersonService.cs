@@ -63,8 +63,7 @@
         /// <inheritdoc />
         public Person GetBySlug(string slug)
         {
-            return this.Context.AsNoTracking()
-                    .FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
+            return this.Context.FirstOrDefault(x => x.Slug.Equals(slug, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <inheritdoc />
@@ -120,8 +119,13 @@
         protected override Person PerformGet(Guid id, bool lazy = true)
         {
             return lazy ? 
+                
                 Context.Find(id) : 
-                this.Context.Include(p => p.Addresses).Include(p => p.Properties).FirstOrDefault(x => x.Id == id);
+
+                Context
+                .Include(p => p.Addresses)
+                .Include(p => p.Properties)
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

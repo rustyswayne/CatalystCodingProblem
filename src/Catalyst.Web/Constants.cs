@@ -20,7 +20,11 @@ namespace Catalyst.Web
 
             // editors
             public const string AddPerson = "addperson";
+            public const string UpdatePerson = "updateperson";
             public const string InterestList = "interestlist";
+            public const string SocialLinks = "sociallinks";
+            public const string Photo = "photo";
+            public const string Address = "address";
 
             // only used to get the UI to display the spinner e.g. used for templating
             public const string DevDoNothing = "donothing"; 

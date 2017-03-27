@@ -1,8 +1,5 @@
 ﻿namespace Catalyst.Web
 {
-    using System;
-    using System.Linq;
-
     using Catalyst.Core;
     using Catalyst.Core.Models.Domain;
     using Catalyst.Core.Models.PropData;
