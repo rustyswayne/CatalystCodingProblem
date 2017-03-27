@@ -73,12 +73,7 @@ var Peeps = (function() {
                 cb(name, args);
             }
             catch(err) {
-                MUI.Logger.captureError(err, {
-                    extra: {
-                        eventName: name,
-                        args: args
-                    }
-                });
+                console.info(err);
             }
         });
     }

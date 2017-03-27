@@ -11,6 +11,13 @@ Peeps.Editors.Person = {
         // or directly from a view (via a dashboard placeholder).
         Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
 
+        Peeps.on(Peeps.Forms.fileSelectEvtName, function(elId, fileName) {
+            if (elId === 'fileselect') {
+              // this is the photo upload editor
+                $('.photo-label-box').val(fileName.fileName);
+            };
+        });
+
         // Bind deletes on the listing pages
         Peeps.Editors.Person.bind.deletes();
 
@@ -26,11 +33,7 @@ Peeps.Editors.Person = {
         // bind the property editor links
         Peeps.Editors.Person.bind.editorLinks();
 
-        // person entry
-        // TODO refactor when move to async
-        //if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
-        //    Peeps.Editors.Person.bind.birthday($('#person-entry'));
-        //}
+
 
     },
 

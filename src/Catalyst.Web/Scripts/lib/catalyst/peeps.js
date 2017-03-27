@@ -73,12 +73,7 @@ var Peeps = (function() {
                 cb(name, args);
             }
             catch(err) {
-                MUI.Logger.captureError(err, {
-                    extra: {
-                        eventName: name,
-                        args: args
-                    }
-                });
+                console.info(err);
             }
         });
     }
@@ -181,65 +176,6 @@ Peeps.Settings = {
     ]
 
 }
-Peeps.Dialogs = {
-
-    confirmDelete: function(confirm, cancel) {
-        Peeps.Dialogs.confirm({
-            title: 'Delete this person?',
-            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
-            confirm: confirm,
-            cancel: cancel
-        });
-    },
-
-    confirm: function(args) {
-
-        // args { title: '', message: '', confirm: callback, cancel: callback}
-
-        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
-            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
-            '</div>')
-
-        $('#peeps').html(template);
-
-        $('#dialog-confirm').dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            buttons: {
-                "Confirm": function () {
-                    if (args.confirm !== undefined) args.confirm();
-                    $(this).dialog("close");
-                },
-                Cancel: function () {
-                    if (args.cancel !== undefined) args.cancel();
-                    $(this).dialog("close");
-                }
-            }
-        });
-    },
-
-    popForm: function(args) {
-
-        // args { frm: formElement, save: callback, cancel: callback  }
-
-        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
-
-        $('#peeps').html(template);
-
-        var dialog = $('#dialog-form').dialog({
-            autoOpen: false,
-            height: 'auto',
-            width: 600,
-            modal: true
-        });
-
-        return dialog;
-    }
-
-}
-
 /**
  * Created by rusty on 3/24/2017.
  */
@@ -372,6 +308,100 @@ Peeps.Dashboards = {
 
 };
 
+Peeps.Dialogs = {
+
+    confirmDelete: function(confirm, cancel) {
+        Peeps.Dialogs.confirm({
+            title: 'Delete this person?',
+            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
+            confirm: confirm,
+            cancel: cancel
+        });
+    },
+
+    confirm: function(args) {
+
+        // args { title: '', message: '', confirm: callback, cancel: callback}
+
+        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
+            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
+            '</div>')
+
+        $('#peeps').html(template);
+
+        $('#dialog-confirm').dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Confirm": function () {
+                    if (args.confirm !== undefined) args.confirm();
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    if (args.cancel !== undefined) args.cancel();
+                    $(this).dialog("close");
+                }
+            }
+        });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
+    }
+
+}
+
+Peeps.Forms = {
+
+    fileSelectEvtName: 'fileselect',
+
+    init: function() {
+        Peeps.Forms.bind.inputTypeFile();
+    },
+
+    rebind: function(frm) {
+        $.validator.unobtrusive.parse(frm);
+    },
+
+    bind: {
+
+        //// see also: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+        inputTypeFile: function() {
+
+            $(document).on('change', ':file', function() {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [ numFiles, label, input.attr('id') ]);
+                Peeps.emit(Peeps.Forms.fileSelectEvtName, { id: input.attr('id'), fileName: label })
+            });
+
+            $(':file').on('fileselect', function(event, numFiles, label, id) {
+                Peeps.debugConsole(numFiles);
+                Peeps.debugConsole(label);
+                Peeps.debugConsole(id);
+            });
+        }
+    }
+
+};
+
 /**
  * Created by rusty on 3/25/2017.
  */
@@ -445,41 +475,6 @@ Peeps.Search = {
     }
 }
 
-Peeps.Forms = {
-
-    fileSelectEvtName: 'fileselect',
-
-    init: function() {
-        Peeps.Forms.bind.inputTypeFile();
-    },
-
-    rebind: function(frm) {
-        $.validator.unobtrusive.parse(frm);
-    },
-
-    bind: {
-
-        //// see also: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
-        inputTypeFile: function() {
-
-            $(document).on('change', ':file', function() {
-            var input = $(this),
-                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [ numFiles, label, input.attr('id') ]);
-                Peeps.emit(Peeps.Forms.fileSelectEvtName, { id: input.attr('id'), fileName: label })
-            });
-
-            $(':file').on('fileselect', function(event, numFiles, label, id) {
-                Peeps.debugConsole(numFiles);
-                Peeps.debugConsole(label);
-                Peeps.debugConsole(id);
-            });
-        }
-    }
-
-};
-
 /**
  * Created by rusty on 3/26/2017.
  */
@@ -504,6 +499,15 @@ Peeps.Editors.Person = {
         // or directly from a view (via a dashboard placeholder).
         Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
 
+        Peeps.on(Peeps.Forms.fileSelectEvtName, function(elId, fileName) {
+            if (elId === 'fileselect') {
+              // this is the photo upload editor
+                $('.photo-label-box').val(fileName.fileName);
+            };
+            console.info(elId);
+            console.info(fileName);
+        });
+
         // Bind deletes on the listing pages
         Peeps.Editors.Person.bind.deletes();
 
@@ -519,11 +523,7 @@ Peeps.Editors.Person = {
         // bind the property editor links
         Peeps.Editors.Person.bind.editorLinks();
 
-        // person entry
-        // TODO refactor when move to async
-        //if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
-        //    Peeps.Editors.Person.bind.birthday($('#person-entry'));
-        //}
+
 
     },
 

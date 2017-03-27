@@ -17,6 +17,8 @@
         <button type="button" class="btn btn-default btn-cancel">Cancel</button>
         <input type="submit" class="btn btn-default" value="Add" />
     </div>
+    @Html.HiddenFor(x => x.ReturnUrl)
+    @Html.HiddenFor(x => x.PersonId)
 }
 <div class="form-group">
     <ul class="list-group">

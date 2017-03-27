@@ -1,15 +1,15 @@
 ﻿@model Catalyst.Web.Areas.Editors.Models.PhotoEditor
     
-@using (Html.BeginForm("Save", "PhotoEditor", FormMethod.Post, new { encType = "multipart/form-data", accept = "image/*",  @id = "photo-editor" }))
+@using (Html.BeginForm("Save", "PhotoEditor", FormMethod.Post, new { encType = "multipart/form-data",  @id = "photo-editor" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-group">
         <div class="input-group">
             <span class="btn btn-default btn-file input-group-addon">
-                Browse... @Html.TextBoxFor(x => x.PostedFile, new { type = "file", name = "PostedFile" })
+                Browse... @Html.TextBoxFor(x => x.PostedFile, new { type = "file", name = "PostedFile", accept = "image/*" })
             </span>
-            <input type="text" id="something" class="form-control" />
+            <input type="text" class="form-control photo-label-box" />
         </div>
     </div>
 
@@ -18,4 +18,6 @@
         <input type="submit" class="btn btn-default" value="Add"/>
     </div>
 
+    @Html.HiddenFor(x => x.PersonId)
+    @Html.HiddenFor(x => x.ReturnUrl)
 }
