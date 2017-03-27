@@ -1,0 +1,1276 @@
+{
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.5.2": {
+      "AjaxMin/5.14.5506.26202": {
+        "type": "package",
+        "compile": {
+          "lib/net40/AjaxMin.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AjaxMin.dll": {}
+        }
+      },
+      "CommonMark.NET/0.15.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommonMark.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommonMark.dll": {}
+        }
+      },
+      "EcmaScript.Net/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        }
+      },
+      "EntityFramework/6.1.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        }
+      },
+      "EntityFramework.SqlServerCompact/6.1.3": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.1.3",
+          "Microsoft.SqlServer.Compact": "4.0.8876.1"
+        },
+        "compile": {
+          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
+        }
+      },
+      "ImageProcessor/2.5.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/ImageProcessor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.dll": {}
+        }
+      },
+      "ImageProcessor.Web/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.5.2",
+          "Microsoft.IO.RecyclableMemoryStream": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        }
+      },
+      "LightInject/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/LightInject.dll": {}
+        },
+        "runtime": {
+          "lib/net45/LightInject.dll": {}
+        }
+      },
+      "LightInject.Annotation/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "LightInject": "4.1.0"
+        },
+        "compile": {
+          "lib/net45/LightInject.Annotation.dll": {}
+        },
+        "runtime": {
+          "lib/net45/LightInject.Annotation.dll": {}
+        }
+      },
+      "log4net/2.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/net45-full/log4net.dll": {}
+        },
+        "runtime": {
+          "lib/net45-full/log4net.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Mvc/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "[3.2.3, 3.3.0)",
+          "Microsoft.AspNet.WebPages": "[3.2.3, 3.3.0)"
+        },
+        "compile": {
+          "lib/net45/System.Web.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Mvc.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Razor/3.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/System.Web.Razor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Razor.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.WebHost": "[5.2.3, 5.3.0)"
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.Core/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.3"
+        },
+        "compile": {
+          "lib/net45/System.Web.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.WebHost/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Core": "[5.2.3, 5.3.0)"
+        },
+        "compile": {
+          "lib/net45/System.Web.Http.WebHost.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.WebHost.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebPages/3.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "[3.2.3, 3.3.0)",
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net45/System.Web.Helpers.dll": {},
+          "lib/net45/System.Web.WebPages.Deployment.dll": {},
+          "lib/net45/System.Web.WebPages.Razor.dll": {},
+          "lib/net45/System.Web.WebPages.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Helpers.dll": {},
+          "lib/net45/System.Web.WebPages.Deployment.dll": {},
+          "lib/net45/System.Web.WebPages.Razor.dll": {},
+          "lib/net45/System.Web.WebPages.dll": {}
+        }
+      },
+      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Net.Compilers": "1.3.2"
+        },
+        "compile": {
+          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
+        },
+        "build": {
+          "build/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props": {}
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        }
+      },
+      "Microsoft.Net.Compilers/2.0.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.Net.Compilers.props": {}
+        }
+      },
+      "Microsoft.SqlServer.Compact/4.0.8876.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SqlServerCe.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SqlServerCe.dll": {}
+        }
+      },
+      "Microsoft.Web.Infrastructure/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        }
+      },
+      "Newtonsoft.Json/6.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Semver/2.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net452/Semver.dll": {}
+        },
+        "runtime": {
+          "lib/net452/Semver.dll": {}
+        }
+      },
+      "SquishIt/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "AjaxMin": "5.14.5506.26202",
+          "WebActivatorEx": "2.1.0",
+          "YUICompressor.NET": "2.3.0"
+        },
+        "compile": {
+          "lib/SquishIt.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Framework.dll": {}
+        }
+      },
+      "SquishIt.Mvc/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "SquishIt": "0.9.9"
+        },
+        "compile": {
+          "lib/SquishIt.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Mvc.dll": {}
+        }
+      },
+      "TidyNetPortable/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/TidyNetPortable.dll": {}
+        },
+        "runtime": {
+          "lib/TidyNetPortable.dll": {}
+        }
+      },
+      "WebActivatorEx/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net40/WebActivatorEx.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {}
+        }
+      },
+      "YUICompressor.NET/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "EcmaScript.Net": "1.0.1"
+        },
+        "compile": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        },
+        "runtime": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        }
+      },
+      "Catalyst.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.2",
+        "dependencies": {
+          "CommonMark.NET": "0.15.1",
+          "EntityFramework": "6.1.3",
+          "EntityFramework.SqlServerCompact": "6.1.3",
+          "LightInject": "5.0.2",
+          "LightInject.Annotation": "1.1.0",
+          "Newtonsoft.Json": "6.0.4",
+          "log4net": "2.0.8",
+          "semver": "2.0.4"
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5.2/win": {
+      "AjaxMin/5.14.5506.26202": {
+        "type": "package",
+        "compile": {
+          "lib/net40/AjaxMin.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AjaxMin.dll": {}
+        }
+      },
+      "CommonMark.NET/0.15.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/CommonMark.dll": {}
+        },
+        "runtime": {
+          "lib/net45/CommonMark.dll": {}
+        }
+      },
+      "EcmaScript.Net/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net20/EcmaScript.NET.dll": {}
+        }
+      },
+      "EntityFramework/6.1.3": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.ComponentModel.DataAnnotations"
+        ],
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        }
+      },
+      "EntityFramework.SqlServerCompact/6.1.3": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.1.3",
+          "Microsoft.SqlServer.Compact": "4.0.8876.1"
+        },
+        "compile": {
+          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServerCompact.dll": {}
+        }
+      },
+      "ImageProcessor/2.5.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/ImageProcessor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.dll": {}
+        }
+      },
+      "ImageProcessor.Web/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "ImageProcessor": "2.5.2",
+          "Microsoft.IO.RecyclableMemoryStream": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        },
+        "runtime": {
+          "lib/net45/ImageProcessor.Web.dll": {}
+        }
+      },
+      "LightInject/5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/LightInject.dll": {}
+        },
+        "runtime": {
+          "lib/net45/LightInject.dll": {}
+        }
+      },
+      "LightInject.Annotation/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "LightInject": "4.1.0"
+        },
+        "compile": {
+          "lib/net45/LightInject.Annotation.dll": {}
+        },
+        "runtime": {
+          "lib/net45/LightInject.Annotation.dll": {}
+        }
+      },
+      "log4net/2.0.8": {
+        "type": "package",
+        "compile": {
+          "lib/net45-full/log4net.dll": {}
+        },
+        "runtime": {
+          "lib/net45-full/log4net.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Mvc/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "[3.2.3, 3.3.0)",
+          "Microsoft.AspNet.WebPages": "[3.2.3, 3.3.0)"
+        },
+        "compile": {
+          "lib/net45/System.Web.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Mvc.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Razor/3.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/System.Web.Razor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Razor.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.WebHost": "[5.2.3, 5.3.0)"
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.Core/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.3"
+        },
+        "compile": {
+          "lib/net45/System.Web.Http.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.WebHost/5.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Core": "[5.2.3, 5.3.0)"
+        },
+        "compile": {
+          "lib/net45/System.Web.Http.WebHost.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.WebHost.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebPages/3.2.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "[3.2.3, 3.3.0)",
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net45/System.Web.Helpers.dll": {},
+          "lib/net45/System.Web.WebPages.Deployment.dll": {},
+          "lib/net45/System.Web.WebPages.Razor.dll": {},
+          "lib/net45/System.Web.WebPages.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Helpers.dll": {},
+          "lib/net45/System.Web.WebPages.Deployment.dll": {},
+          "lib/net45/System.Web.WebPages.Razor.dll": {},
+          "lib/net45/System.Web.WebPages.dll": {}
+        }
+      },
+      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Net.Compilers": "1.3.2"
+        },
+        "compile": {
+          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
+        },
+        "build": {
+          "build/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props": {}
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll": {}
+        }
+      },
+      "Microsoft.Net.Compilers/2.0.1": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.Net.Compilers.props": {}
+        }
+      },
+      "Microsoft.SqlServer.Compact/4.0.8876.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SqlServerCe.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SqlServerCe.dll": {}
+        }
+      },
+      "Microsoft.Web.Infrastructure/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        }
+      },
+      "Newtonsoft.Json/6.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Semver/2.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/net452/Semver.dll": {}
+        },
+        "runtime": {
+          "lib/net452/Semver.dll": {}
+        }
+      },
+      "SquishIt/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "AjaxMin": "5.14.5506.26202",
+          "WebActivatorEx": "2.1.0",
+          "YUICompressor.NET": "2.3.0"
+        },
+        "compile": {
+          "lib/SquishIt.Framework.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Framework.dll": {}
+        }
+      },
+      "SquishIt.Mvc/0.9.9": {
+        "type": "package",
+        "dependencies": {
+          "SquishIt": "0.9.9"
+        },
+        "compile": {
+          "lib/SquishIt.Mvc.dll": {}
+        },
+        "runtime": {
+          "lib/SquishIt.Mvc.dll": {}
+        }
+      },
+      "TidyNetPortable/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/TidyNetPortable.dll": {}
+        },
+        "runtime": {
+          "lib/TidyNetPortable.dll": {}
+        }
+      },
+      "WebActivatorEx/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net40/WebActivatorEx.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {}
+        }
+      },
+      "YUICompressor.NET/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "EcmaScript.Net": "1.0.1"
+        },
+        "compile": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        },
+        "runtime": {
+          "lib/NET20/Yahoo.Yui.Compressor.dll": {}
+        }
+      },
+      "Catalyst.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.2",
+        "dependencies": {
+          "CommonMark.NET": "0.15.1",
+          "EntityFramework": "6.1.3",
+          "EntityFramework.SqlServerCompact": "6.1.3",
+          "LightInject": "5.0.2",
+          "LightInject.Annotation": "1.1.0",
+          "Newtonsoft.Json": "6.0.4",
+          "log4net": "2.0.8",
+          "semver": "2.0.4"
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AjaxMin/5.14.5506.26202": {
+      "sha512": "ayrhrlFSQEAw+1w7cdUGozbZ8BxakITQcTezeLKByp69zk0tdto8/Jt3U2ieCq3U1dlvwXGvlthMaTJXeHEaFw==",
+      "type": "package",
+      "path": "ajaxmin/5.14.5506.26202",
+      "files": [
+        "AjaxMin.5.14.5506.26202.nupkg.sha512",
+        "AjaxMin.nuspec",
+        "lib/net20/AjaxMin.dll",
+        "lib/net35/AjaxMin.dll",
+        "lib/net40/AjaxMin.dll",
+        "tools/net35/AjaxMin.dll",
+        "tools/net35/AjaxMin.targets",
+        "tools/net35/AjaxMinTask.dll",
+        "tools/net40/AjaxMin.dll",
+        "tools/net40/AjaxMin.targets",
+        "tools/net40/AjaxMinTask.dll"
+      ]
+    },
+    "CommonMark.NET/0.15.1": {
+      "sha512": "xgAvZ0tNcupiabTcOOvNYRzU7h9dZ28xIFh/CHiNgCI6GUu/ME2hmZP3abLgRFrnXyNBfVxfL4ZNmqkRnBSLEg==",
+      "type": "package",
+      "path": "commonmark.net/0.15.1",
+      "files": [
+        "LICENSE.md",
+        "commonmark.net.0.15.1.nupkg.sha512",
+        "commonmark.net.nuspec",
+        "lib/net20/CommonMark.dll",
+        "lib/net20/CommonMark.pdb",
+        "lib/net20/CommonMark.xml",
+        "lib/net35-client/CommonMark.dll",
+        "lib/net35-client/CommonMark.pdb",
+        "lib/net35-client/CommonMark.xml",
+        "lib/net40-client/CommonMark.dll",
+        "lib/net40-client/CommonMark.pdb",
+        "lib/net40-client/CommonMark.xml",
+        "lib/net45/CommonMark.dll",
+        "lib/net45/CommonMark.pdb",
+        "lib/net45/CommonMark.xml",
+        "lib/netstandard1.0/CommonMark.dll",
+        "lib/netstandard1.0/CommonMark.pdb",
+        "lib/netstandard1.0/CommonMark.xml",
+        "lib/portable-net40+sl50+wp80+win+wpa81+MonoAndroid10+MonoTouch10/CommonMark.dll",
+        "lib/portable-net40+sl50+wp80+win+wpa81+MonoAndroid10+MonoTouch10/CommonMark.pdb",
+        "lib/portable-net40+sl50+wp80+win+wpa81+MonoAndroid10+MonoTouch10/CommonMark.xml",
+        "lib/portable-net45+wp80+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/CommonMark.dll",
+        "lib/portable-net45+wp80+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/CommonMark.pdb",
+        "lib/portable-net45+wp80+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10/CommonMark.xml",
+        "tools/cmark.exe",
+        "tools/cmark.exe.config"
+      ]
+    },
+    "EcmaScript.Net/1.0.1": {
+      "sha512": "6U09fonPEr/ONxkJFZSjv/auSpqvw/IGebcRW+9sr7F82nOaRxfpzmN2wuz7Hy/Tr1wcR/hsbTk1j9JNlzRxHg==",
+      "type": "package",
+      "path": "ecmascript.net/1.0.1",
+      "files": [
+        "EcmaScript.Net.1.0.1.nupkg.sha512",
+        "EcmaScript.Net.nuspec",
+        "lib/net20/EcmaScript.NET.dll"
+      ]
+    },
+    "EntityFramework/6.1.3": {
+      "sha512": "2xzFHAF3VVdmTR3//MygtQpwfbDjeaq+nQwCcokLzen7MKHOojPaxNPQPa4diHY1QtcR7zlHAJHNRqPB7W2Syw==",
+      "type": "package",
+      "path": "entityframework/6.1.3",
+      "files": [
+        "EntityFramework.6.1.3.nupkg.sha512",
+        "EntityFramework.nuspec",
+        "content/App.config.transform",
+        "content/Web.config.transform",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.xml",
+        "tools/EntityFramework.PowerShell.Utility.dll",
+        "tools/EntityFramework.PowerShell.dll",
+        "tools/EntityFramework.psd1",
+        "tools/EntityFramework.psm1",
+        "tools/about_EntityFramework.help.txt",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/migrate.exe"
+      ]
+    },
+    "EntityFramework.SqlServerCompact/6.1.3": {
+      "sha512": "I6AltOs7CpwIvr7RApY4l8UPQ0W2NePxt6aY3zTFvkxvaxKHBYx5ArJisa/QZzYnDAOS5mP3YZsNzrttEqM0Nw==",
+      "type": "package",
+      "path": "entityframework.sqlservercompact/6.1.3",
+      "files": [
+        "content/App.config.transform",
+        "content/Web.config.transform",
+        "entityframework.sqlservercompact.6.1.3.nupkg.sha512",
+        "entityframework.sqlservercompact.nuspec",
+        "lib/net40/EntityFramework.SqlServerCompact.dll",
+        "lib/net40/EntityFramework.SqlServerCompact.xml",
+        "lib/net45/EntityFramework.SqlServerCompact.dll",
+        "lib/net45/EntityFramework.SqlServerCompact.xml",
+        "tools/install.ps1"
+      ]
+    },
+    "ImageProcessor/2.5.2": {
+      "sha512": "PwcbjoYJIRUHMWL/WTY9PT42+HHcwNQkvG+/doca4F2TJH2hCXwpSBZd3LN6LmBEmMl0Y9VE5i2XmfB7EDITzA==",
+      "type": "package",
+      "path": "imageprocessor/2.5.2",
+      "files": [
+        "ImageProcessor.2.5.2.nupkg.sha512",
+        "ImageProcessor.nuspec",
+        "lib/net40/ImageProcessor.dll",
+        "lib/net45/ImageProcessor.dll"
+      ]
+    },
+    "ImageProcessor.Web/4.8.2": {
+      "sha512": "H5ND02QHminfp7di4dII4Po45dJWTgdvmn7so6f+8KbIYZ6eDWoWgVwSHAu00fP5KYFFlviYG7RHNreolgFAbA==",
+      "type": "package",
+      "path": "imageprocessor.web/4.8.2",
+      "files": [
+        "ImageProcessor.Web.4.8.2.nupkg.sha512",
+        "ImageProcessor.Web.nuspec",
+        "content/web.config.transform",
+        "lib/net45/ImageProcessor.Web.dll"
+      ]
+    },
+    "LightInject/5.0.2": {
+      "sha512": "2gLh8UtRUJIqhb0EmkIKNKFkWW4FRs4tY/P0e2IR1Y4CYVjPWHGa8NT0ASJOk8gxrgzj7ZJ9VwWPvTrZTL43EA==",
+      "type": "package",
+      "path": "lightinject/5.0.2",
+      "files": [
+        "lib/Xamarin.iOS/LightInject.XML",
+        "lib/Xamarin.iOS/LightInject.dll",
+        "lib/Xamarin.iOS/LightInject.pdb",
+        "lib/monoandroid/LightInject.XML",
+        "lib/monoandroid/LightInject.dll",
+        "lib/monoandroid/LightInject.pdb",
+        "lib/monotouch/LightInject.XML",
+        "lib/monotouch/LightInject.dll",
+        "lib/monotouch/LightInject.pdb",
+        "lib/net45/LightInject.XML",
+        "lib/net45/LightInject.dll",
+        "lib/net45/LightInject.pdb",
+        "lib/net46/LightInject.XML",
+        "lib/net46/LightInject.dll",
+        "lib/net46/LightInject.pdb",
+        "lib/netstandard1.1/LightInject.dll",
+        "lib/netstandard1.1/LightInject.pdb",
+        "lib/netstandard1.1/LightInject.xml",
+        "lib/netstandard1.3/LightInject.dll",
+        "lib/netstandard1.3/LightInject.pdb",
+        "lib/netstandard1.3/LightInject.xml",
+        "lib/netstandard1.6/LightInject.dll",
+        "lib/netstandard1.6/LightInject.pdb",
+        "lib/netstandard1.6/LightInject.xml",
+        "lib/portable-net45+netcore45+wpa81/LightInject.XML",
+        "lib/portable-net45+netcore45+wpa81/LightInject.dll",
+        "lib/portable-net45+netcore45+wpa81/LightInject.pdb",
+        "lib/uap/LightInject.XML",
+        "lib/uap/LightInject.dll",
+        "lib/uap/LightInject.pdb",
+        "lightinject.5.0.2.nupkg.sha512",
+        "lightinject.nuspec"
+      ]
+    },
+    "LightInject.Annotation/1.1.0": {
+      "sha512": "sZZpnoBRo20Ul5i8Vn8NIjIpTqhzPCwcghhQ5R36iJobmEyPjIy3qiTSVL24Ax+6aYdz/v7Vz4m/35qCVjSk3w==",
+      "type": "package",
+      "path": "lightinject.annotation/1.1.0",
+      "files": [
+        "LightInject.Annotation.1.1.0.nupkg.sha512",
+        "LightInject.Annotation.nuspec",
+        "lib/Xamarin.iOS/LightInject.Annotation.dll",
+        "lib/Xamarin.iOS/LightInject.Annotation.pdb",
+        "lib/monoandroid/LightInject.Annotation.dll",
+        "lib/monoandroid/LightInject.Annotation.pdb",
+        "lib/monotouch/LightInject.Annotation.dll",
+        "lib/monotouch/LightInject.Annotation.pdb",
+        "lib/net45/LightInject.Annotation.dll",
+        "lib/net45/LightInject.Annotation.pdb",
+        "lib/net46/LightInject.Annotation.dll",
+        "lib/net46/LightInject.Annotation.pdb",
+        "lib/netstandard1.1/LightInject.Annotation.dll",
+        "lib/netstandard1.1/LightInject.Annotation.pdb",
+        "lib/netstandard1.3/LightInject.Annotation.dll",
+        "lib/netstandard1.3/LightInject.Annotation.pdb",
+        "lib/portable-net45+netcore45+wpa81/LightInject.Annotation.dll",
+        "lib/portable-net45+netcore45+wpa81/LightInject.Annotation.pdb"
+      ]
+    },
+    "log4net/2.0.8": {
+      "sha512": "N41MQGHZImiCfn0cUuSBjZxrcNfIQCuCgQP0rpgB3J/NWponEh3lc1LxJEuIsPAR9Oc1jVvfkNNFCY1C5hf9LA==",
+      "type": "package",
+      "path": "log4net/2.0.8",
+      "files": [
+        "lib/net20-full/log4net.dll",
+        "lib/net20-full/log4net.xml",
+        "lib/net35-client/log4net.dll",
+        "lib/net35-client/log4net.xml",
+        "lib/net35-full/log4net.dll",
+        "lib/net35-full/log4net.xml",
+        "lib/net40-client/log4net.dll",
+        "lib/net40-client/log4net.xml",
+        "lib/net40-full/log4net.dll",
+        "lib/net40-full/log4net.xml",
+        "lib/net45-full/log4net.dll",
+        "lib/net45-full/log4net.xml",
+        "lib/netstandard1.3/log4net.dll",
+        "log4net.2.0.8.nupkg.sha512",
+        "log4net.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Mvc/5.2.3": {
+      "sha512": "i8jZf5QrbcFmjiYWRD7o7qTak/oXKxV80MgP4cZ33A8GC0RBtBIdZ1VHaloGUg+qsHUz5rVkGpwenM+ugDz5PA==",
+      "type": "package",
+      "path": "microsoft.aspnet.mvc/5.2.3",
+      "files": [
+        "Content/Web.config.install.xdt",
+        "Content/Web.config.uninstall.xdt",
+        "Microsoft.AspNet.Mvc.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.Mvc.nuspec",
+        "lib/net45/System.Web.Mvc.dll",
+        "lib/net45/System.Web.Mvc.xml"
+      ]
+    },
+    "Microsoft.AspNet.Razor/3.2.3": {
+      "sha512": "leta+Q73O7+pR8ThTqXmwaNMSqwZQQ3BHfpUHd8S1XaUWe1jRVLitMHqo1AmY7wPNLyankPA1beiUKEGj8Q3Dw==",
+      "type": "package",
+      "path": "microsoft.aspnet.razor/3.2.3",
+      "files": [
+        "Microsoft.AspNet.Razor.3.2.3.nupkg.sha512",
+        "Microsoft.AspNet.Razor.nuspec",
+        "lib/net45/System.Web.Razor.dll",
+        "lib/net45/System.Web.Razor.xml"
+      ]
+    },
+    "Microsoft.AspNet.WebApi/5.2.3": {
+      "sha512": "mGBfSy61+2dIdPwgguW8EaCVsbYTwwVHeCc/pVq1PhlZS87ColgJ++Hve40TrX6Dtqde0fo9M1Tt19rXlHC5GA==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi/5.2.3",
+      "files": [
+        "Microsoft.AspNet.WebApi.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebApi.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.3": {
+      "sha512": "3kiI8peSXbXHDDrRuo+QaX0iCEVRe0nvn2dBDRw656uPX32UalbBlSIDUDlJxu05eau4tnuhsikiUuugvvoUoQ==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.client/5.2.3",
+      "files": [
+        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebApi.Client.nuspec",
+        "lib/net45/System.Net.Http.Formatting.dll",
+        "lib/net45/System.Net.Http.Formatting.xml",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.Core/5.2.3": {
+      "sha512": "o90QYlRV8VKR1S7+EcJw9w8WSyVFLl+IIzN8ILZ+n2t6rsc/KS8kBxRzA7wCFPRUHhebCfLqilBk39phvanx3g==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.core/5.2.3",
+      "files": [
+        "Content/web.config.transform",
+        "Microsoft.AspNet.WebApi.Core.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebApi.Core.nuspec",
+        "lib/net45/System.Web.Http.dll",
+        "lib/net45/System.Web.Http.xml"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.WebHost/5.2.3": {
+      "sha512": "bhm4/BKdS3t6nK2R3NjCpxulcwtMFiHqVBDLuN3W5So1PhZfE+RBs7eVazGOhsEKCk7PoSmiSnl9DG0cpyfHtA==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.webhost/5.2.3",
+      "files": [
+        "Microsoft.AspNet.WebApi.WebHost.5.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebApi.WebHost.nuspec",
+        "lib/net45/System.Web.Http.WebHost.dll",
+        "lib/net45/System.Web.Http.WebHost.xml"
+      ]
+    },
+    "Microsoft.AspNet.WebPages/3.2.3": {
+      "sha512": "zbtxBERla5RE/mhftwbrXOzc0r6lh8WcnjpGW7QQe+PvSDDx1BgsTUGzfCXO/vJznHNpY5oCSYLt8Q5vUu7F0g==",
+      "type": "package",
+      "path": "microsoft.aspnet.webpages/3.2.3",
+      "files": [
+        "Content/Web.config.install.xdt",
+        "Content/Web.config.uninstall.xdt",
+        "Microsoft.AspNet.WebPages.3.2.3.nupkg.sha512",
+        "Microsoft.AspNet.WebPages.nuspec",
+        "lib/net45/System.Web.Helpers.dll",
+        "lib/net45/System.Web.Helpers.xml",
+        "lib/net45/System.Web.WebPages.Deployment.dll",
+        "lib/net45/System.Web.WebPages.Deployment.xml",
+        "lib/net45/System.Web.WebPages.Razor.dll",
+        "lib/net45/System.Web.WebPages.Razor.xml",
+        "lib/net45/System.Web.WebPages.dll",
+        "lib/net45/System.Web.WebPages.xml"
+      ]
+    },
+    "Microsoft.CodeDom.Providers.DotNetCompilerPlatform/1.0.3": {
+      "sha512": "7G2GcPc9aveqUa2t1a4OZmfs4RqSlalpHC94KILFswIDLCTGrser0ymXi7TnUI5gAIHhfn2dEjpIb5taxPWU5g==",
+      "type": "package",
+      "path": "microsoft.codedom.providers.dotnetcompilerplatform/1.0.3",
+      "files": [
+        "build/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props",
+        "content/web.config.install.xdt",
+        "content/web.config.uninstall.xdt",
+        "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll",
+        "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml",
+        "microsoft.codedom.providers.dotnetcompilerplatform.1.0.3.nupkg.sha512",
+        "microsoft.codedom.providers.dotnetcompilerplatform.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Microsoft.IO.RecyclableMemoryStream/1.2.1": {
+      "sha512": "j2EO0JM4snuIXMRKaTX7AYrmfHkj8I7ySi+tOoNddB0CucEp1M3uRmK8MJfM6jaKNKGlTZkVCGA937896iNmPA==",
+      "type": "package",
+      "path": "microsoft.io.recyclablememorystream/1.2.1",
+      "files": [
+        "Microsoft.IO.RecyclableMemoryStream.1.2.1.nupkg.sha512",
+        "Microsoft.IO.RecyclableMemoryStream.nuspec",
+        "lib/net40/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/net40/Microsoft.IO.RecyclableMemoryStream.pdb",
+        "lib/net45/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/net45/Microsoft.IO.RecyclableMemoryStream.pdb"
+      ]
+    },
+    "Microsoft.Net.Compilers/2.0.1": {
+      "sha512": "FTR74DK6ePuJNtwkHVlg0kx3MByLwpZF3H8vxZZJvA1vvMio3J3sJkX06EqhsWq8XRNcHELSF9RZjtDnIfiSnA==",
+      "type": "package",
+      "path": "microsoft.net.compilers/2.0.1",
+      "files": [
+        "ThirdPartyNotices.rtf",
+        "build/Microsoft.Net.Compilers.props",
+        "microsoft.net.compilers.2.0.1.nupkg.sha512",
+        "microsoft.net.compilers.nuspec",
+        "tools/Microsoft.Build.Tasks.CodeAnalysis.dll",
+        "tools/Microsoft.CSharp.Core.targets",
+        "tools/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
+        "tools/Microsoft.CodeAnalysis.CSharp.dll",
+        "tools/Microsoft.CodeAnalysis.Scripting.dll",
+        "tools/Microsoft.CodeAnalysis.VisualBasic.dll",
+        "tools/Microsoft.CodeAnalysis.dll",
+        "tools/Microsoft.DiaSymReader.Native.amd64.dll",
+        "tools/Microsoft.DiaSymReader.Native.x86.dll",
+        "tools/Microsoft.VisualBasic.Core.targets",
+        "tools/Microsoft.Win32.Primitives.dll",
+        "tools/System.AppContext.dll",
+        "tools/System.Collections.Immutable.dll",
+        "tools/System.Console.dll",
+        "tools/System.Diagnostics.FileVersionInfo.dll",
+        "tools/System.Diagnostics.Process.dll",
+        "tools/System.Diagnostics.StackTrace.dll",
+        "tools/System.IO.Compression.dll",
+        "tools/System.IO.FileSystem.DriveInfo.dll",
+        "tools/System.IO.FileSystem.Primitives.dll",
+        "tools/System.IO.FileSystem.dll",
+        "tools/System.IO.Pipes.dll",
+        "tools/System.Reflection.Metadata.dll",
+        "tools/System.Security.AccessControl.dll",
+        "tools/System.Security.Claims.dll",
+        "tools/System.Security.Cryptography.Algorithms.dll",
+        "tools/System.Security.Cryptography.Encoding.dll",
+        "tools/System.Security.Cryptography.Primitives.dll",
+        "tools/System.Security.Cryptography.X509Certificates.dll",
+        "tools/System.Security.Principal.Windows.dll",
+        "tools/System.Text.Encoding.CodePages.dll",
+        "tools/System.Threading.Thread.dll",
+        "tools/System.ValueTuple.dll",
+        "tools/System.Xml.ReaderWriter.dll",
+        "tools/System.Xml.XPath.XDocument.dll",
+        "tools/System.Xml.XPath.dll",
+        "tools/System.Xml.XmlDocument.dll",
+        "tools/VBCSCompiler.exe",
+        "tools/VBCSCompiler.exe.config",
+        "tools/csc.exe",
+        "tools/csc.exe.config",
+        "tools/csc.rsp",
+        "tools/csi.exe",
+        "tools/csi.exe.config",
+        "tools/csi.rsp",
+        "tools/vbc.exe",
+        "tools/vbc.exe.config",
+        "tools/vbc.rsp"
+      ]
+    },
+    "Microsoft.SqlServer.Compact/4.0.8876.1": {
+      "sha512": "CKh6YxPd7/FApB3y5/mZyqkTVKDkbYFUf/tbDAwHlKLrIKRlJ7/VPLMqHX0izl4B0Yey+qMIVo7izGTSi/9ang==",
+      "type": "package",
+      "path": "microsoft.sqlserver.compact/4.0.8876.1",
+      "files": [
+        "Content/web.config.transform",
+        "NativeBinaries/amd64/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest",
+        "NativeBinaries/amd64/Microsoft.VC90.CRT/README_ENU.txt",
+        "NativeBinaries/amd64/Microsoft.VC90.CRT/msvcr90.dll",
+        "NativeBinaries/amd64/sqlceca40.dll",
+        "NativeBinaries/amd64/sqlcecompact40.dll",
+        "NativeBinaries/amd64/sqlceer40EN.dll",
+        "NativeBinaries/amd64/sqlceme40.dll",
+        "NativeBinaries/amd64/sqlceqp40.dll",
+        "NativeBinaries/amd64/sqlcese40.dll",
+        "NativeBinaries/x86/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest",
+        "NativeBinaries/x86/Microsoft.VC90.CRT/README_ENU.txt",
+        "NativeBinaries/x86/Microsoft.VC90.CRT/msvcr90.dll",
+        "NativeBinaries/x86/sqlceca40.dll",
+        "NativeBinaries/x86/sqlcecompact40.dll",
+        "NativeBinaries/x86/sqlceer40EN.dll",
+        "NativeBinaries/x86/sqlceme40.dll",
+        "NativeBinaries/x86/sqlceqp40.dll",
+        "NativeBinaries/x86/sqlcese40.dll",
+        "SQLCE_EULA_ENU.rtf",
+        "lib/net40/System.Data.SqlServerCe.dll",
+        "microsoft.sqlserver.compact.4.0.8876.1.nupkg.sha512",
+        "microsoft.sqlserver.compact.nuspec",
+        "tools/Install.ps1",
+        "tools/Uninstall.ps1",
+        "tools/VS.psd1",
+        "tools/VS.psm1"
+      ]
+    },
+    "Microsoft.Web.Infrastructure/1.0.0": {
+      "sha512": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
+      "type": "package",
+      "path": "microsoft.web.infrastructure/1.0.0",
+      "files": [
+        "Microsoft.Web.Infrastructure.1.0.0.nupkg.sha512",
+        "Microsoft.Web.Infrastructure.nuspec",
+        "lib/net40/Microsoft.Web.Infrastructure.dll"
+      ]
+    },
+    "Newtonsoft.Json/6.0.4": {
+      "sha512": "FyQLmEpjsCrEP+znauLDGAi+h6i9YnaMkITlfIoiM4RYyX3nki306bTHsr/0okiIvIc7BJhQTbOAIZVocccFUw==",
+      "type": "package",
+      "path": "newtonsoft.json/6.0.4",
+      "files": [
+        "Newtonsoft.Json.6.0.4.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netcore45/Newtonsoft.Json.dll",
+        "lib/netcore45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "tools/install.ps1"
+      ]
+    },
+    "Semver/2.0.4": {
+      "sha512": "H52a9cgrh4hkVxv5y99L9vk2NBtJB3ids/yavTHUvC0pUl3EsWEZAJmjBPFSt7jDtn3Q04+Nhtfo0J2xvsnhZQ==",
+      "type": "package",
+      "path": "semver/2.0.4",
+      "files": [
+        "lib/net452/Semver.dll",
+        "lib/net452/Semver.xml",
+        "lib/netstandard1.1/Semver.dll",
+        "lib/netstandard1.1/Semver.xml",
+        "semver.2.0.4.nupkg.sha512",
+        "semver.nuspec"
+      ]
+    },
+    "SquishIt/0.9.9": {
+      "sha512": "G1sP3UC74lzm85wMLlQBxh63RN5WXkSipD/3Qx5m5DHFY6SFlkqhKcg1xhQKjXs85lhf3EG+ux45N/vqTXLD5A==",
+      "type": "package",
+      "path": "squishit/0.9.9",
+      "files": [
+        "lib/SquishIt.Framework.dll",
+        "lib/SquishIt.Framework.pdb",
+        "lib/SquishIt.Framework.xml",
+        "optional/SquishIt.Mvc.dll",
+        "optional/SquishIt.Mvc.pdb",
+        "squishit.0.9.9.nupkg.sha512",
+        "squishit.nuspec"
+      ]
+    },
+    "SquishIt.Mvc/0.9.9": {
+      "sha512": "2trZ+buogodfcQi3vCu1MXUHLQo1i6zemrURVGRJC4zGqucL7CrFjB6ArlBP0M/MwRr6rjEzc43V1q/T3ZXmlw==",
+      "type": "package",
+      "path": "squishit.mvc/0.9.9",
+      "files": [
+        "lib/SquishIt.Mvc.dll",
+        "lib/SquishIt.Mvc.pdb",
+        "squishit.mvc.0.9.9.nupkg.sha512",
+        "squishit.mvc.nuspec"
+      ]
+    },
+    "TidyNetPortable/1.0.0": {
+      "sha512": "JCnQ7XQ6gNT1vGn7otrrHCKMaNgwGRm22dZ6hYwQ+EbHK572mSqv1FCBlm8wIGb71aMrpLF3LFkaHRcN9iRlXg==",
+      "type": "package",
+      "path": "tidynetportable/1.0.0",
+      "files": [
+        "lib/TidyNetPortable.dll",
+        "tidynetportable.1.0.0.nupkg.sha512",
+        "tidynetportable.nuspec"
+      ]
+    },
+    "WebActivatorEx/2.1.0": {
+      "sha512": "0HJ6DpxcTzSGIgcN6Q0jKAwLX1bWKnbeDOvT7vFXB/e4MIrwWc+1XwzihQp0Sr91EUK2N7j5cjZ1cIvWCraeJg==",
+      "type": "package",
+      "path": "webactivatorex/2.1.0",
+      "files": [
+        "lib/net40/WebActivatorEx.dll",
+        "webactivatorex.2.1.0.nupkg.sha512",
+        "webactivatorex.nuspec"
+      ]
+    },
+    "YUICompressor.NET/2.3.0": {
+      "sha512": "NAU4l/PEePmTQHHIGtad/Z1I9NgT0DcylYTuwb353fmFB9fgAze5T9IypNpWzgeail83NTdQDSfHAZpZwE98jA==",
+      "type": "package",
+      "path": "yuicompressor.net/2.3.0",
+      "files": [
+        "New BSD License.txt",
+        "YUICompressor.NET.2.3.0.nupkg.sha512",
+        "YUICompressor.NET.nuspec",
+        "lib/NET20/Yahoo.Yui.Compressor.dll",
+        "readme.txt"
+      ]
+    },
+    "Catalyst.Core/1.0.0": {
+      "type": "project",
+      "path": "../Catalyst.Core/project.json",
+      "msbuildProject": "../Catalyst.Core/Catalyst.Core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "CommonMark.NET >= 0.15.1",
+      "ImageProcessor >= 2.5.2",
+      "ImageProcessor.Web >= 4.8.2",
+      "LightInject >= 5.0.2",
+      "LightInject.Annotation >= 1.1.0",
+      "Microsoft.AspNet.Mvc >= 5.2.3",
+      "Microsoft.AspNet.Razor >= 3.2.3",
+      "Microsoft.AspNet.WebApi >= 5.2.3",
+      "Microsoft.AspNet.WebApi.Client >= 5.2.3",
+      "Microsoft.AspNet.WebApi.Core >= 5.2.3",
+      "Microsoft.AspNet.WebApi.WebHost >= 5.2.3",
+      "Microsoft.AspNet.WebPages >= 3.2.3",
+      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform >= 1.0.3",
+      "Microsoft.Net.Compilers >= 2.0.1",
+      "Microsoft.Web.Infrastructure >= 1.0.0",
+      "Newtonsoft.Json >= 6.0.4",
+      "SquishIt.Mvc >= 0.9.9",
+      "TidyNetPortable >= 1.0.0"
+    ],
+    ".NETFramework,Version=v4.5.2": []
+  },
+  "packageFolders": {
+    "C:\\Users\\rusty\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "C:\\Working\\Github\\CatalystCodingProblem\\src\\Catalyst.Web\\Catalyst.Web.csproj",
+      "projectName": "Catalyst.Web",
+      "projectPath": "C:\\Working\\Github\\CatalystCodingProblem\\src\\Catalyst.Web\\Catalyst.Web.csproj",
+      "projectJsonPath": "C:\\Working\\Github\\CatalystCodingProblem\\src\\Catalyst.Web\\project.json",
+      "projectStyle": "ProjectJson",
+      "frameworks": {
+        "net452": {
+          "projectReferences": {
+            "C:\\Working\\Github\\CatalystCodingProblem\\src\\Catalyst.Core\\Catalyst.Core.csproj": {
+              "projectPath": "C:\\Working\\Github\\CatalystCodingProblem\\src\\Catalyst.Core\\Catalyst.Core.csproj"
+            }
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "CommonMark.NET": "0.15.1",
+      "ImageProcessor": "2.5.2",
+      "ImageProcessor.Web": "4.8.2",
+      "LightInject": "5.0.2",
+      "LightInject.Annotation": "1.1.0",
+      "Microsoft.AspNet.Mvc": "5.2.3",
+      "Microsoft.AspNet.Razor": "3.2.3",
+      "Microsoft.AspNet.WebApi": "5.2.3",
+      "Microsoft.AspNet.WebApi.Client": "5.2.3",
+      "Microsoft.AspNet.WebApi.Core": "5.2.3",
+      "Microsoft.AspNet.WebApi.WebHost": "5.2.3",
+      "Microsoft.AspNet.WebPages": "3.2.3",
+      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": "1.0.3",
+      "Microsoft.Net.Compilers": "2.0.1",
+      "Microsoft.Web.Infrastructure": "1.0.0",
+      "Newtonsoft.Json": "6.0.4",
+      "SquishIt.Mvc": "0.9.9",
+      "TidyNetPortable": "1.0.0"
+    },
+    "frameworks": {
+      "net452": {}
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      }
+    }
+  }
+}
