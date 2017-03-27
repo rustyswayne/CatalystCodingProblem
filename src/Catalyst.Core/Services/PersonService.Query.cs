@@ -14,8 +14,8 @@
             return this.Context.AsNoTracking()
                 .OrderByDescending(x => x.UpdateDate)
                 .Take(count)
-                .Select(x => x.Id)
                 .ToArray()
+                .Select(x => x.Id)
                 .Select(id => Get(id));
         }
 

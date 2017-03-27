@@ -90,14 +90,22 @@
         public virtual TEntity Get(Guid id, bool lazy = true)
         {
             var cacheKey = GetCacheKey(id);
+
+            if (!lazy)
+            {
+                // REQUIRES TESTING TO REMOVE - for now just remove item
+                // TODO caching tests
+                RuntimeCache.ClearCacheItem(cacheKey);
+                return PerformGet(id, false);
+            }
+
             var result = RuntimeCache.GetCacheItem(cacheKey);
 
             if (result != null) return (TEntity)result;
 
-            return PerformGet(id, lazy);
-            
-            /// TODO detach from context before caching!!!
-            /// return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id));
+            //// TEST todo - assert item is detached from context before caching!!!
+            // cache for 5 minutes
+            return (TEntity)RuntimeCache.GetCacheItem(cacheKey, () => PerformGet(id), TimeSpan.FromMinutes(5));
         }
 
         /// <inheritdoc />
@@ -105,7 +113,7 @@
         {
             if (!ids.Any())
             {
-                return this.Context.ToArray().Select(x => Get(x.Id)).Where(x => x != null);
+                return this.Context.AsNoTracking().ToArray().Select(x => Get(x.Id)).Where(x => x != null);
             }
 
             return ids.Select(id => this.Get(id)).Where(x => x != null);
@@ -188,7 +196,9 @@
         /// </returns>
         protected virtual TEntity PerformGet(Guid id, bool lazy = true)
         {
-            return this.Context.Find(id);
+            return this.Context
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.Id.Equals(id));
         }
 
         /// <summary>

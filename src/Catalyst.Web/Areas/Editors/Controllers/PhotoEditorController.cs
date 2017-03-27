@@ -64,7 +64,9 @@
                 // upload complete at this point.  associate with person
                 var photo = person.GetPropertyValue<Photo>(true);
                 photo.Path = savePath;
-                photo.Src = $"{MediaPath.EnsureNotEndsWith('~')}{filename}";
+
+                var src = $"{MediaPath.EnsureNotEndsWith('~')}{filename}";
+                photo.Src = src.EnsureNotStartsWith('~').EnsureForwardSlashes().ToLowerInvariant();
 
                 var prop = person.GetProperty(ConverterMapping.ConverterAlias);
                 if (prop == null)
@@ -94,8 +96,9 @@
         private void EnsureSavePath()
         {
             var media = Server.MapPath("~/media");
+            var store = Server.MapPath(MediaPath);
             if (!Directory.Exists(media)) Directory.CreateDirectory(media);
-            if (!Directory.Exists(Server.MapPath(MediaPath))) Directory.CreateDirectory(MediaPath);
+            if (!Directory.Exists(store)) Directory.CreateDirectory(store);
         }
     }
 }

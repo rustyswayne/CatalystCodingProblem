@@ -30,7 +30,7 @@
         }
 
         /// <inheritdoc />
-        protected override DbSet<ExtendedProperty> Context => DbContext.ExtendedProperties;
+        protected override DbSet<ExtendedProperty> Context => DbContext.Set<ExtendedProperty>();
 
         /// <inheritdoc />
         protected override string EntitySetName => "ExtendedProperties";

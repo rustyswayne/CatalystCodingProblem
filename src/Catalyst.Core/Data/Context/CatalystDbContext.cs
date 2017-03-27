@@ -6,7 +6,6 @@
     using System.Data.Entity.Validation;
     using System.Linq;
 
-    using Catalyst.Core.Data.Mapping;
     using Catalyst.Core.Logging;
     using Catalyst.Core.Models.Domain;
     using Catalyst.Core.Registers;
@@ -78,12 +77,6 @@
 
         /// <inheritdoc />
         public DbSet<Person> People { get; set; }
-
-        /// <inheritdoc />
-        public DbSet<Address> Addresses { get; set; }
-
-        /// <inheritdoc />
-        public DbSet<ExtendedProperty> ExtendedProperties { get; set; }
 
         /// <summary>
         /// Overrides Save changes for logging.

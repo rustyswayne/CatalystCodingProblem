@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using Catalyst.Core;
@@ -22,16 +23,7 @@
         public override ActionResult Editor(Guid id)
         {
             var person = Services.Person.Get(id);
-
-            var model = new InterestListEditor("Interests")
-                {
-                    PersonId = person.Id,
-                    InterestList =
-                        person.GetPropertyValue<InterestList>(true),
-                    ReturnUrl = person.Url(Web.Constants.PersonRoute)
-                };
-
-            return View(model);
+            return View(BuildModel(person));
         }
 
 
@@ -72,9 +64,69 @@
 
             }
 
+            if (Request.IsAjaxRequest())
+            {
+                return View("Editor", BuildModel(person));
+            }
 
             return Redirect(model.ReturnUrl);
         }
 
+        /// <summary>
+        /// Removes an interest.
+        /// </summary>
+        /// <param name="id">
+        /// The person id.
+        /// </param>
+        /// <param name="idx">
+        /// The index of the item to be removed.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ActionResult"/>.
+        /// </returns>
+        public ActionResult Remove(Guid id, int idx)
+        {
+            try
+            {
+                var person = Services.Person.Get(id);
+                var interests = person.GetPropertyValue<InterestList>();
+                var list = interests.Values.ToList();
+                list.RemoveAt(idx);
+                interests.Values = list;
+
+                var prop = person.GetProperty(ConverterMapping.ConverterAlias);
+                prop.SetValue(interests);
+
+                Services.Person.Save(person, true);
+
+                return View("Editor", BuildModel(person));
+
+            }
+            catch (Exception ex)
+            {
+                Logger.WarnWithException<InterestEditorController>("Failed to remove interest", ex);
+                return Redirect("/");
+            }
+        }
+
+        /// <summary>
+        /// Builds a model.
+        /// </summary>
+        /// <param name="person">
+        /// The person.
+        /// </param>
+        /// <returns>
+        /// The <see cref="InterestListEditor"/>.
+        /// </returns>
+        private InterestListEditor BuildModel(Person person)
+        {
+            return new InterestListEditor("Interests")
+            {
+                PersonId = person.Id,
+                InterestList =
+                person.GetPropertyValue<InterestList>(true),
+                ReturnUrl = person.Url(Web.Constants.PersonRoute)
+            };
+        }
     }
 }

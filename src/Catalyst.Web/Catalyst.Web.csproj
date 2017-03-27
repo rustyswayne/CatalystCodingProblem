@@ -75,6 +75,8 @@
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Media\Placeholders\balls.svg" />
+    <Content Include="Media\Placeholders\rss.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\css\styles.css">
@@ -144,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.offcanvas.min.js" />
-    <Content Include="Scripts\jquery-birthday-picker.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.slim.min.js" />
@@ -155,6 +156,7 @@
     <Content Include="Areas\Editors\Views\PhotoEditor\Editor.cshtml" />
     <Content Include="Content\css\modules\_forms.scss" />
     <Content Include="Areas\Editors\Views\AddressEditor\Editor.cshtml" />
+    <Content Include="Media\Web.config" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

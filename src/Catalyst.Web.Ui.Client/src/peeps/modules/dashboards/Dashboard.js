@@ -105,6 +105,13 @@ Peeps.Dashboards = {
 
         appendSpinner: function(dashboard, id) {
 
+            if (dashboard === undefined) {
+                // sort of a hack here for the spinner
+                // just gonig to replace the existing (markdown) content with the spinner.
+                // this will not affect the title / note .. but out of time
+                dashboard = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
+            }
+
             Peeps.Dashboards.spinner.activeIds.push(id);
             var spinner = Peeps.Dashboards.spinner.build(id);
             $(dashboard).find(".chart-stage").html(spinner);

@@ -88,7 +88,6 @@ C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\WebActivatorEx.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Yahoo.Yui.Compressor.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.pdb
-C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\bin\Catalyst.Core.dll.config
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\obj\Debug\Catalyst.Web.csprojResolveAssemblyReference.cache
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\obj\Debug\Catalyst.Web.dll
 C:\Working\Github\CatalystCodingProblem\src\Catalyst.Web\obj\Debug\Catalyst.Web.pdb

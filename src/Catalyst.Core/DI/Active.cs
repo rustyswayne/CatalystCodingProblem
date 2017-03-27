@@ -43,9 +43,9 @@
         public static IEnumerable<IConverterMappingInfo> ConverterMappings => ValueConverterRegister.ConverterMappings;
 
         /// <summary>
-        /// Gets an instance of the <see cref="ICatalystDbContext"/>.
+        /// Gets an instance of the <see cref="CatalystDbContext"/>.
         /// </summary>
-        internal static ICatalystDbContext DbContext => Container.GetInstance<ICatalystDbContext>(Constants.Database.ConnectionStringName);
+        internal static ICatalystDbContext DbContext => Container.GetInstance<CatalystDbContext>(Constants.Database.ConnectionStringName);
 
         /// <summary>
         /// Gets the <see cref="IValueConverterRegister"/>.

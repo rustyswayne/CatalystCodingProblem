@@ -22,10 +22,14 @@
 }
 <div class="form-group">
     <ul class="list-group">
-        @foreach (var item in Model.InterestList.Values)
+        @{
+            var items = Model.InterestList.Values.ToArray();
+            for (var i = 0; i < items.Length; i++)
             {
-            <li class="list-group-item">@item.Title <a href="#" class="pull-right"><i class="glyphicon glyphicon-trash"></i></a></li>
+                <li class="list-group-item">@items[i].Title <a href="@Url.Action("Remove", "InterestEditor", new { id = Model.PersonId, idx = i })" class="pull-right interest-trash"><i class="glyphicon glyphicon-trash"></i></a></li>
+            }
         }
+
     </ul>
 </div>
 

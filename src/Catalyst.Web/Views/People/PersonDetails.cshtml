@@ -35,7 +35,14 @@
         <hr />
 
         <h2>Address <small><a href="@url" data-editor="address">(edit)</a></small></h2>
-        @Html.Partial("_Address", p.Addresses.FirstOrDefault())
+        @{
+            var adr = p.Addresses.FirstOrDefault();
+            if (adr != null)
+            {
+                @Html.Partial("_Address", adr)
+            }
+        }
+        
 
     </div>
     <div class="chart-notes">

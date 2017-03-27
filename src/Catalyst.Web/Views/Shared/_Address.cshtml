@@ -1,7 +1,7 @@
 ﻿@model Catalyst.Core.Models.Domain.IAddress
 @if (Model != null)
 {
-<address>
+<address class="notranslate">
     <strong>@Model.Name</strong><br />
     @Model.Address1@Html.If(() => !Model.Address2.IsNullOrWhiteSpace(), ", ")@Model.Address2<br />
     @Model.Locality, @Model.Region<br />

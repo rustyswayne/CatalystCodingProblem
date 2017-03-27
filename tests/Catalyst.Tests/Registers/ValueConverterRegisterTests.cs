@@ -33,7 +33,7 @@
         public void InstanceTypes()
         {
             //// Arrange
-            const int expected = 4;
+            const int expected = 3;
             
             //// Act
             var types = register.InstanceTypes;

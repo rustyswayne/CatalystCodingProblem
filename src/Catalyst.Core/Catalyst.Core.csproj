@@ -74,6 +74,7 @@
     <Compile Include="Data\Context\CatalystDbContext.cs" />
     <Compile Include="Data\Context\ICatalystDbContext.cs" />
     <Compile Include="Data\GuidComb.cs" />
+    <Compile Include="Data\Initializers\NoSeedDropAlwaysCatalystDbInitializer.cs" />
     <Compile Include="Data\Initializers\DefaultCatalystDbInitializer.cs" />
     <Compile Include="Data\Initializers\DropAlwaysCatalystDbInitializer.cs" />
     <Compile Include="Data\Mapping\ExtendedPropertyDbMapping.cs" />
@@ -164,7 +165,6 @@
     <Compile Include="Registers\ValueConverterRegister.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup />

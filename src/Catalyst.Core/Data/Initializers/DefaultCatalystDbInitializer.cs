@@ -10,7 +10,7 @@
     /// Drops the database if any of the domain models have changed.
     /// </summary>
     // ReSharper disable once StyleCop.SA1650
-    public class DefaultCatalystDbInitializer : DropCreateDatabaseIfModelChanges<CatalystDbContext>
+    internal class DefaultCatalystDbInitializer : DropCreateDatabaseIfModelChanges<CatalystDbContext>
     {
         /// <inheritdoc />
         protected override void Seed(CatalystDbContext context)

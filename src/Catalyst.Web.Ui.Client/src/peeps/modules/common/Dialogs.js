@@ -1,9 +1,10 @@
 Peeps.Dialogs = {
 
-    confirmDelete: function(confirm, cancel) {
+    confirmDelete: function(confirm, cancel, itemName) {
+        itemName = itemName === undefined ? 'person' : itemName;
         Peeps.Dialogs.confirm({
-            title: 'Delete this person?',
-            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
+            title: 'Delete this ' + itemName + '?',
+            message: 'This <strong>' + itemName + '</strong> will be permanently deleted and cannot be recovered. Are you sure?',
             confirm: confirm,
             cancel: cancel
         });

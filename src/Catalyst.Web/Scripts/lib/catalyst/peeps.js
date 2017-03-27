@@ -176,6 +176,66 @@ Peeps.Settings = {
     ]
 
 }
+Peeps.Dialogs = {
+
+    confirmDelete: function(confirm, cancel, itemName) {
+        itemName = itemName === undefined ? 'person' : itemName;
+        Peeps.Dialogs.confirm({
+            title: 'Delete this ' + itemName + '?',
+            message: 'This <strong>' + itemName + '</strong> will be permanently deleted and cannot be recovered. Are you sure?',
+            confirm: confirm,
+            cancel: cancel
+        });
+    },
+
+    confirm: function(args) {
+
+        // args { title: '', message: '', confirm: callback, cancel: callback}
+
+        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
+            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
+            '</div>')
+
+        $('#peeps').html(template);
+
+        $('#dialog-confirm').dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Confirm": function () {
+                    if (args.confirm !== undefined) args.confirm();
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    if (args.cancel !== undefined) args.cancel();
+                    $(this).dialog("close");
+                }
+            }
+        });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
+    }
+
+}
+
 /**
  * Created by rusty on 3/24/2017.
  */
@@ -283,6 +343,13 @@ Peeps.Dashboards = {
 
         appendSpinner: function(dashboard, id) {
 
+            if (dashboard === undefined) {
+                // sort of a hack here for the spinner
+                // just gonig to replace the existing (markdown) content with the spinner.
+                // this will not affect the title / note .. but out of time
+                dashboard = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
+            }
+
             Peeps.Dashboards.spinner.activeIds.push(id);
             var spinner = Peeps.Dashboards.spinner.build(id);
             $(dashboard).find(".chart-stage").html(spinner);
@@ -304,100 +371,6 @@ Peeps.Dashboards = {
             return text;
         }
 
-    }
-
-};
-
-Peeps.Dialogs = {
-
-    confirmDelete: function(confirm, cancel) {
-        Peeps.Dialogs.confirm({
-            title: 'Delete this person?',
-            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
-            confirm: confirm,
-            cancel: cancel
-        });
-    },
-
-    confirm: function(args) {
-
-        // args { title: '', message: '', confirm: callback, cancel: callback}
-
-        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
-            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
-            '</div>')
-
-        $('#peeps').html(template);
-
-        $('#dialog-confirm').dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            buttons: {
-                "Confirm": function () {
-                    if (args.confirm !== undefined) args.confirm();
-                    $(this).dialog("close");
-                },
-                Cancel: function () {
-                    if (args.cancel !== undefined) args.cancel();
-                    $(this).dialog("close");
-                }
-            }
-        });
-    },
-
-    popForm: function(args) {
-
-        // args { frm: formElement, save: callback, cancel: callback  }
-
-        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
-
-        $('#peeps').html(template);
-
-        var dialog = $('#dialog-form').dialog({
-            autoOpen: false,
-            height: 'auto',
-            width: 600,
-            modal: true
-        });
-
-        return dialog;
-    }
-
-}
-
-Peeps.Forms = {
-
-    fileSelectEvtName: 'fileselect',
-
-    init: function() {
-        Peeps.Forms.bind.inputTypeFile();
-    },
-
-    rebind: function(frm) {
-        $.validator.unobtrusive.parse(frm);
-    },
-
-    bind: {
-
-        //// see also: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
-        inputTypeFile: function() {
-
-            $(document).on('change', ':file', function() {
-            var input = $(this),
-                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [ numFiles, label, input.attr('id') ]);
-                Peeps.emit(Peeps.Forms.fileSelectEvtName, { id: input.attr('id'), fileName: label })
-            });
-
-            $(':file').on('fileselect', function(event, numFiles, label, id) {
-                Peeps.debugConsole(numFiles);
-                Peeps.debugConsole(label);
-                Peeps.debugConsole(id);
-            });
-        }
     }
 
 };
@@ -475,6 +448,41 @@ Peeps.Search = {
     }
 }
 
+Peeps.Forms = {
+
+    fileSelectEvtName: 'fileselect',
+
+    init: function() {
+        Peeps.Forms.bind.inputTypeFile();
+    },
+
+    rebind: function(frm) {
+        $.validator.unobtrusive.parse(frm);
+    },
+
+    bind: {
+
+        //// see also: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+        inputTypeFile: function() {
+
+            $(document).on('change', ':file', function() {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [ numFiles, label, input.attr('id') ]);
+                Peeps.emit(Peeps.Forms.fileSelectEvtName, { id: input.attr('id'), fileName: label })
+            });
+
+            $(':file').on('fileselect', function(event, numFiles, label, id) {
+                Peeps.debugConsole(numFiles);
+                Peeps.debugConsole(label);
+                Peeps.debugConsole(id);
+            });
+        }
+    }
+
+};
+
 /**
  * Created by rusty on 3/26/2017.
  */
@@ -486,6 +494,82 @@ Peeps.Editors = {
     }
 
 }
+Peeps.Editors.Interests = {
+
+    route: {},
+
+    saveEndpoint: '/editors/interesteditor/save/',
+
+    init: function() {
+
+        // get the route;
+        Peeps.Editors.Interests.route = _.find(Peeps.Settings.apiRoutes, function (r) {
+            if (r.id === 'interestlist') {
+                return r;
+            }
+        });
+
+        Peeps.Editors.Interests.bind.form();
+
+        // bind delete buttons
+        Peeps.Editors.Interests.bind.deletes();
+    },
+
+    bind: {
+
+        form: function() {
+
+            var frm = $('#interests-editor');
+            var route = Peeps.Editors.Interests.route;
+
+            $(frm).bind('submit', function(e) {
+                e.preventDefault();
+
+                Peeps.Dashboards.spinner.appendSpinner();
+
+                $.ajax({
+
+                    url: Peeps.Editors.Interests.saveEndpoint,
+                    type: 'POST',
+                    data: $(frm).serialize()
+
+                }).done(function(data) {
+                    Peeps.Editors.Person.bind.editorPanel(route, data);
+                });
+            });
+
+        },
+
+        deletes: function() {
+
+            var route = Peeps.Editors.Interests.route;
+
+            function execute(targetUrl) {
+                $.get(targetUrl).done(function(data) {
+                    Peeps.Editors.Person.bind.editorPanel(route, data);
+                });
+            }
+            _.each($('.interest-trash'), function(el) {
+
+                $(el).bind('click', function(e) {
+                    e.preventDefault();
+
+                    var targetUrl = $(this).attr("href");
+                    Peeps.Dialogs.confirmDelete(
+                        function () {
+                            Peeps.Dashboards.spinner.appendSpinner();
+                            execute(targetUrl);
+                            },
+                        undefined,
+                        'interest');
+
+                }); // .bind
+            }); // _.each
+
+        }
+    }
+}
+
 Peeps.Editors.Person = {
 
     personId: '',
@@ -504,8 +588,6 @@ Peeps.Editors.Person = {
               // this is the photo upload editor
                 $('.photo-label-box').val(fileName.fileName);
             };
-            console.info(elId);
-            console.info(fileName);
         });
 
         // Bind deletes on the listing pages
@@ -523,8 +605,6 @@ Peeps.Editors.Person = {
         // bind the property editor links
         Peeps.Editors.Person.bind.editorLinks();
 
-
-
     },
 
     onDashboardLoaded: function(s, e) {
@@ -533,6 +613,9 @@ Peeps.Editors.Person = {
             case 'addperson':
             case 'updateperson':
                 Peeps.Editors.Person.bind.personEntry(e);
+                break;
+            case 'interestlist':
+                Peeps.Editors.Interests.init();
                 break;
             default:
                 break;
@@ -559,6 +642,26 @@ Peeps.Editors.Person = {
             }
         },
 
+        editorPanel: function(route, data) {
+
+            Peeps.Editors.Person.editorPanel.html(data);
+
+            // they all have forms
+            // rebind
+            $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
+                e.preventDefault();
+                // bit hacky here
+                window.location.reload();
+            });
+
+            var frm = $(Peeps.Editors.Person.editorPanel).find('form');
+            Peeps.Forms.rebind(frm);
+
+            var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
+            Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+
+        },
+
         editorLinks: function() {
             if (!Peeps.willWork($('[data-editor]'))) return;
 
@@ -573,8 +676,7 @@ Peeps.Editors.Person = {
                     // this will not affect the title / note .. but out of time
                     var dash = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
 
-
-                    Peeps.Dashboards.spinner.appendSpinner(dash);
+                    Peeps.Dashboards.spinner.appendSpinner();
 
                     // get the route;
                     var route = _.find(Peeps.Settings.apiRoutes, function (r) {
@@ -588,25 +690,9 @@ Peeps.Editors.Person = {
                         dataType: 'html',
                         data: { id: Peeps.Editors.Person.personId },
                     }).done(function(data) {
-
-                        Peeps.Editors.Person.editorPanel.html(data);
-
-                        // they all have forms
-                        // rebind
-                        $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
-                           e.preventDefault();
-                           // bit hacky here
-                           window.location.reload();
-                        });
-
-                        var frm = $(Peeps.Editors.Person.editorPanel).find('form');
-                        Peeps.Forms.rebind(frm);
-
-                        var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
-                        Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+                        Peeps.Editors.Person.bind.editorPanel(route, data);
 
                     });
-
                 });
 
             });
@@ -630,7 +716,6 @@ Peeps.Editors.Person = {
                 yearRange: "1930:2017"
             });
         }
-
     }
 }
 

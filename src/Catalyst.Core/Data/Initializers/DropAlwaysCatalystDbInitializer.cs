@@ -11,7 +11,7 @@
     /// <remarks>
     /// This will not seed any data!
     /// </remarks>
-    public class DropAlwaysCatalystDbInitializer : DropCreateDatabaseAlways<CatalystDbContext>
+    internal class DropAlwaysCatalystDbInitializer : DropCreateDatabaseAlways<CatalystDbContext>
     {
         /// <inheritdoc />
         protected override void Seed(CatalystDbContext context)

@@ -33,8 +33,6 @@ Peeps.Editors.Person = {
         // bind the property editor links
         Peeps.Editors.Person.bind.editorLinks();
 
-
-
     },
 
     onDashboardLoaded: function(s, e) {
@@ -43,6 +41,9 @@ Peeps.Editors.Person = {
             case 'addperson':
             case 'updateperson':
                 Peeps.Editors.Person.bind.personEntry(e);
+                break;
+            case 'interestlist':
+                Peeps.Editors.Interests.init();
                 break;
             default:
                 break;
@@ -69,6 +70,26 @@ Peeps.Editors.Person = {
             }
         },
 
+        editorPanel: function(route, data) {
+
+            Peeps.Editors.Person.editorPanel.html(data);
+
+            // they all have forms
+            // rebind
+            $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
+                e.preventDefault();
+                // bit hacky here
+                window.location.reload();
+            });
+
+            var frm = $(Peeps.Editors.Person.editorPanel).find('form');
+            Peeps.Forms.rebind(frm);
+
+            var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
+            Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+
+        },
+
         editorLinks: function() {
             if (!Peeps.willWork($('[data-editor]'))) return;
 
@@ -83,8 +104,7 @@ Peeps.Editors.Person = {
                     // this will not affect the title / note .. but out of time
                     var dash = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
 
-
-                    Peeps.Dashboards.spinner.appendSpinner(dash);
+                    Peeps.Dashboards.spinner.appendSpinner();
 
                     // get the route;
                     var route = _.find(Peeps.Settings.apiRoutes, function (r) {
@@ -98,25 +118,9 @@ Peeps.Editors.Person = {
                         dataType: 'html',
                         data: { id: Peeps.Editors.Person.personId },
                     }).done(function(data) {
-
-                        Peeps.Editors.Person.editorPanel.html(data);
-
-                        // they all have forms
-                        // rebind
-                        $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
-                           e.preventDefault();
-                           // bit hacky here
-                           window.location.reload();
-                        });
-
-                        var frm = $(Peeps.Editors.Person.editorPanel).find('form');
-                        Peeps.Forms.rebind(frm);
-
-                        var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
-                        Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+                        Peeps.Editors.Person.bind.editorPanel(route, data);
 
                     });
-
                 });
 
             });
@@ -140,6 +144,5 @@ Peeps.Editors.Person = {
                 yearRange: "1930:2017"
             });
         }
-
     }
 }
