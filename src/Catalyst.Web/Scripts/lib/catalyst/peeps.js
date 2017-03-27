@@ -23,6 +23,9 @@ var Peeps = (function() {
             // intialize the search
             Peeps.Search.init();
 
+            // bind the forms
+            Peeps.Forms.init();
+
             // initialize the dashboards
             Peeps.Dashboards.init();
 
@@ -164,16 +167,79 @@ Peeps.Settings = {
 
     apiRoutes: [
      // { id: "route alias", value: "use this for the $.ajax url", title: "message to replace 'Intializing...'", notes: "notes replacement",  delay: NOT REQUIRE (FOR DEMO) }
-        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
-        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', title: "Evaluating Profiles...", notes: 'Property filter queries not implemented.', delay: 1250 },
-        { id: 'randomwatched', value: '/dashboard/randomwatched', title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 },
+        { id: 'countrymetrics', value: '/dashboard/countriessnapshot', reqId: false, title: "Querying Country Metrics...", notes: 'Country filter queries not implemented.', delay: 750 },
+        { id: 'peopleprops', value: '/dashboard/peoplepropertystats', reqId: false, title: "Evaluating Profiles...", notes: 'Property filter queries not implemented.', delay: 1250 },
+        { id: 'randomwatched', value: '/dashboard/randomwatched', reqId: false, title: "Selecting random...", notes: 'Randomly selected from watched', delay: 0 },
 
         // editors
-        { id: 'addperson', value: '/editors/personeditor/addperson', title: 'Loading form...', notes: '', delay: 0 },
-        { id: 'interestlist', value: '/editors/interesteditor/editor', title: 'Loading form...', notes: '', delay: 0 }
+        { id: 'addperson', value: '/editors/personeditor/editor', reqId: false, title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'updateperson', value: '/editors/personeditor/editor', reqId: true, title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'interestlist', value: '/editors/interesteditor/editor', reqId: true, title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'sociallinks', value: '/editors/sociallinkseditor/editor', reqId: true, title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'photo', value: '/editors/photoeditor/editor', reqId: true, title: 'Loading form...', notes: '', delay: 0 },
+        { id: 'address', value: '/editors/addresseditor/editor', reqId: true, title: 'Loading form...', notes: '', delay: 0 }
     ]
 
 }
+Peeps.Dialogs = {
+
+    confirmDelete: function(confirm, cancel) {
+        Peeps.Dialogs.confirm({
+            title: 'Delete this person?',
+            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
+            confirm: confirm,
+            cancel: cancel
+        });
+    },
+
+    confirm: function(args) {
+
+        // args { title: '', message: '', confirm: callback, cancel: callback}
+
+        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
+            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
+            '</div>')
+
+        $('#peeps').html(template);
+
+        $('#dialog-confirm').dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Confirm": function () {
+                    if (args.confirm !== undefined) args.confirm();
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    if (args.cancel !== undefined) args.cancel();
+                    $(this).dialog("close");
+                }
+            }
+        });
+    },
+
+    popForm: function(args) {
+
+        // args { frm: formElement, save: callback, cancel: callback  }
+
+        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
+
+        $('#peeps').html(template);
+
+        var dialog = $('#dialog-form').dialog({
+            autoOpen: false,
+            height: 'auto',
+            width: 600,
+            modal: true
+        });
+
+        return dialog;
+    }
+
+}
+
 /**
  * Created by rusty on 3/24/2017.
  */
@@ -306,72 +372,6 @@ Peeps.Dashboards = {
 
 };
 
-Peeps.Dialogs = {
-
-    confirmDelete: function(confirm, cancel) {
-        Peeps.Dialogs.confirm({
-            title: 'Delete this person?',
-            message: 'This person will be permanently deleted and cannot be recovered. Are you sure?',
-            confirm: confirm,
-            cancel: cancel
-        });
-    },
-
-    confirm: function(args) {
-
-        // args { title: '', message: '', confirm: callback, cancel: callback}
-
-        var template = $('<div id="dialog-confirm" title="' + args.title + '">' +
-            '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>' + args.message + '</p>' +
-            '</div>')
-
-        $('#peeps').html(template);
-
-        $('#dialog-confirm').dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            buttons: {
-                "Confirm": function () {
-                    if (args.confirm !== undefined) args.confirm();
-                    $(this).dialog("close");
-                },
-                Cancel: function () {
-                    if (args.cancel !== undefined) args.cancel();
-                    $(this).dialog("close");
-                }
-            }
-        });
-    },
-
-    popForm: function(args) {
-
-        // args { frm: formElement, save: callback, cancel: callback  }
-
-        var template = '<div id="dialog-form" title="Create new user">' + args.frm + '</div>';
-
-        $('#peeps').html(template);
-
-        var dialog = $('#dialog-form').dialog({
-            autoOpen: false,
-            height: 'auto',
-            width: 600,
-            modal: true
-        });
-
-        return dialog;
-    }
-
-}
-
-Peeps.Forms = {
-
-    rebind: function(frm) {
-        $.validator.unobtrusive.parse(frm);
-    }
-};
-
 /**
  * Created by rusty on 3/25/2017.
  */
@@ -445,6 +445,41 @@ Peeps.Search = {
     }
 }
 
+Peeps.Forms = {
+
+    fileSelectEvtName: 'fileselect',
+
+    init: function() {
+        Peeps.Forms.bind.inputTypeFile();
+    },
+
+    rebind: function(frm) {
+        $.validator.unobtrusive.parse(frm);
+    },
+
+    bind: {
+
+        //// see also: https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3
+        inputTypeFile: function() {
+
+            $(document).on('change', ':file', function() {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [ numFiles, label, input.attr('id') ]);
+                Peeps.emit(Peeps.Forms.fileSelectEvtName, { id: input.attr('id'), fileName: label })
+            });
+
+            $(':file').on('fileselect', function(event, numFiles, label, id) {
+                Peeps.debugConsole(numFiles);
+                Peeps.debugConsole(label);
+                Peeps.debugConsole(id);
+            });
+        }
+    }
+
+};
+
 /**
  * Created by rusty on 3/26/2017.
  */
@@ -458,30 +493,55 @@ Peeps.Editors = {
 }
 Peeps.Editors.Person = {
 
+    personId: '',
+
+    editorPanel: null,
+
     init: function() {
 
-        // for the new have to wait to bind the form since they are loaded async
+        // For async form loads we have to wait for the operation to complete. In
+        // this case we can't always rely on a promise, since the initiation may occur from another module
+        // or directly from a view (via a dashboard placeholder).
         Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
 
-        // always do this
+        // Bind deletes on the listing pages
         Peeps.Editors.Person.bind.deletes();
 
-        if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
-
-            Peeps.Editors.Person.bind.birthday($('#person-entry'));
+        if (Peeps.willWork('#person-details')) {
+            var pd = $('#person-details');
+            Peeps.Editors.Person.personId = $(pd).data('person');
+            // console.info(Peeps.Editors.Person.personId);
         }
+        if (Peeps.willWork('#editor-panel')) {
+            Peeps.Editors.Person.editorPanel = $('#editor-panel');
+        }
+
+        // bind the property editor links
+        Peeps.Editors.Person.bind.editorLinks();
+
+        // person entry
+        // TODO refactor when move to async
+        //if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
+        //    Peeps.Editors.Person.bind.birthday($('#person-entry'));
+        //}
 
     },
 
     onDashboardLoaded: function(s, e) {
 
-      if (e.params.id === 'addperson') {
-          Peeps.Editors.Person.bind.personEntry(e);
-      }
+        switch ( e.params.id ) {
+            case 'addperson':
+            case 'updateperson':
+                Peeps.Editors.Person.bind.personEntry(e);
+                break;
+            default:
+                break;
+        };
 
     },
 
     bind: {
+
         deletes: function() {
             if (Peeps.willWork('.delete-person')) {
             _.each($('.delete-person'), function(el) {
@@ -499,10 +559,62 @@ Peeps.Editors.Person = {
             }
         },
 
+        editorLinks: function() {
+            if (!Peeps.willWork($('[data-editor]'))) return;
+
+            _.each($('[data-editor]'), function(link) {
+
+                var routeAlias = $(link).data('editor');
+                $(link).bind('click', function(e) {
+                    e.preventDefault();
+
+                    // sort of a hack here for the spinner
+                    // just gonig to replace the existing (markdown) content with the spinner.
+                    // this will not affect the title / note .. but out of time
+                    var dash = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
+
+
+                    Peeps.Dashboards.spinner.appendSpinner(dash);
+
+                    // get the route;
+                    var route = _.find(Peeps.Settings.apiRoutes, function (r) {
+                        if (r.id === routeAlias) {
+                            return r;
+                        }
+                    });
+
+                    $.ajax({
+                        url: route.value,
+                        dataType: 'html',
+                        data: { id: Peeps.Editors.Person.personId },
+                    }).done(function(data) {
+
+                        Peeps.Editors.Person.editorPanel.html(data);
+
+                        // they all have forms
+                        // rebind
+                        $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
+                           e.preventDefault();
+                           // bit hacky here
+                           window.location.reload();
+                        });
+
+                        var frm = $(Peeps.Editors.Person.editorPanel).find('form');
+                        Peeps.Forms.rebind(frm);
+
+                        var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
+                        Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+
+                    });
+
+                });
+
+            });
+        },
+
         personEntry: function(args) {
 
             if (!Peeps.willWork('#person-entry')) return;
-
 
             var frm = $('#person-entry');
 

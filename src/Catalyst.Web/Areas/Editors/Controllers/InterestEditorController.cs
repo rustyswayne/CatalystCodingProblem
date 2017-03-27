@@ -1,5 +1,6 @@
 ﻿namespace Catalyst.Web.Areas.Editors.Controllers
 {
+    using System;
     using System.Web.Mvc;
 
     using Catalyst.Core;
@@ -12,19 +13,22 @@
     /// <summary>
     /// The interest editor controller.
     /// </summary>
-    public class InterestEditorController : PropertyEditorControllerBase<InterestList, InterestListEditor>
+    public class InterestEditorController : EditorControllerBase<InterestList, InterestListEditor>
     {
         /// <inheritdoc />
-        [ChildActionOnly]
-        public override ActionResult Editor(Person person)
+        [HttpGet]
+        [CheckAjaxRequest]
+        public override ActionResult Editor(Guid id)
         {
-            var model = new InterestListEditor($"{person.FullName()} Interests")
+            var person = Services.Person.Get(id);
+
+            var model = new InterestListEditor("Interests")
                 {
                     PersonId = person.Id,
-                    InterestList = person.GetPropertyValue<InterestList>(true),
+                    InterestList =
+                        person.GetPropertyValue<InterestList>(true),
                     ReturnUrl = person.Url(Web.Constants.PersonRoute)
                 };
-
 
             return View(model);
         }
@@ -38,7 +42,7 @@
 
             if (Request.IsAjaxRequest())
             {
-                var editor = new InterestListEditor($"{person.FullName()} Interests")
+                var editor = new InterestListEditor("Interests")
                 {
                     PersonId = person.Id,
                     InterestList = person.GetPropertyValue<InterestList>(true),

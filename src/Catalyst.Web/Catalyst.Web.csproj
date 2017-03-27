@@ -90,14 +90,17 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Editors\Controllers\AddressEditorController.cs" />
     <Compile Include="Areas\Editors\Controllers\InterestEditorController.cs" />
     <Compile Include="Areas\Editors\Controllers\PersonEditorController.cs" />
+    <Compile Include="Areas\Editors\Controllers\PhotoEditorController.cs" />
     <Compile Include="Areas\Editors\Controllers\SocialLinksEditorController.cs" />
     <Compile Include="Areas\Editors\EditorsAreaRegistration.cs" />
     <Compile Include="Areas\Editors\Models\EditorFormBase.cs" />
     <Compile Include="Areas\Editors\Models\IEditorForm.cs" />
     <Compile Include="Areas\Editors\Models\InterestListEditor.cs" />
-    <Compile Include="Areas\Editors\Models\PersonEntry.cs" />
+    <Compile Include="Areas\Editors\Models\PersonEditor.cs" />
+    <Compile Include="Areas\Editors\Models\PhotoEditor.cs" />
     <Compile Include="Areas\Editors\Models\SocialLinksEditor.cs" />
     <Compile Include="Boot\WebBoot.cs" />
     <Compile Include="Constants.cs" />
@@ -145,10 +148,13 @@
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.slim.min.js" />
-    <Content Include="Areas\Editors\Views\PersonEditor\AddEditPerson.cshtml" />
+    <Content Include="Areas\Editors\Views\PersonEditor\Editor.cshtml" />
     <Content Include="Areas\Editors\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Editors\Views\SocialLinksEditor\Editor.cshtml" />
     <Content Include="Areas\Editors\Views\InterestEditor\Editor.cshtml" />
+    <Content Include="Areas\Editors\Views\PhotoEditor\Editor.cshtml" />
+    <Content Include="Content\css\modules\_forms.scss" />
+    <Content Include="Areas\Editors\Views\AddressEditor\Editor.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -224,6 +230,7 @@
     <Content Include="Views\Shared\_InterestList.cshtml" />
     <Content Include="Content\css\externals\typeahead\_typeahead.scss" />
     <Content Include="Views\Shared\_TwoColumn.cshtml" />
+    <Content Include="Views\Shared\_Address.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

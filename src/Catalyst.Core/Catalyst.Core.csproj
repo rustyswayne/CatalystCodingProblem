@@ -69,7 +69,7 @@
       <DependentUpon>Constants.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CatalystControllerBase.cs" />
-    <Compile Include="Controllers\PropertyEditorControllerBase.cs" />
+    <Compile Include="Controllers\EditorControllerBase.cs" />
     <Compile Include="Data\Context\CatalystDbContext.cs" />
     <Compile Include="Data\Context\ICatalystDbContext.cs" />
     <Compile Include="Data\GuidComb.cs" />

@@ -1,29 +1,54 @@
 Peeps.Editors.Person = {
 
+    personId: '',
+
+    editorPanel: null,
+
     init: function() {
 
-        // for the new have to wait to bind the form since they are loaded async
+        // For async form loads we have to wait for the operation to complete. In
+        // this case we can't always rely on a promise, since the initiation may occur from another module
+        // or directly from a view (via a dashboard placeholder).
         Peeps.on(Peeps.Dashboards.loadedEvtName, Peeps.Editors.Person.onDashboardLoaded);
 
-        // always do this
+        // Bind deletes on the listing pages
         Peeps.Editors.Person.bind.deletes();
 
-        if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
-
-            Peeps.Editors.Person.bind.birthday($('#person-entry'));
+        if (Peeps.willWork('#person-details')) {
+            var pd = $('#person-details');
+            Peeps.Editors.Person.personId = $(pd).data('person');
+            // console.info(Peeps.Editors.Person.personId);
         }
+        if (Peeps.willWork('#editor-panel')) {
+            Peeps.Editors.Person.editorPanel = $('#editor-panel');
+        }
+
+        // bind the property editor links
+        Peeps.Editors.Person.bind.editorLinks();
+
+        // person entry
+        // TODO refactor when move to async
+        //if (Peeps.willWork('#person-details') && Peeps.willWork('#person-entry')) {
+        //    Peeps.Editors.Person.bind.birthday($('#person-entry'));
+        //}
 
     },
 
     onDashboardLoaded: function(s, e) {
 
-      if (e.params.id === 'addperson') {
-          Peeps.Editors.Person.bind.personEntry(e);
-      }
+        switch ( e.params.id ) {
+            case 'addperson':
+            case 'updateperson':
+                Peeps.Editors.Person.bind.personEntry(e);
+                break;
+            default:
+                break;
+        };
 
     },
 
     bind: {
+
         deletes: function() {
             if (Peeps.willWork('.delete-person')) {
             _.each($('.delete-person'), function(el) {
@@ -41,10 +66,62 @@ Peeps.Editors.Person = {
             }
         },
 
+        editorLinks: function() {
+            if (!Peeps.willWork($('[data-editor]'))) return;
+
+            _.each($('[data-editor]'), function(link) {
+
+                var routeAlias = $(link).data('editor');
+                $(link).bind('click', function(e) {
+                    e.preventDefault();
+
+                    // sort of a hack here for the spinner
+                    // just gonig to replace the existing (markdown) content with the spinner.
+                    // this will not affect the title / note .. but out of time
+                    var dash = Peeps.Editors.Person.editorPanel.find('.chart-wrapper');
+
+
+                    Peeps.Dashboards.spinner.appendSpinner(dash);
+
+                    // get the route;
+                    var route = _.find(Peeps.Settings.apiRoutes, function (r) {
+                        if (r.id === routeAlias) {
+                            return r;
+                        }
+                    });
+
+                    $.ajax({
+                        url: route.value,
+                        dataType: 'html',
+                        data: { id: Peeps.Editors.Person.personId },
+                    }).done(function(data) {
+
+                        Peeps.Editors.Person.editorPanel.html(data);
+
+                        // they all have forms
+                        // rebind
+                        $(Peeps.Editors.Person.editorPanel).find('.btn-cancel').bind('click', function(e) {
+                           e.preventDefault();
+                           // bit hacky here
+                           window.location.reload();
+                        });
+
+                        var frm = $(Peeps.Editors.Person.editorPanel).find('form');
+                        Peeps.Forms.rebind(frm);
+
+                        var panel = $(Peeps.Editors.Person.editorPanel).find('.chart-wrapper');
+                        Peeps.emit(Peeps.Dashboards.loadedEvtName, { panel: panel, params: route })
+
+                    });
+
+                });
+
+            });
+        },
+
         personEntry: function(args) {
 
             if (!Peeps.willWork('#person-entry')) return;
-
 
             var frm = $('#person-entry');
 

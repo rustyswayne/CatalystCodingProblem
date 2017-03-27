@@ -8,24 +8,24 @@
     /// <summary>
     /// Represents a model for adding and editing <see cref="IPerson"/>.
     /// </summary>
-    public class PersonEntry : EditorFormBase
+    public class PersonEditor : EditorFormBase
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PersonEntry"/> class.
+        /// Initializes a new instance of the <see cref="PersonEditor"/> class.
         /// </summary>
-        public PersonEntry()
+        public PersonEditor()
             : this("Saving....")
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PersonEntry"/> class.
+        /// Initializes a new instance of the <see cref="PersonEditor"/> class.
         /// </summary>
         /// <param name="title">
         /// The title.
         /// </param>
-        public PersonEntry(string title)
+        public PersonEditor(string title)
             : base(title)
         {
         }

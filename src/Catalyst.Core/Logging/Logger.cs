@@ -53,11 +53,6 @@
             if (logger != null) logger.Error(message, exception);
         }
 
-        public void Error<T>(string v, Exception ex)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <inheritdoc />
         public void Warn(Type callingType, string message, params Func<object>[] formatItems)
         {

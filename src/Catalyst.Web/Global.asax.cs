@@ -58,7 +58,7 @@
 
             var logger = Logger.CreateWithDefaultLog4NetConfiguration();
 
-            logger.Error<Global>("Application Error", ex);
+            logger.Error(typeof(Global), "Application Error", ex);
         }
     }
 }

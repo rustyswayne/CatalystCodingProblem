@@ -23,6 +23,9 @@ var Peeps = (function() {
             // intialize the search
             Peeps.Search.init();
 
+            // bind the forms
+            Peeps.Forms.init();
+
             // initialize the dashboards
             Peeps.Dashboards.init();
 

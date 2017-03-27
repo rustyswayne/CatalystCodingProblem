@@ -1,5 +1,6 @@
 ﻿namespace Catalyst.Core.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -17,7 +18,7 @@
     /// <typeparam name="TEditorModel">
     /// The type of the editor model
     /// </typeparam>
-    public abstract class PropertyEditorControllerBase<TValue, TEditorModel> : CatalystControllerBase
+    public abstract class EditorControllerBase<TValue, TEditorModel> : CatalystControllerBase
         where TValue : class, IPropertyValueModel, new()
         where TEditorModel : class, new()
     {
@@ -29,13 +30,13 @@
         /// <summary>
         /// Responsible for rendering the editor.
         /// </summary>
-        /// <param name="person">
-        /// The person.
+        /// <param name="id">
+        /// The person id.
         /// </param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        public abstract ActionResult Editor(Person person);
+        public abstract ActionResult Editor(Guid id);
 
         /// <summary>
         /// Responsible for saving the property value.

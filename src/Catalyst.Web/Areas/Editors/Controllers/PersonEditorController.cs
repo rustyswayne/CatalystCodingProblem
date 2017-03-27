@@ -14,35 +14,36 @@
     /// </summary>
     public class PersonEditorController : CatalystControllerBase
     {
-        
         /// <summary>
-        /// Toggles whether or not a person is watched.
+        /// Responsible for rendering the editor form.
         /// </summary>
         /// <param name="id">
-        /// The person's id.
-        /// </param>
-        /// <param name="r">
-        /// The current page route.
+        /// The person id.
         /// </param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
         [HttpGet]
-        public ActionResult ToggleWatched(Guid id, string r)
+        [CheckAjaxRequest]
+        public ActionResult Editor(Guid? id = null)
         {
-            var person = Services.Person.Get(id);
+            var person = id.HasValue ?
+                Services.Person.Get(id.Value) :
+                null;
 
-            if (person == null)
-            {
-                var nullRef = new NullReferenceException("Person record was null in ToggleWatched");
-                Logger.Error<PersonEditorController>("Person not found", nullRef);
-                throw nullRef;
-            }
+            var model = person != null
+                ? new PersonEditor($"Update {person.FullName()}")
+                {
+                    PersonId = person.Id,
+                    FirstName = person.FirstName,
+                    LastName = person.LastName,
+                    Birthday =
+                                person.Birthday.ToShortDateString(),
+                    Watch = person.Watch
+                }
+                : new PersonEditor("Add a Person") { ReturnUrl = Web.Constants.PeopleRoute };
 
-            person.Watch = !person.Watch;
-            Services.Person.Save(person);
-
-            return Redirect(r);
+            return View("Editor", model);
         }
 
         /// <summary>
@@ -56,11 +57,11 @@
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SavePerson(PersonEntry model)
+        public ActionResult Save(PersonEditor model)
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("AddEditPerson", model);
+                return PartialView("Editor", model);
             }
 
             DateTime birthday;
@@ -118,45 +119,75 @@
         }
 
         /// <summary>
-        /// Responsible for rendering a form to add a person.
+        /// Toggles whether or not a person is watched.
         /// </summary>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        [HttpGet]
-        [CheckAjaxRequest]
-        public ActionResult AddPerson()
-        {
-            var model = new PersonEntry("Add a Person")
-                {
-                    ReturnUrl = Web.Constants.PeopleRoute
-                };
-
-            return View("AddEditPerson", model);
-        }
-
-        /// <summary>
-        /// Responsible for rendering a form to edit a person.
-        /// </summary>
-        /// <param name="person">
-        /// The <see cref="IPerson"/>.
+        /// <param name="id">
+        /// The person's id.
+        /// </param>
+        /// <param name="r">
+        /// The current page route.
         /// </param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        [ChildActionOnly]
-        public ActionResult EditPerson(IPerson person)
+        [HttpGet]
+        public ActionResult ToggleWatched(Guid id, string r)
         {
-            var model = new PersonEntry($"Update {person.FullName()}")
-                {
-                    PersonId = person.Id,
-                    FirstName = person.FirstName,
-                    LastName = person.LastName,
-                    Birthday = person.Birthday.ToShortDateString(),
-                    Watch = person.Watch
-                };
+            var person = Services.Person.Get(id);
 
-            return View("AddEditPerson", model);
+            if (person == null)
+            {
+                var nullRef = new NullReferenceException("Person record was null in ToggleWatched");
+                Logger.Error<PersonEditorController>("Person not found", nullRef);
+                throw nullRef;
+            }
+
+            person.Watch = !person.Watch;
+            Services.Person.Save(person);
+
+            return Redirect(r);
         }
+
+        ///// <summary>
+        ///// Responsible for rendering a form to add a person.
+        ///// </summary>
+        ///// <returns>
+        ///// The <see cref="ActionResult"/>.
+        ///// </returns>
+        //[HttpGet]
+        //[CheckAjaxRequest]
+        //public ActionResult AddPerson()
+        //{
+        //    var model = new PersonEditor("Add a Person")
+        //        {
+        //            ReturnUrl = Web.Constants.PeopleRoute
+        //        };
+
+        //    return View("AddEditPerson", model);
+        //}
+
+        ///// <summary>
+        ///// Responsible for rendering a form to edit a person.
+        ///// </summary>
+        ///// <param name="person">
+        ///// The <see cref="IPerson"/>.
+        ///// </param>
+        ///// <returns>
+        ///// The <see cref="ActionResult"/>.
+        ///// </returns>
+        //[ChildActionOnly]
+        //public ActionResult EditPerson(IPerson person)
+        //{
+        //    var model = new PersonEditor($"Update {person.FullName()}")
+        //        {
+        //            PersonId = person.Id,
+        //            FirstName = person.FirstName,
+        //            LastName = person.LastName,
+        //            Birthday = person.Birthday.ToShortDateString(),
+        //            Watch = person.Watch
+        //        };
+
+        //    return View("AddEditPerson", model);
+        //}
     }
 }
